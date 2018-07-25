@@ -6,8 +6,20 @@ const pizza = (props) => {
 
   return (
     <div className={classes.Pizza}>
-      
-      <PizzaIngredient type="crust-thin"/>
+      <div className={classes.Pan}>
+        <PizzaIngredient type='crust'>
+          <PizzaIngredient type='crust-thin'>
+            <PizzaIngredient type='topping-container'>
+              <PizzaIngredient type='cheese' />
+              <PizzaIngredient type='sauce' />
+              <PizzaIngredient type='pepperoni' />
+            </PizzaIngredient>
+          </PizzaIngredient>
+        </PizzaIngredient>
+        
+      </div>
+        
+        
     </div>
   )
 };
