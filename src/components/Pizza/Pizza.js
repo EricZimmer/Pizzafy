@@ -8,11 +8,13 @@ const pizza = (props) => {
     <div className={classes.Pizza}>
       <div className={classes.Pan}>
         <PizzaIngredient type='crust'>
-          <PizzaIngredient type='crust-thin'>
+          <PizzaIngredient type='crust-regular'>
             <PizzaIngredient type='topping-container'>
               <PizzaIngredient type='cheese' />
               <PizzaIngredient type='sauce' />
-              <PizzaIngredient type='pepperoni' />
+              <PizzaIngredient type='pepperoni-right' />
+              <PizzaIngredient type='pepperoni-left' />
+              {/* <PizzaIngredient type='pepperoni-extra' /> */}
             </PizzaIngredient>
           </PizzaIngredient>
         </PizzaIngredient>

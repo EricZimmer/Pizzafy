@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './PizzaIngredient.css';
 import pepperoni from './IngredientStyles/pepperoni.css';
-import peps from '../../../assets/peps1.svg';
+import pepperoniR from '../../../assets/pepright.svg';
+import pepperoniL from '../../../assets/pepleft.svg';
 
 class PizzaIngredient extends Component {
   
@@ -26,6 +27,9 @@ class PizzaIngredient extends Component {
       case('crust-thin'):
         ingredients = <div className={classes.CrustThin}>{this.props.children}</div>;
         break;
+      case('crust-regular'):
+        ingredients = <div className={classes.CrustRegular}>{this.props.children}</div>;
+        break;
       case('sauce'):
         ingredients = <div className={classes.Sauce}></div>;
         break;
@@ -36,9 +40,21 @@ class PizzaIngredient extends Component {
         ingredients = <div className={classes.ToppingContainer}>{this.props.children}</div>;
         break;
       
-      case('pepperoni'):
-        ingredients = <img className={classes.img1} src={peps}/>;
+      case('pepperoni-right'):
+        ingredients = <img className={classes.img1} src={pepperoniR}/>;
       break;
+      case('pepperoni-left'):
+        ingredients = <img className={classes.img1} src={pepperoniL}/>;
+      break;
+      case('pepperoni-extra'):
+        ingredients = (
+          <div>
+
+            <img className={[classes.img1, classes.rotate].join(' ')} src={pepperoniR} />
+            <img className={[classes.img1, classes.rotate].join(' ')} src={pepperoniL} />
+          </div>
+        );
+        break;
       default: ingredients = null;
     }
 

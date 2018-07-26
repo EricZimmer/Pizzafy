@@ -7,42 +7,28 @@
   margin: auto;
   background: #99542d;
   z-index: 1;
-  top: 3%;
+  top: 4%;
   position: relative;
   border: 3px solid #5a3119;
-  border-bottom: 4px solid #222;
-  box-shadow: 0px 3px 3px rgb(77, 72, 72);
+
+  box-shadow: 0px 3px 3px rgb(44, 37, 37);
 }
 
 .Crust:before {
   content: '';
-  width: 98%;
+  width: 97%;
   height: 97%;
   border-radius: 50%;
-  z-index: 2;
+  z-index: 3;
   background: #b98853;
   opacity: 0.5;
   position: absolute;
-  top: 0;
-  left: 1%;
+  top: 1.5%;
+  left: 1.5%;
 }
 
 .CrustRegular {
-  width: 90%;
-  height: 80%;
-  background: rgb(179, 110, 58);
-  position: relative;
-  border-radius: 50%;
- /*  box-shadow: inset 3px 3px #5a3119; */
-  border: 8px solid #99542d;
-  box-shadow: inset 0px 3px  rgb(157, 97, 62);
-  z-index: 2;
-  top: 15px;
-  margin: auto;
-}
-
-.CrustThin {
-  width: 95%;
+  width: 89%;
   height: 89%;
   background: rgb(179, 110, 58);
   position: relative;
@@ -50,22 +36,32 @@
  /*  box-shadow: inset 3px 3px #5a3119; */
   border: 8px solid #99542d;
   box-shadow: inset 0px 3px  rgb(157, 97, 62);
-  z-index: 2;
-  top: 15px;
+  z-index: 4;
+  top: 5.5%;
+  margin: auto;
+}
+
+.CrustThin {
+  width: 95%;
+  height: 95%;
+  background: rgb(179, 110, 58);
+  position: relative;
+  border-radius: 50%;
+ /*  box-shadow: inset 3px 3px #5a3119; */
+  border: 4px solid #99542d;
+  box-shadow: inset 0px 3px  rgb(157, 97, 62);
+  z-index: 4;
+  top: 2.5%;
   margin: auto;
 }
 
 
-.Sheet {
-  border-radius: 5%;
-  width: 90%;
-  height: 50%;
-}
+
 
 .ToppingContainer {
   width: 100%;
   height: 100%;
-  z-index: 4;
+  z-index: 5;
   top:0%;
   left:0%;
   position: absolute;
@@ -73,27 +69,27 @@
 }
 
 .Sauce {
-  width: 98%;
-  height: 98%;
+  width: 99%;
+  height: 99%;
   background: radial-gradient(closest-side, rgb(189, 56, 32) 13%, rgb(172, 25, 25) 88%);
   opacity: 0.8;
   position: absolute;
   border-radius: 50%;
-  top: 1%;
-  left: 1%;
+  top: 0.5%;
+  left: 0.5%;
   z-index: 5;
   margin: auto;
 }
 
 .Cheese {
-  width: 94%;
-  height: 92%;
+  width: 95%;
+  height: 95%;
   border-radius: 50%;
   background: radial-gradient(rgb(202, 178, 124) 30%, rgb(231, 188, 87) 80%);
   z-index: 6;
   margin: auto;
-  top: 4%;
-  left: 3%;
+  top: 2.5%;
+  left: 2.5%;
   position: absolute;
 }
 
@@ -106,16 +102,18 @@
   position: relative;
 
 }
-
+.rotate{
+  transform: rotateY(180deg) rotate(125deg);
+}
 
 .img1{
   z-index: 7;
   position: absolute;
   top:0px;
-  left: 2%;
-  top: 5%;
+  left: 4%;
+  top: 4%;
   height: 92%;
-  width: 95%;
+  width: 92%;
 
 }
 .img2{
