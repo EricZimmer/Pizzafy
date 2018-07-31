@@ -1,32 +1,4 @@
 
-
-.Crust {
-  width: 90%;
-  height: 90%;
-  border-radius: 50%;
-  margin: auto;
-  background: #99542d;
-  z-index: 1;
-  top: 4%;
-  position: relative;
-  border: 3px solid #5a3119;
-
-  box-shadow: 0px 3px 3px rgb(44, 37, 37);
-}
-
-.Crust:before {
-  content: '';
-  width: 97%;
-  height: 97%;
-  border-radius: 50%;
-  z-index: 3;
-  background: #b98853;
-  opacity: 0.5;
-  position: absolute;
-  top: 1.5%;
-  left: 1.5%;
-}
-
 .CrustRegular {
   width: 89%;
   height: 89%;
@@ -93,20 +65,13 @@
   position: absolute;
 }
 
-.Pepperoni {
-  width: 10%;
-  height: 10%;
-  background-color: red;
-  border: 1px solid rgb(77, 37, 37, 0.6);
-  border-radius: 50%;
-  position: relative;
 
-}
 .rotate{
-  transform: rotateY(180deg) rotate(125deg);
+  transform: rotateY(180deg)  rotate(180deg) scale(0.9);
+  
 }
 
-.img1{
+.Pepperoni{
   z-index: 7;
   position: absolute;
   top:0px;
@@ -116,11 +81,14 @@
   width: 92%;
 
 }
-.img2{
-  z-index: 7;
+
+.Sausage{
+  z-index: 8;
   position: absolute;
-  top:10px;
-  left: 10%;
-  height: 100%;
-  width: 100%;
+  top:0px;
+  left: 4%;
+  top: 4%;
+  height: 92%;
+  width: 92%;
+
 }

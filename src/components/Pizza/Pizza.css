@@ -26,6 +26,34 @@
   position: relative;
 }
 
+.Crust {
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  margin: auto;
+  background: #99542d;
+  z-index: 1;
+  top: 4%;
+  position: relative;
+  border: 3px solid #5a3119;
+
+  box-shadow: 0px 3px 3px rgb(44, 37, 37);
+}
+
+.Crust:before {
+  content: '';
+  width: 97%;
+  height: 97%;
+  border-radius: 50%;
+  z-index: 3;
+  background: #b98853;
+  opacity: 0.5;
+  position: absolute;
+  top: 1.5%;
+  left: 1.5%;
+}
+
+
 @media (min-width: 500px) and (min-height: 400px) {
   .Pizza {
     width: 480px;
