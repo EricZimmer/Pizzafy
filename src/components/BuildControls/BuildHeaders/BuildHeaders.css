@@ -1,17 +1,23 @@
 .BuildHeaders {
-  margin: 0;
-  padding: 0;
+  
+  padding: 0px;
+  
   list-style: none;
   display: flex;
-  flex-flow: column;
-  align-items: center;
-  height: 100%;
+  flex-flow: row;
+ 
+  
+  /* align-items: left; */
+  /* width: 90%; */
+  /* height: 40px; */
+  /* justify-content: left; */
 /*   color: #ccc;
   background-color: blue; */
 }
 
 @media (min-width: 500px) {
   .BuildHeaders {
+    display: flex;
     flex-flow: row;
   }
 }

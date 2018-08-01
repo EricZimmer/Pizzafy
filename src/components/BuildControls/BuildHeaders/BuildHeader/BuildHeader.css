@@ -1,17 +1,19 @@
 
 .BuildHeader {
-  margin: 10px 0;
-  display: block;
-  width: 100%;
+  /* margin: auto; */
+  display: inline-block;
+  
+  height: 100%;
   color: #ccc;
   border: 1px solid #ccc;
-  border-radius: 5%;
-  padding: 3px 15px;
-  margin: 0px 5px;
+  border-radius: 0%;
+  padding: .72em;
+ 
+  text-align: center;
 }
 
 .BuildHeader:hover {
   color: green;
-  border-color: green;
+  border-color: blue;
   cursor: pointer;
 }

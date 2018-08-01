@@ -1,0 +1,83 @@
+.BuildControl {
+  display: grid;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+  margin: 10px auto;
+  padding: 15px 15px;
+  border: 3px solid #ccc;
+  width: 90%;
+}
+
+.BuildControl button {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font: inherit;
+  padding: 15px;
+
+  /* width: 80px; */
+  border: 1px solid #aa6817;
+  cursor: pointer;
+  outline: none;
+  
+}
+
+.ControlGroup {
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.BuildControl button:disabled {
+  background-color: #AC9980;
+  border: 1px solid #7E7365;
+  color: #ccc;
+  cursor: default;
+}
+
+.BuildControl button:hover:disabled {
+  background-color: #AC9980;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.Label {
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: block;
+  color: #ccc;
+  margin: auto;
+}
+
+.BuildControl .Left {  
+  background-color: #D39952;
+  color: white;
+}
+
+.BuildControl .Right {
+  background-color: #8F5E1E;
+  color: white;
+}
+
+.BuildControl .Whole {
+  background-color: #8F5E1E;
+  color: white;
+}
+
+.BuildControl .Left:hover, .BuildControl .Left:active {  
+  background-color: #DAA972;
+  color: white;
+}
+
+.BuildControl .Right:hover,.BuildControl .Right:active {
+  background-color: #99703F;
+  color: white;
+}
+
+.BuildControl .Whole:hover,.BuildControl .Whole:active {
+  background-color: #99703F;
+  color: white;
+}

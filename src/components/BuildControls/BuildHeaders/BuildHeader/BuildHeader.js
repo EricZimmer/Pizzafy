@@ -3,9 +3,9 @@ import classes from './BuildHeader.css';
 import { NavLink } from 'react-router-dom';
 
 const buildHeader = (props) => (
-  <li className={classes.BuildHeader}>
+  <div className={classes.BuildHeader}>
     {props.children}
-  </li>
+  </div>
 );
 
 export default buildHeader;

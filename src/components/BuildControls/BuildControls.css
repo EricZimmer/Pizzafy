@@ -1,14 +1,42 @@
-.BuildControls {
-  width: 100%;
-  background-color: #50453b;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  box-shadow: 0 2px 1px #ccc;
+.BuildControlsContainer {
+  width: 320px;
   margin: auto;
   padding: 10px 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  background-color: rgb(141, 141, 141);
 }
 
-.BuildControlsContainer {
-  width: 
+.BuildControls {
+  width: 90%;
+  background-color: #b8804c;
+
+
+  display: flex;
+  flex-flow: row wrap;
+
+  border: 2px solid #aaa;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 1px #ccc;
+  /* margin: auto; */
+  padding: 10px 20px;
+}
+
+
+@media (min-width: 500px) and (min-height: 400px) {
+  .BuildControlsContainer {
+    width: 480px;
+    
+  }
+}
+
+
+@media (min-width: 1000px) and (min-height: 700px) {
+  .BuildControlsContainer {
+    
+    width: 560px;
+    
+  }
 }
