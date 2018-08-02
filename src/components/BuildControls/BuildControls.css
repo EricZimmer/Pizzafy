@@ -9,7 +9,7 @@
 }
 
 .BuildControls {
-  width: 90%;
+  width: 95%;
   background-color: #b8804c;
 
 
@@ -21,7 +21,7 @@
   align-items: center;
   box-shadow: 0 2px 1px #ccc;
   /* margin: auto; */
-  padding: 10px 20px;
+  padding: 10px 0px;
 }
 
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import BuildHeader from './BuildHeader/BuildHeader';
-import classes from '../../BuildControls/BuildControls.css';
+import classes from '../BuildHeaders/BuildHeaders.css';
 
 const buildHeaders = (props) => (
-  <div className={classes.ControlGroup}>
+  <div className={classes.BuildHeaders}>
     <BuildHeader style={{ 'color': 'yellow'}}>Crust, Cheese & Sauce</BuildHeader>
     
-    <BuildHeader style={{ 'color': 'green'}}>Meats</BuildHeader>
-    <BuildHeader style={{ 'color': 'yellow'}}>Veggies</BuildHeader>
+    <BuildHeader style={{ 'color': 'green'}}>Toppings</BuildHeader>
+    {/* <BuildHeader style={{ 'color': 'yellow'}}>Veggies</BuildHeader> */}
   </div>
 );
 

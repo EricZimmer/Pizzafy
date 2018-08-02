@@ -11,35 +11,35 @@ const buildControl = (props) => (
       <button
         className={classes.Left}
         >
-        Left
+        
       </button>
       <button
         className={classes.Whole}
         >
-        Whole
+        
       </button>
       <button
         className={classes.Right}
         >
-        Right
+        
       </button>
     </div>
     <div className={classes.ControlGroup}>
     
       <button
-        className={classes.Left}
+        className={classes.Extra}
         >
-        Left
+        Extra
       </button>
       <button
-        className={classes.Whole}
+        className={classes.Extra}
         >
-        Whole
+        Extra
       </button>
       <button
-        className={classes.Right}
+        className={classes.Extra}
         >
-        Right
+        Extra
       </button>
     </div>
     
