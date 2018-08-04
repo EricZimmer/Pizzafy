@@ -4,9 +4,17 @@ import classes from '../BuildHeaders/BuildHeaders.css';
 
 const buildHeaders = (props) => (
   <div className={classes.BuildHeaders}>
-    <BuildHeader style={{ 'color': 'yellow'}}>Crust, Cheese & Sauce</BuildHeader>
+    <BuildHeader 
+        clicked={props.clicked}
+        name={'crust'}>
+      Crust, Cheese & Sauce
+    </BuildHeader>
     
-    <BuildHeader style={{ 'color': 'green'}}>Toppings</BuildHeader>
+    <BuildHeader
+        clicked={props.clicked}
+        name={'toppings'}>
+      Toppings
+    </BuildHeader>
     {/* <BuildHeader style={{ 'color': 'yellow'}}>Veggies</BuildHeader> */}
   </div>
 );

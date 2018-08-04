@@ -17,3 +17,8 @@
   border-color: blue;
   cursor: pointer;
 }
+
+.BuildHeader:active {
+  background-color: #777;
+  border-color: tomato;
+}

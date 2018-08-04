@@ -8,14 +8,27 @@
   background-color: rgb(141, 141, 141);
 }
 
+
+.ControlGroup {
+  display: grid;
+  flex-flow: column;
+  align-content: center;
+  justify-content: center;
+  margin: 10px auto;
+  padding: 15px 15px;
+  border: 3px solid #ccc;
+  width: 95%;
+}
+
 .BuildControls {
   width: 95%;
   background-color: #b8804c;
-
-
+  
+  
   display: flex;
+  
   flex-flow: row wrap;
-
+  
   border: 2px solid #aaa;
   justify-content: center;
   align-items: center;
@@ -23,6 +36,24 @@
   /* margin: auto; */
   padding: 10px 0px;
 }
+
+.BuildControl {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content: center;
+  margin: .5em 0;
+}
+
+.Label {
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: block;
+  color: #ccc;
+  margin: auto;
+}
+
 
 
 @media (min-width: 500px) and (min-height: 400px) {

@@ -9,7 +9,7 @@
   width: 95%;
 }
 
-.BuildControl button {
+button {
   /* display: flex;
   align-content: center;
   justify-content: center; */
@@ -23,22 +23,16 @@
   color: white;
 }
 
-.ControlGroup {
-  display: flex;
-  flex-flow: row nowrap;
-  align-content: center;
-  justify-content: center;
-  margin: .5em auto;
-}
 
-.BuildControl button:disabled {
+
+button:disabled {
   /* background-color: #AC9980;
   border: 1px solid #7E7365; */
   color: #ccc;
   cursor: default;
 }
 
-.BuildControl button:hover:disabled {
+button:hover:disabled {
   background-color: #AC9980;
   color: #ccc;
   cursor: not-allowed;
