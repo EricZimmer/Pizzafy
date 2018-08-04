@@ -30,8 +30,10 @@ class PizzaBuilder extends Component {
     console.log('clicked');
   }
 
-  addToppingHandler = (name, side, amount) => {
+  addToppingHandler = (event, name, side, amount) => {
     console.log(name, side, amount);
+    event.preventDefault();
+    event.stopPropagation();
     this.setState(prevState => {
       prevState.ingredients[name[side]] = amount
     });
@@ -46,7 +48,7 @@ class PizzaBuilder extends Component {
         <BuildControls 
             currentControl={this.state.currentTab}  
             clicked={(name) => this.headerClickedHandler(name)}
-            addTopping={(name, side, amount) => this.addToppingHandler(name, side, amount)}>
+            addTopping={(event, name, side, amount) => this.addToppingHandler(event, name, side, amount)}>
         </BuildControls>
       </Auxhoc>
     );

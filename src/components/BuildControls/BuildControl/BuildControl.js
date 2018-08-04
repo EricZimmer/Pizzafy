@@ -9,7 +9,7 @@ const buildControl = (props) => {
     return <button
         className={classes[props.class]}
 
-        onClick={() => props.clicked( props.name,  props.side,  props.amount)}>
+        onClick={(event) => props.clicked(event, props.name,  props.side,  props.amount)}>
         {label}
     </button>
       
