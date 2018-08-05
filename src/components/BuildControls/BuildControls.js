@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 import classes from './BuildControls.css';
 import Auxhoc from '../../hoc/Auxhoc';
-import * as ActionTypes from '../../store/actions/ActionTypes';
+import * as IngrTypes from '../../INGREDIENTCONST';
 
 import BuildControl from './BuildControl/BuildControl';
 
 const placementRegular = [
-  { side: ActionTypes.LEFT, amount: ActionTypes.REGULAR},
-  { side: ActionTypes.WHOLE, amount: ActionTypes.REGULAR},
-  { side: ActionTypes.RIGHT, amount: ActionTypes.REGULAR}  
+  { side: IngrTypes.LEFT, amount: IngrTypes.REGULAR},
+  { side: IngrTypes.WHOLE, amount: IngrTypes.REGULAR},
+  { side: IngrTypes.RIGHT, amount: IngrTypes.REGULAR}  
 ]
 
 const placementExtra = [
-  { side: ActionTypes.LEFT, amount: ActionTypes.EXTRA},
-  { side: ActionTypes.WHOLE, amount: ActionTypes.EXTRA},
-  { side: ActionTypes.RIGHT, amount: ActionTypes.EXTRA}
+  { side: IngrTypes.LEFT, amount: IngrTypes.EXTRA},
+  { side: IngrTypes.WHOLE, amount: IngrTypes.EXTRA},
+  { side: IngrTypes.RIGHT, amount: IngrTypes.EXTRA}
 ]
 
 const MEAT_CONTROLS = [
-  { label: 'Pepperoni', type: 'Pepperoni' },
-  { label: 'Sausage', type: 'Sausage' },
-  { label: 'Ham', type: 'Ham' },
+  { label: 'Pepperoni', type: IngrTypes.PEPPERONI },
+  { label: 'Sausage', type: IngrTypes.SAUSAGE },
+  { label: 'Ham', type: IngrTypes.HAM },
 ];
 
 
@@ -28,22 +28,33 @@ const MEAT_CONTROLS = [
 
 class BuildControls extends Component {
   state = {
-    Pepperoni: {
-      toggleToppings: false
+    [IngrTypes.PEPPERONI]: {
+      toggleToppings: true
 
     },
-    Sausage: {
+    [IngrTypes.SAUSAGE]: {
       toggleToppings: false
     },
-    Ham: {
+    [IngrTypes.HAM]: {
       toggleToppings: false
     }
   }
 
+  toggle = (e) => {
+    e.preventDefault();
+    e.target.classList.toggle(classes.Toggle);
+  }
+  
+
   toppingToggle = (e) => {
     e.preventDefault();
-    const id = e.target.id;
-    this.setState({[id]: {toggleToppings: !this.state[id].toggleToppings}});
+    
+    const id = e.target.id || e.target.parentNode.id;
+    
+      this.setState({[id]: {toggleToppings: !this.state[id].toggleToppings}});
+
+    document.getElementById(id).scrollIntoView(false);
+    /* console.log(document.getElementById(id)); */
   }
 
   render() {
@@ -79,8 +90,13 @@ class BuildControls extends Component {
             key={ctrl.type} 
             className={classes.ControlGroup}
             onClick={(e) => this.toppingToggle(e)}>
-            <div className={classes.Label}>{ctrl.label}</div>
-            {this.state[ctrl.type].toggleToppings ? <Auxhoc>
+              <div 
+                className={classes.Label}
+                onClick={(e) => this.toppingToggle(e)}>
+                {ctrl.label}
+              </div>
+              {this.state[ctrl.type].toggleToppings ? 
+              <Auxhoc>
                 <div className={classes.BuildControl}>{ctrlGroupReg}</div>
                 <div className={classes.BuildControl}>{ctrlGroupExtra}</div>
               </Auxhoc> : null}

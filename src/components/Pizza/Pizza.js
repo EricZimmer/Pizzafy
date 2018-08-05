@@ -3,23 +3,28 @@ import classes from './Pizza.css'
 import PizzaIngredient from './PizzaIngredient/PizzaIngredient';
 
 const pizza = (props) => {
-
+  /* let ingredients = null;
+  if (props.ingredients != null) {
+    let ingredientString = '';
+    ingredients = Object.keys(props.ingredients)
+      .map(ingr => {
+        ingredientString = ingr.toLowerCase();
+        return Object.keys(ingr).map((side, _) => {
+          console.log(ingr.Left);
+          return `${ingr} + '-' + ${ingr[side]} + '-' + ${ingr.side}`
+        });
+      });
+      
+  } */
   return (
     <div className={classes.Pizza}>
       <div className={classes.Pan}>
         <div className={classes.Crust}>
-          <PizzaIngredient type='crust-regular'>
-            <PizzaIngredient type='topping-container'>
-              <PizzaIngredient type='cheese' />
-              <PizzaIngredient type='sauce' />
-              {/* <PizzaIngredient type='pepperoni-right' />
-              <PizzaIngredient type='pepperoni-left' /> */}
-              {/* <PizzaIngredient type='pepperoni-extra-left' />
-              <PizzaIngredient type='pepperoni-extra-right' /> */}
-              <PizzaIngredient type='sausage-left' />
-              <PizzaIngredient type='sausage-right' />
-              <PizzaIngredient type='sausage-extra-left' />
-              <PizzaIngredient type='sausage-extra-right' />
+          <PizzaIngredient topping='crust-regular'>
+            <PizzaIngredient topping='topping-container'>
+              <PizzaIngredient topping='cheese' />
+              <PizzaIngredient topping='sauce' />
+              {props.ingredients}
             </PizzaIngredient>
           </PizzaIngredient>
         </div>

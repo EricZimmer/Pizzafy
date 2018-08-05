@@ -5,7 +5,7 @@ import classes from './BuildControl.css';
 const buildControl = (props) => {
     
     
-    const label = props.amount === "Extra" ? "Extra" : null;
+    const label = props.amount === "EXTRA" ? "Extra" : null;
     return <button
         className={classes[props.class]}
 

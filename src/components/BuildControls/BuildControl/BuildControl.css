@@ -21,7 +21,10 @@ button {
   outline: none;
   background-color: #D39952;
   color: white;
-}
+  user-select: none;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #777;
+} 
 
 
 
@@ -38,52 +41,45 @@ button:hover:disabled {
   cursor: not-allowed;
 }
 
-.Label {
-  padding-bottom: 10px;
-  font-weight: bold;
-  font-size: 1.2rem;
-  display: block;
-  color: #ccc;
-  margin: auto;
-}
 
-.Left {  
+
+.LEFT {  
   
   width: 35px;
   border-radius: 30px 0 0 30px;
   /* border-right: 1px solid transparent; */
 }
 
-.Right {
+.RIGHT {
   
   width: 35px;
   border-radius: 0 30px 30px 0;
 }
 
-.Whole {
+.WHOLE {
    
   width: 50px;
   border-radius: 50%;
   margin: 0px 2em;
 }
 
-.Extra {
+.EXTRA {
   width: 65px;
   margin: 0 .7em;
   border-radius: 15%;
 }
 
-.BuildControl .Left:hover, .BuildControl .Left:active {  
+.BuildControl .LEFT:hover, .BuildControl .LEFT:active {  
   background-color: #DAA972;
   color: white;
 }
 
-.BuildControl .Right:hover,.BuildControl .Right:active {
+.BuildControl .RIGHT:hover,.BuildControl .RIGHT:active {
   background-color: #99703F;
   color: white;
 }
 
-.BuildControl .Whole:hover,.BuildControl .Whole:active {
+.BuildControl .WHOLE:hover,.BuildControl .WHOLE:active {
   background-color: #99703F;
   color: white;
 }
