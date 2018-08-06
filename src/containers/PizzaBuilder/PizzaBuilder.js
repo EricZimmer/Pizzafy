@@ -13,15 +13,15 @@ class PizzaBuilder extends Component {
   state = {
     currentTab: 'meat',
     ingredients: {
-      PEPPERONI: {
-        LEFT: IngrTypes.NONE,
-        RIGHT: IngrTypes.NONE,
+      [IngrTypes.PEPPERONI]: {
+        [IngrTypes.LEFT]: IngrTypes.NONE,
+        [IngrTypes.RIGHT]: IngrTypes.NONE,
         [IngrTypes.WHOLE]: IngrTypes.NONE
       },
-      SAUSAGE: {
-        [IngrTypes.LEFT]: IngrTypes.REGULAR,
-        [IngrTypes.RIGHT]: IngrTypes.REGULAR,
-        [IngrTypes.WHOLE]: IngrTypes.REGULAR
+      [IngrTypes.SAUSAGE]: {
+        [IngrTypes.LEFT]: IngrTypes.NONE,
+        [IngrTypes.RIGHT]: IngrTypes.NONE,
+        [IngrTypes.WHOLE]: IngrTypes.NONE
       }
     }
   };
@@ -32,19 +32,74 @@ class PizzaBuilder extends Component {
   }
 
   addToppingHandler = (event, name, side, amount) => {
-    console.log(name, side, amount);
     event.preventDefault();
     event.stopPropagation();
-    this.setState({
-      ...this.state.ingredients,
+    let newTopping = {};
+    switch(amount) {
+      case(IngrTypes.REGULAR):
+        switch(side) {
+          case(IngrTypes.LEFT):
+            newTopping = {
+              [IngrTypes.RIGHT]: IngrTypes.NONE,
+              [IngrTypes.WHOLE]: IngrTypes.NONE
+            }
+           break;
+          case(IngrTypes.RIGHT):
+            newTopping = {
+              [IngrTypes.LEFT]: IngrTypes.NONE,
+              [IngrTypes.WHOLE]: IngrTypes.NONE
+            }
+           break;
+          case(IngrTypes.WHOLE):
+            newTopping = {
+              [IngrTypes.LEFT]: IngrTypes.NONE,
+              [IngrTypes.RIGHT]: IngrTypes.NONE
+            }
+           break;
+          default: newTopping = null;
+        }
+        break;
+      case(IngrTypes.EXTRA):
+        switch(side) {
+          case(IngrTypes.LEFT):
+            newTopping = {
+              [IngrTypes.RIGHT]: IngrTypes.NONE,
+              [IngrTypes.WHOLE]: IngrTypes.NONE
+            }
+          break;
+          case(IngrTypes.RIGHT):
+            newTopping = {
+              [IngrTypes.LEFT]: IngrTypes.NONE,
+              [IngrTypes.WHOLE]: IngrTypes.NONE
+            }
+          break;
+          case(IngrTypes.WHOLE):
+            newTopping = {
+              [IngrTypes.LEFT]: IngrTypes.NONE,
+              [IngrTypes.RIGHT]: IngrTypes.NONE
+            }
+          break;
+          default: newTopping = null;
+        }
+        break;
+        default: newTopping = null;
+      return newTopping;
+    }
+    console.log(newTopping);
+    const newState = {
+      ...this.state,
       ingredients: {
-        ...this.state.ingredients[name],
+        ...this.state.ingredients,
         [IngrTypes[name]]: {
+          ...this.state.ingredients[name],
+          ...newTopping,
           [side]: amount
         }
 
       }
-    });
+    }
+    console.log(newState);
+    this.setState({...newState});
     //console.log(this.state.ingredients[name[side]])
   }
 
@@ -57,18 +112,16 @@ class PizzaBuilder extends Component {
     ); */
     let ingredients = null;
     if (this.state.ingredients != null) {
-      let stIngr = this.state.ingredients;
+      let stIngr = {...this.state.ingredients};
 
       ingredients = Object.keys(stIngr)
         .map(ingr => {
-          console.log(ingr);
           return Object.keys(stIngr[ingr]).map((side) => {
             let amount = stIngr[ingr][side];
-            let topping = ingr;
-            console.log('props = ', typeof(topping));
             return (
               <PizzaIngredient 
-                  topping={'PEPPERONI'}
+                  key={`${ingr} + '_' ${side} + '_' ${amount}`}
+                  topping={ingr}
                   side={side}
                   amount={amount}/>
               );

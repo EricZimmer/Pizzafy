@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './PizzaIngredient.css';
 import * as IngrTypes from '../../../INGREDIENTCONST';
+import Auxhoc from '../../../hoc/Auxhoc';
 
 import PEPPERONI_RIGHT from '../../../assets/pepright.svg';
 import PEPPERONI_LEFT from '../../../assets/pepleft.svg';
-import PEPPERONI_WHOLE from '../../../assets/pepleft.svg';
+
 import SAUSAGE_RIGHT from '../../../assets/sausageright.svg';
 import SAUSAGE_LEFT from '../../../assets/sausageleft.svg';
 
@@ -14,76 +15,95 @@ const IMAGES = {
   'SAUSAGE_LEFT': SAUSAGE_LEFT, 'SAUSAGE_RIGHT': SAUSAGE_RIGHT
 };
 
+const getImageRegular = (img, divclasses) => {
+  return ( divclasses === null ? null : 
+    <img className={divclasses} src={IMAGES[img]}/> );
+};
+
+const getImageExtra = (img, divclasses) => {
+  return ( divclasses === null ? null : 
+    <img className={divclasses} src={IMAGES[img]}/> );
+};
+
 class PizzaIngredient extends Component {
+
+  createTopping = (topping, side, amount) => {
+    const imgSrc = {
+      [IngrTypes.LEFT]: [topping, IngrTypes.LEFT].join('_'),
+      [IngrTypes.RIGHT]: [topping, IngrTypes.RIGHT].join('_')    
+    };
+    const divClasses = {
+      regular: classes[topping],
+      extra: [classes[topping], classes.rotate].join(' ')
+    };
+
+    let finishedTopping = {};
+
+    if(side === IngrTypes.WHOLE) {
+ 
+      if(amount === IngrTypes.REGULAR) {
+        finishedTopping = (
+          <Auxhoc>
+            {getImageRegular(imgSrc.LEFT, divClasses.regular)}
+            {getImageRegular(imgSrc.RIGHT, divClasses.regular)}
+          </Auxhoc>
+        );
+      }
+    } else {
+        if(amount === IngrTypes.REGULAR) {
+          finishedTopping = getImageRegular(imgSrc[side], divClasses.regular);
+        } 
+        else if (amount === IngrTypes.EXTRA) {
+          finishedTopping = (
+            <Auxhoc>
+              {getImageRegular(imgSrc[side], divClasses.regular)}
+              {getImageRegular(imgSrc[side], divClasses.extra)}
+            </Auxhoc>
+          );
+        }
+    }
+          
+          
+    return finishedTopping;
+  };
   
   render () {
-    //console.log(classes);
-    /* const pepLeftClasses = Object.keys(pepperoni)
-      .map(pep => {
-        return [...Array(pepperoni[pep])]
-      })
-      .map(peps => {
-        return <div key={peps} className={[classes.Pepperoni, peps].join(' ')} ></div>;
-      }); */
+      let ingredients = null;
+      const side = this.props.side || null;
+      const amount = this.props.amount || null;
       
-      console.log('inside topping switch', this.props.topping);
-    let ingredients = null;
-    let imgSrc = null;
-    let divClasses = [];
-    switch (this.props.topping) {
-      case('crust'):
-        ingredients = <div className={classes.Crust}>{this.props.children}</div>;
+      switch (this.props.topping) {
+        case('crust'):
+          ingredients = <div className={classes.Crust}>{this.props.children}</div>;
         break;
-      case('crust-thin'):
-        ingredients = <div className={classes.CrustThin}>{this.props.children}</div>;
+        case('crust-thin'):
+          ingredients = <div className={classes.CrustThin}>{this.props.children}</div>;
         break;
-      case('crust-regular'):
-        ingredients = <div className={classes.CrustRegular}>{this.props.children}</div>;
+        case('crust-regular'):
+          ingredients = <div className={classes.CrustRegular}>{this.props.children}</div>;
         break;
-      case('sauce'):
-        ingredients = <div className={classes.Sauce}></div>;
+        case('sauce'):
+          ingredients = <div className={classes.Sauce}></div>;
         break;
-      case('cheese'):
-        ingredients = <div className={classes.Cheese}></div>;
+        case('cheese'):
+          ingredients = <div className={classes.Cheese}></div>;
         break;
-      case('topping-container'):
-        ingredients = <div className={classes.ToppingContainer}>{this.props.children}</div>;
+        case('topping-container'):
+          ingredients = <div className={classes.ToppingContainer}>{this.props.children}</div>;
         break;
-      /* case(ActionTypes.PEPPERONI): 
-        switch(this.props.sideAndAmount) {
-          case(ActionTypes.)
-        } */
-      case(IngrTypes.PEPPERONI):
-        const side = this.props.side;
-        const amount = this.props.amount;
-        if(side != 'WHOLE' && amount === IngrTypes.REGULAR) {
-          divClasses = classes[IngrTypes.PEPPERONI];
-        } 
-        else if (side != 'WHOLE' && amount === IngrTypes.EXTRA) {
-          divClasses = [classes[IngrTypes.PEPPERONI], classes.rotate].join(' ');
-        }
         
-        imgSrc = [IngrTypes.PEPPERONI, this.props.side].join('_');
-        console.log('divClasses = ', divClasses, ' src = ', imgSrc);
-        ingredients = (
-          <img className={divClasses} src={IMAGES[imgSrc]}/>
-        );
+        case(IngrTypes.PEPPERONI):
+          if(amount !== IngrTypes.NONE) {
+            ingredients = this.createTopping(IngrTypes.PEPPERONI, side, amount);
+          }
         break;
-      default: ingredients = null;
-      
+        case(IngrTypes.SAUSAGE):
+          if(amount !== IngrTypes.NONE) {
+            ingredients = this.createTopping(IngrTypes.SAUSAGE, side, amount);
+          }
+        break;
+      default: ingredients = null;    
     }
-    /* switch(this.props.topping) {
-      case(IngrTypes.PEPPERONI):
-        divClasses = classes[IngrTypes.PEPPERONI];
-        imgSrc = [IngrTypes.PEPPERONI, this.props.side].join('_');
-        console.log('divClasses = ', divClasses, ' src = ', imgSrc);
-        ingredients = (
-          <img className={divClasses} src={imgSrc}/>
-        );
-        break;
-    default: ingredients = ingredients;
-
-    } */
     
     return ingredients;
   };
