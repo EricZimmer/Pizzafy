@@ -13,16 +13,7 @@ class PizzaBuilder extends Component {
   state = {
     currentTab: 'meat',
     ingredients: {
-      /* [IngrTypes.PEPPERONI]: {
-        [IngrTypes.LEFT]: IngrTypes.NONE,
-        [IngrTypes.RIGHT]: IngrTypes.NONE,
-        [IngrTypes.WHOLE]: IngrTypes.NONE
-      },
-      [IngrTypes.SAUSAGE]: {
-        [IngrTypes.LEFT]: IngrTypes.NONE,
-        [IngrTypes.RIGHT]: IngrTypes.NONE,
-        [IngrTypes.WHOLE]: IngrTypes.NONE
-      } */
+      
       [IngrTypes.PEPPERONI]: {
         [IngrTypes.REGULAR]: IngrTypes.NONE,
         [IngrTypes.EXTRA]: IngrTypes.NONE
