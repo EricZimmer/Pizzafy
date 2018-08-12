@@ -41,7 +41,9 @@ button:hover:disabled {
   cursor: not-allowed;
 }
 
-
+.ToggledOn {
+  background-color: red;
+}
 
 .LEFT {  
   

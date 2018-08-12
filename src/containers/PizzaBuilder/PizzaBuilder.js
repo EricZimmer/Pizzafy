@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Auxhoc from '../../hoc/Auxhoc';
 import Pizza from '../../components/Pizza/Pizza';
 import BuildHeaders from '../../components/BuildHeaders/BuildHeaders';
-import BuildControls from '../../components/BuildControls/BuildControls';
+import BuildControls from '../../components/ControlGroup/BuildControls/BuildControls';
 
 import * as IngrTypes from '../../INGREDIENTCONST';
 import PizzaIngredient from '../../components/Pizza/PizzaIngredient/PizzaIngredient';
@@ -13,7 +13,7 @@ class PizzaBuilder extends Component {
   state = {
     currentTab: 'meat',
     ingredients: {
-      [IngrTypes.PEPPERONI]: {
+      /* [IngrTypes.PEPPERONI]: {
         [IngrTypes.LEFT]: IngrTypes.NONE,
         [IngrTypes.RIGHT]: IngrTypes.NONE,
         [IngrTypes.WHOLE]: IngrTypes.NONE
@@ -22,6 +22,10 @@ class PizzaBuilder extends Component {
         [IngrTypes.LEFT]: IngrTypes.NONE,
         [IngrTypes.RIGHT]: IngrTypes.NONE,
         [IngrTypes.WHOLE]: IngrTypes.NONE
+      } */
+      [IngrTypes.PEPPERONI]: {
+        [IngrTypes.REGULAR]: IngrTypes.NONE,
+        [IngrTypes.EXTRA]: IngrTypes.NONE
       }
     }
   };
@@ -31,10 +35,10 @@ class PizzaBuilder extends Component {
     /* console.log('clicked'); */
   }
 
-  addToppingHandler = (event, name, side, amount) => {
+  addToppingHandler = (event, name, side, amount, toggle) => {
     event.preventDefault();
     event.stopPropagation();
-    let newTopping = {};
+    /* let newTopping = {};
     switch(amount) {
       case(IngrTypes.REGULAR):
         switch(side) {
@@ -83,17 +87,18 @@ class PizzaBuilder extends Component {
         }
         break;
         default: newTopping = null;
+        console.log(newTopping);
       return newTopping;
-    }
-    console.log(newTopping);
+    } */
+    console.log('add top toggle',toggle);
     const newState = {
       ...this.state,
       ingredients: {
         ...this.state.ingredients,
         [IngrTypes[name]]: {
           ...this.state.ingredients[name],
-          ...newTopping,
-          [side]: amount
+          /* ...newTopping, */
+          [amount]: toggle ? side : IngrTypes.NONE
         }
 
       }
@@ -116,11 +121,11 @@ class PizzaBuilder extends Component {
 
       ingredients = Object.keys(stIngr)
         .map(ingr => {
-          return Object.keys(stIngr[ingr]).map((side) => {
-            let amount = stIngr[ingr][side];
+          return Object.keys(stIngr[ingr]).map((amount) => {
+            let side = stIngr[ingr][amount];
             return (
               <PizzaIngredient 
-                  key={`${ingr} + '_' ${side} + '_' ${amount}`}
+                  key={`${ingr} + '_' ${amount} + '_' ${side}`}
                   topping={ingr}
                   side={side}
                   amount={amount}/>
@@ -140,7 +145,7 @@ class PizzaBuilder extends Component {
         <BuildControls 
             currentControl={this.state.currentTab}  
             clicked={(name) => this.headerClickedHandler(name)}
-            addTopping={(event, name, side, amount) => this.addToppingHandler(event, name, side, amount)}>
+            addTopping={(event, name, side, amount, toggle) => this.addToppingHandler(event, name, side, amount, toggle)}>
         </BuildControls>
       </Auxhoc>
     );

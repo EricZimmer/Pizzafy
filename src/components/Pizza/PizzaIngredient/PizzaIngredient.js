@@ -71,6 +71,7 @@ class PizzaIngredient extends Component {
       let ingredients = null;
       const side = this.props.side || null;
       const amount = this.props.amount || null;
+      //console.log(amount, side);
       
       switch (this.props.topping) {
         case('crust'):
@@ -93,12 +94,12 @@ class PizzaIngredient extends Component {
         break;
         
         case(IngrTypes.PEPPERONI):
-          if(amount !== IngrTypes.NONE) {
+          if(side && side !== IngrTypes.NONE) {
             ingredients = this.createTopping(IngrTypes.PEPPERONI, side, amount);
           }
         break;
         case(IngrTypes.SAUSAGE):
-          if(amount !== IngrTypes.NONE) {
+          if(side && side  !== IngrTypes.NONE) {
             ingredients = this.createTopping(IngrTypes.SAUSAGE, side, amount);
           }
         break;
