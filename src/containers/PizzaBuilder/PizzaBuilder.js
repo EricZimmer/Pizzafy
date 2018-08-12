@@ -4,6 +4,7 @@ import Auxhoc from '../../hoc/Auxhoc';
 import Pizza from '../../components/Pizza/Pizza';
 import BuildHeaders from '../../components/BuildHeaders/BuildHeaders';
 import BuildControls from '../../components/ControlGroup/BuildControls/BuildControls';
+import ControlGroup from '../../components/ControlGroup/ControlGroup';
 
 import * as IngrTypes from '../../INGREDIENTCONST';
 import PizzaIngredient from '../../components/Pizza/PizzaIngredient/PizzaIngredient';
@@ -133,11 +134,12 @@ class PizzaBuilder extends Component {
           
         <BuildHeaders 
           clicked={ this.headerClickedHandler}/>
-        <BuildControls 
+        {/* <BuildControls 
             currentControl={this.state.currentTab}  
             clicked={(name) => this.headerClickedHandler(name)}
             addTopping={(event, name, side, amount, toggle) => this.addToppingHandler(event, name, side, amount, toggle)}>
-        </BuildControls>
+        </BuildControls> */}
+        <ControlGroup />
       </Auxhoc>
     );
   }

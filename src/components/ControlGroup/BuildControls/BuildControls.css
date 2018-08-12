@@ -9,7 +9,7 @@
 }
 
 
-.ControlGroup {
+.BuildControls {
   display: grid;
   flex-flow: column;
   align-content: center;
@@ -18,15 +18,15 @@
   padding: 15px 15px;
   border: 3px solid #ccc;
   border-radius: 2%;
-  width: 95%;
+  width: 75%;
 }
 
-.BuildControls {
+.ControlGroup {
   width: 95%;
   background-color: #b8804c;
   
   
-  display: flex;
+  display: grid;
   
   flex-flow: row wrap;
   
@@ -34,7 +34,7 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0 2px 1px #ccc;
-  /* margin: auto; */
+  margin: auto;
   padding: 10px 0px;
 }
 

@@ -98,121 +98,51 @@ class BuildControls extends Component {
     
     const regular = this.state.REGULAR;
     const extra = this.state.EXTRA;
+    const topping = this.props.topping;
+    
+    const controlsRegular = regular.map(reg => {
+      console.log('reg ', reg.side, reg.toggled);
 
-    const meatControls = MEAT_CONTROLS.map(ctrl => {
-      const ctrlGroupReg = regular.map(reg => {
-        console.log('reg ', reg.side, reg.toggled);
-
-        return <BuildControl
-          key={`${ctrl.type} + ${reg.side} + ${IngrTypes.REGULAR}`}
-          name={ctrl.type}
-          amount={IngrTypes.REGULAR}
-          side={reg.side}
-          class={reg.side}
-          toggled={reg.toggled}
-          clicked={this.toppingToggle}
-        />
-        
-        });
-      const ctrlGroupExtra = Object.keys(extra).map(pE => {
-        return <BuildControl
-          key={`${ctrl.type} + ${pE.side} + ${pE.amount}`}
-          name={ctrl.type}
-          amount={pE.amount}
-          side={pE.side}
-          class={pE.amount}
-          toggled={pE.toggle}
-          clicked={this.toppingToggle}
-        />
-      });
-
-      let controls = (
-          <div 
-            id={ctrl.type}
-            key={ctrl.type} 
-            className={classes.ControlGroup}
-            onClick={(e) => this.toppingGroupToggle(e)}>
-              <div 
-                className={classes.Label}
-                onClick={(e) => this.toppingGroupToggle(e)}>
-                {ctrl.label}
-              </div>
-              {this.state[ctrl.type].toggleToppings ? 
-              <Auxhoc>
-                <div className={classes.BuildControl}>{ctrlGroupReg}</div>
-                {/* <div className={classes.BuildControl}>{ctrlGroupExtra}</div> */}
-              </Auxhoc> : null}
-          </div>
-        );
+      return <BuildControl
+        key={`${topping} + ${reg.side} + ${IngrTypes.REGULAR}`}
+        name={topping}
+        amount={IngrTypes.REGULAR}
+        side={reg.side}
+        class={reg.side}
+        toggled={reg.toggled}
+        clicked={this.toppingToggle}
+      />
       
-      return (
-        controls
-      );
+    });
+    const controlsExtra = extra.map(extra => {
+      return <BuildControl
+        key={`${topping} + ${extra.side} + ${IngrTypes.EXTRA}`}
+        name={topping}
+        amount={IngrTypes.EXTRA}
+        side={extra.side}
+        class={IngrTypes.EXTRA}
+        toggled={extra.toggle}
+        clicked={this.toppingToggle}
+      />
     });
 
-    /* const meatControls = MEAT_CONTROLS.map(ctrl => {
-      const ctrlGroupReg = placementRegular.map(pR => {
-        return <BuildControl
-          key={`${ctrl.type} + ${pR.side} + ${pR.amount}`}
-          name={ctrl.type}
-          amount={pR.amount}
-          side={pR.side}
-          class={pR.side}
-          toggle={pR.toggle}
-          clicked={this.toppingToggle}
-        />
-      });
-      const ctrlGroupExtra = placementExtra.map(pE => {
-        return <BuildControl
-          key={`${ctrl.type} + ${pE.side} + ${pE.amount}`}
-          name={ctrl.type}
-          amount={pE.amount}
-          side={pE.side}
-          class={pE.amount}
-          toggle={pE.toggle}
-          clicked={this.toppingToggle}
-        />
-      });
-
-      let controls = (
-          <div 
-            id={ctrl.type}
-            key={ctrl.type} 
-            className={classes.ControlGroup}
-            onClick={(e) => this.toppingGroupToggle(e)}>
-              <div 
-                className={classes.Label}
-                onClick={(e) => this.toppingGroupToggle(e)}>
-                {ctrl.label}
-              </div>
-              {this.state[ctrl.type].toggleToppings ? 
-              <Auxhoc>
-                <div className={classes.BuildControl}>{ctrlGroupReg}</div>
-                <div className={classes.BuildControl}>{ctrlGroupExtra}</div>
-              </Auxhoc> : null}
-          </div>
-        );
-      
-      return (
-        controls
-      );
-    }); */
-
-
-    return (
-      <div className={classes.BuildControlsContainer}>
-       
+    let controls = (    
       <div className={classes.BuildControls}>
-        
-            
-        {meatControls}
+        <div 
+          className={classes.Label}
+          /* onClick={(e) => this.toppingGroupToggle(e)} */>
+          {this.props.topping}
+        </div>
+        <div className={classes.BuildControl}>{controlsRegular}</div>
+        <div className={classes.BuildControl}>{controlsExtra}</div>
       </div>
-    </div>
+        
     );
-  }
-  
+    return controls;
+      
+  };
 
+    
+}
   
-};
-
 export default BuildControls;
