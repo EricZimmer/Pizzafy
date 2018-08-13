@@ -27,9 +27,9 @@ class PizzaBuilder extends Component {
     /* console.log('clicked'); */
   }
 
-  addToppingHandler = (name, side, amount) => {
+  addToppingHandler = (name, reg, extra) => {
      
-    console.log('add top ', name, side, amount);
+    /* console.log('add top ', name, side, amount); */
     const newState = {
       ...this.state,
       ingredients: {
@@ -37,7 +37,8 @@ class PizzaBuilder extends Component {
         [IngrTypes[name]]: {
           ...this.state.ingredients[name],
           /* ...newTopping, */
-          [amount]: side
+          [IngrTypes.REGULAR]: reg,
+          [IngrTypes.EXTRA]: extra
         }
 
       }

@@ -26,20 +26,17 @@ class BuildControls extends Component {
   }
   
   componentDidUpdate() {
-    const regState = this.state[IngrTypes.REGULAR];
-    let regular = null;
-    Object.keys(regState)
-      .map(side => {
-        console.log(regState[side]);
-        return regState[side] ? regular = side : regular = IngrTypes.NONE;
-      });
-      console.log('cdu ', regular);
+    //this.props.addTopping(this.props.topping, this.state);
+    
+  }
+  componentWillUpdate() {
+    
   }
   
 
   toppingToggle = (e, side, amount) => {
     e.preventDefault();
-    this.props.addTopping(this.props.topping, side, amount);
+    /* this.props.addTopping(this.props.topping, side, amount); */
 
     const stateAmount = this.state[amount];
     let updateToggle = Object.keys(stateAmount).map(stateSide => {
@@ -80,11 +77,27 @@ class BuildControls extends Component {
     },{});
     this.setState({
       [amount]: updateToggle
+    }, () => {
+      let reg = IngrTypes.NONE;
+      let extr = IngrTypes.NONE;
+      for (let key in this.state.REGULAR) {
+        if (this.state.REGULAR[key]) {
+          reg = key;
+        }
+      }
+      for (let key in this.state.EXTRA) {
+        if (this.state.EXTRA[key]) {
+          extr = key;
+        }
+      }
+      this.props.addTopping(this.props.topping, reg, extr);
     });
     console.log('updatedtoggle= ', updateToggle);
     this.setState({
       pepperoni: [amount, side].join('__')
     });
+
+    
     //this.props.addTopping(e, name, side, amount, toggle);
   }
 
@@ -94,7 +107,7 @@ class BuildControls extends Component {
     const regular = this.state.REGULAR;
     const extra = this.state.EXTRA;
     const topping = this.props.topping;
-
+    
     
     const controlsRegular = Object.keys(regular).map(reg => {
       return <BuildControl
