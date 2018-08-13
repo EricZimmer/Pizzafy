@@ -5,49 +5,19 @@ import * as IngrTypes from '../../../INGREDIENTCONST';
 
 import BuildControl from './BuildControl/BuildControl';
 
-let placementRegular = [
-  { side: IngrTypes.LEFT, amount: IngrTypes.REGULAR, toggle: false},
-  { side: IngrTypes.WHOLE, amount: IngrTypes.REGULAR, toggle: false},
-  { side: IngrTypes.RIGHT, amount: IngrTypes.REGULAR, toggle: false}  
-]
-
-let placementExtra = [
-  { side: IngrTypes.LEFT, amount: IngrTypes.EXTRA, toggle: false},
-  { side: IngrTypes.WHOLE, amount: IngrTypes.EXTRA, toggle: false},
-  { side: IngrTypes.RIGHT, amount: IngrTypes.EXTRA, toggle: false}
-]
-
-const MEAT_CONTROLS = [
-  { label: 'Pepperoni', type: IngrTypes.PEPPERONI },
-  { label: 'Sausage', type: IngrTypes.SAUSAGE },
-  { label: 'Ham', type: IngrTypes.HAM },
-];
-
-
-
-
 class BuildControls extends Component {
   state = {
-    [IngrTypes.PEPPERONI]: {
-      toggleToppings: true
-
+    
+    [IngrTypes.REGULAR]: {
+      [IngrTypes.LEFT]: false,
+      [IngrTypes.WHOLE]: false,
+      [IngrTypes.RIGHT]: false
     },
-    [IngrTypes.SAUSAGE]: {
-      toggleToppings: false
-    },
-    [IngrTypes.HAM]: {
-      toggleToppings: false
-    },
-    [IngrTypes.REGULAR]: [
-      {side: IngrTypes.LEFT, toggled: false},
-      {side: IngrTypes.WHOLE, toggled: false},
-      {side: IngrTypes.RIGHT, toggled: false}
-    ],
-    [IngrTypes.EXTRA]: [
-      {side: IngrTypes.LEFT, toggled: false},
-      {side: IngrTypes.WHOLE, toggled: false},
-      {side: IngrTypes.RIGHT, toggled: false}
-    ],
+    [IngrTypes.EXTRA]: {
+      [IngrTypes.LEFT]: false,
+      [IngrTypes.WHOLE]: false,
+      [IngrTypes.RIGHT]: false
+    }
   }
 
   toggle = (e) => {
@@ -55,42 +25,67 @@ class BuildControls extends Component {
     e.target.classList.toggle(classes.Toggle);
   }
   
-
-  toppingGroupToggle = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const id = e.target.id || e.target.parentNode.id;
-    console.log('id= ', id);
-      if(id) {
-
-        this.setState({
-          ...this.state,
-          [id]: {
-            ...this.state[id],
-            toggleToppings: !this.state[id].toggleToppings
-          }
-        });
-      }
-
-    
+  componentDidUpdate() {
+    const regState = this.state[IngrTypes.REGULAR];
+    let regular = null;
+    Object.keys(regState)
+      .map(side => {
+        console.log(regState[side]);
+        return regState[side] ? regular = side : regular = IngrTypes.NONE;
+      });
+      console.log('cdu ', regular);
   }
+  
 
-  toppingToggle = (e, name, side, amount, toggle) => {
+  toppingToggle = (e, side, amount) => {
     e.preventDefault();
-    console.log('toppingToggle', toggle);
-    let updateToggle = this.state[amount].map(amnt => {
-      if(amnt.side === side) {
-        return {...amnt, toggled: !amnt.toggled}
-      } else return {...amnt, toggled: false };
-    });
+    this.props.addTopping(this.props.topping, side, amount);
+
+    const stateAmount = this.state[amount];
+    let updateToggle = Object.keys(stateAmount).map(stateSide => {
+      if(stateSide === side) {
+        if(amount === IngrTypes.REGULAR) {
+          this.setState({ 
+            [IngrTypes.EXTRA]: {
+              ...this.state[IngrTypes.EXTRA],
+              [IngrTypes[side]]: false,
+              [IngrTypes.WHOLE]: false
+            }
+          });
+        } else if(amount === IngrTypes.EXTRA) {
+            if(side === IngrTypes.WHOLE) {
+              this.setState({ 
+                [IngrTypes.REGULAR]: {
+                  [IngrTypes.LEFT]: false,
+                  [IngrTypes.WHOLE]: false,
+                  [IngrTypes.RIGHT]: false
+                }
+              });
+            } else {
+              this.setState({ 
+                [IngrTypes.REGULAR]: {
+                  ...this.state[IngrTypes.REGULAR],
+                  [IngrTypes[side]]: false
+                }
+              });
+            }
+        }
+       
+        return {[stateSide]: !stateAmount[stateSide]};
+      } else {
+        return {[stateSide]: false };
+      }
+    }).reduce((obj, item) => {
+      return {...obj, ...item};
+    },{});
     this.setState({
       [amount]: updateToggle
     });
-    console.log('updatedtoggle= ', this.state);
+    console.log('updatedtoggle= ', updateToggle);
     this.setState({
       pepperoni: [amount, side].join('__')
     });
-    this.props.addTopping(e, name, side, amount, toggle);
+    //this.props.addTopping(e, name, side, amount, toggle);
   }
 
 
@@ -99,44 +94,44 @@ class BuildControls extends Component {
     const regular = this.state.REGULAR;
     const extra = this.state.EXTRA;
     const topping = this.props.topping;
-    
-    const controlsRegular = regular.map(reg => {
-      console.log('reg ', reg.side, reg.toggled);
 
+    
+    const controlsRegular = Object.keys(regular).map(reg => {
       return <BuildControl
-        key={`${topping} + ${reg.side} + ${IngrTypes.REGULAR}`}
+        key={`${topping} + ${reg} + ${IngrTypes.REGULAR}`}
         name={topping}
         amount={IngrTypes.REGULAR}
-        side={reg.side}
-        class={reg.side}
-        toggled={reg.toggled}
+        side={reg}
+        class={reg}
+        toggled={regular[reg]}
         clicked={this.toppingToggle}
       />
       
     });
-    const controlsExtra = extra.map(extra => {
+    const controlsExtra = Object.keys(extra).map(ext => {
       return <BuildControl
-        key={`${topping} + ${extra.side} + ${IngrTypes.EXTRA}`}
+        key={`${topping} + ${ext} + ${IngrTypes.EXTRA}`}
         name={topping}
         amount={IngrTypes.EXTRA}
-        side={extra.side}
+        side={ext}
         class={IngrTypes.EXTRA}
-        toggled={extra.toggle}
+        toggled={extra[ext]}
         clicked={this.toppingToggle}
       />
     });
 
-    let controls = (    
-      <div className={classes.BuildControls}>
-        <div 
-          className={classes.Label}
-          /* onClick={(e) => this.toppingGroupToggle(e)} */>
+    const controls = (    
+      <div id={this.props.topping} className={classes.BuildControls}
+        onClick={(e) => this.props.clicked(e)}>
+        <div className={classes.Label}>
           {this.props.topping}
         </div>
-        <div className={classes.BuildControl}>{controlsRegular}</div>
-        <div className={classes.BuildControl}>{controlsExtra}</div>
-      </div>
-        
+        {this.props.toggled ? 
+          <Auxhoc>
+            <div className={classes.BuildControl}>{controlsRegular}</div>
+            <div className={classes.BuildControl}>{controlsExtra}</div>
+          </Auxhoc> : null}
+      </div>    
     );
     return controls;
       

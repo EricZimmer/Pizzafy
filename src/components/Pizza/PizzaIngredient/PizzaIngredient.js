@@ -48,6 +48,15 @@ class PizzaIngredient extends Component {
             {getImageRegular(imgSrc.RIGHT, divClasses.regular)}
           </Auxhoc>
         );
+      } else if (amount === IngrTypes.EXTRA) {
+        finishedTopping = (
+          <Auxhoc>
+            {getImageRegular(imgSrc.LEFT, divClasses.regular)}
+            {getImageRegular(imgSrc.RIGHT, divClasses.regular)}
+            {getImageRegular(imgSrc.LEFT, divClasses.extra)}
+            {getImageRegular(imgSrc.RIGHT, divClasses.extra)}
+          </Auxhoc>
+        );
       }
     } else {
         if(amount === IngrTypes.REGULAR) {

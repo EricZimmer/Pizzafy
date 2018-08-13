@@ -27,62 +27,9 @@ class PizzaBuilder extends Component {
     /* console.log('clicked'); */
   }
 
-  addToppingHandler = (event, name, side, amount, toggle) => {
-    event.preventDefault();
-    event.stopPropagation();
-    /* let newTopping = {};
-    switch(amount) {
-      case(IngrTypes.REGULAR):
-        switch(side) {
-          case(IngrTypes.LEFT):
-            newTopping = {
-              [IngrTypes.RIGHT]: IngrTypes.NONE,
-              [IngrTypes.WHOLE]: IngrTypes.NONE
-            }
-           break;
-          case(IngrTypes.RIGHT):
-            newTopping = {
-              [IngrTypes.LEFT]: IngrTypes.NONE,
-              [IngrTypes.WHOLE]: IngrTypes.NONE
-            }
-           break;
-          case(IngrTypes.WHOLE):
-            newTopping = {
-              [IngrTypes.LEFT]: IngrTypes.NONE,
-              [IngrTypes.RIGHT]: IngrTypes.NONE
-            }
-           break;
-          default: newTopping = null;
-        }
-        break;
-      case(IngrTypes.EXTRA):
-        switch(side) {
-          case(IngrTypes.LEFT):
-            newTopping = {
-              [IngrTypes.RIGHT]: IngrTypes.NONE,
-              [IngrTypes.WHOLE]: IngrTypes.NONE
-            }
-          break;
-          case(IngrTypes.RIGHT):
-            newTopping = {
-              [IngrTypes.LEFT]: IngrTypes.NONE,
-              [IngrTypes.WHOLE]: IngrTypes.NONE
-            }
-          break;
-          case(IngrTypes.WHOLE):
-            newTopping = {
-              [IngrTypes.LEFT]: IngrTypes.NONE,
-              [IngrTypes.RIGHT]: IngrTypes.NONE
-            }
-          break;
-          default: newTopping = null;
-        }
-        break;
-        default: newTopping = null;
-        console.log(newTopping);
-      return newTopping;
-    } */
-    console.log('add top toggle',toggle);
+  addToppingHandler = (name, side, amount) => {
+     
+    console.log('add top ', name, side, amount);
     const newState = {
       ...this.state,
       ingredients: {
@@ -90,7 +37,7 @@ class PizzaBuilder extends Component {
         [IngrTypes[name]]: {
           ...this.state.ingredients[name],
           /* ...newTopping, */
-          [amount]: toggle ? side : IngrTypes.NONE
+          [amount]: side
         }
 
       }
@@ -139,7 +86,8 @@ class PizzaBuilder extends Component {
             clicked={(name) => this.headerClickedHandler(name)}
             addTopping={(event, name, side, amount, toggle) => this.addToppingHandler(event, name, side, amount, toggle)}>
         </BuildControls> */}
-        <ControlGroup />
+        <ControlGroup 
+          addTopping={(name, side, amount) => this.addToppingHandler(name, side, amount) }/>
       </Auxhoc>
     );
   }
