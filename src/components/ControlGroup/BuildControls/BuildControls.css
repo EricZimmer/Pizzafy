@@ -10,15 +10,15 @@
 
 
 .BuildControls {
-  display: grid;
+  display: flex;
   flex-flow: column;
   align-content: center;
   justify-content: center;
-  margin: 10px auto;
+  margin: 2px auto;
   padding: 15px 15px;
   border: 3px solid #ccc;
   border-radius: 2%;
-  width: 75%;
+  width: 95%;
 }
 
 .ControlGroup {
@@ -27,7 +27,7 @@
   
   
   display: grid;
-  
+  grid-template-rows: 1fr 1fr 1fr;
   flex-flow: row wrap;
   
   border: 2px solid #aaa;
@@ -35,7 +35,7 @@
   align-items: center;
   box-shadow: 0 2px 1px #ccc;
   margin: auto;
-  padding: 10px 0px;
+  padding: 5px 0px;
 }
 
 .BuildControl {
@@ -43,7 +43,10 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-content: center;
+  align-self: center;
   margin: .5em 0;
+  width: 90%;
+ 
 }
 
 .Label {

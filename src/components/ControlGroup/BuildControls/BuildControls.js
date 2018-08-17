@@ -127,6 +127,7 @@ class BuildControls extends Component {
         name={topping}
         amount={IngrTypes.EXTRA}
         side={ext}
+        label={IngrTypes.EXTRA}
         class={IngrTypes.EXTRA}
         toggled={extra[ext]}
         clicked={this.toppingToggle}

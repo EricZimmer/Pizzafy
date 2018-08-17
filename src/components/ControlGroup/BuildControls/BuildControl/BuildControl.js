@@ -16,7 +16,7 @@ class BuildControl extends Component {
         
     }
     render() {
-        const label = this.props.amount === "EXTRA" ? "Extra" : null;
+        const label = this.props.label ? this.props.label : null;
         const thisClass = classes[this.props.class]
         let currClass = this.props.toggled ? [thisClass, classes.ToggledOn].join(' ')   : thisClass;
         //console.log('button toggle ', this.props.toggled, 'currclass ', currClass);

@@ -1,0 +1,89 @@
+[33mcommit 5f3ab782a0a56676bfe1f2ab81bac0d3b286944a[m[33m ([m[1;36mHEAD -> [m[1;32mcontrolchange[m[33m, [m[1;31morigin/controlchange[m[33m)[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Mon Aug 13 03:08:15 2018 -0700
+
+    topping controls now correctly add and remove related images
+
+[33mcommit ebb010fff0ff3e3b732942a24ca228d63b0ef47a[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Mon Aug 13 02:23:24 2018 -0700
+
+    control toggling works
+
+[33mcommit 38cd3a382da5a35c4a69551a875eaa2abb424797[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Sun Aug 12 16:34:41 2018 -0700
+
+    updated topping controls structure
+
+[33mcommit 9a62e39bc9af6bb42d3f2903fd92779117c95a92[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Sun Aug 12 15:40:28 2018 -0700
+
+    test
+
+[33mcommit 2bbf5859ff7d3b291cca345f565d8a1e40f28f00[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Sat Aug 11 23:46:58 2018 -0700
+
+    refactoring build components to be more modular
+
+[33mcommit c371fdcf772d982f54fa67ae39bf1a272f610f99[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Sun Aug 5 23:51:55 2018 -0700
+
+    connected controls to state and images
+
+[33mcommit 833908d68baf7eb0ab12498f60dce09b9f4860aa[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Sat Aug 4 22:34:39 2018 -0700
+
+    connected build controls with pizza ingredient creation
+
+[33mcommit 6e96c47978a7524217c9576832309c98149509d9[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Fri Aug 3 21:55:47 2018 -0700
+
+    added topping toggle functionality
+
+[33mcommit 3ffbfed733c1fd6a21aa52695f5a23cc2094790a[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Fri Aug 3 19:12:43 2018 -0700
+
+    refactored css and build controls
+
+[33mcommit 8077d094b412063bd0ff12c87d62d2ac9d5bed20[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Wed Aug 1 20:24:25 2018 -0700
+
+    adjusted build controls
+
+[33mcommit a89abbf58d9493e0e3114e84e2ef25d5dfa3a9a3[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Tue Jul 31 23:03:21 2018 -0700
+
+    added temp build controls
+
+[33mcommit aa7b70a08643011e27dab8c392733a65d971509c[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Mon Jul 30 21:13:16 2018 -0700
+
+    init build controls setup
+
+[33mcommit 07b80faff4ff283871ef6076e50a764ad7b8ce4e[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Wed Jul 25 20:52:56 2018 -0700
+
+    updated css
+
+[33mcommit d31e6556616362683840b78190b79a2979042641[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Tue Jul 24 20:04:16 2018 -0700
+
+    modified pizza css
+
+[33mcommit e006c1c62ac6cadde53711b4739d119457a1ccf8[m
+Author: Eric Zimmer <zimmer.eric@gmail.com>
+Date:   Mon Jul 23 15:23:58 2018 -0700
+
+    initial commit

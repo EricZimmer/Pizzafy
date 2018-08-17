@@ -62,7 +62,7 @@
 }
 
 
-@media (min-width: 1000px) and (min-height: 700px) {
+@media (min-width: 1000px) and (min-height: 500px) {
   .Pizza {
     
     width: 560px;

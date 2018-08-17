@@ -1,12 +1,12 @@
 .BuildControl {
   display: grid;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: center;
   align-content: center;
   margin: 10px auto;
   padding: 15px 15px;
   border: 3px solid #ccc;
-  width: 95%;
+  /* width: 95%; */
 }
 
 button {
@@ -14,7 +14,7 @@ button {
   align-content: center;
   justify-content: center; */
   font: inherit;
-  /* padding: 15px; */
+  font-size: .75rem;
   height: 50px;
   border: 4px solid #aa6817;
   cursor: pointer;
@@ -66,7 +66,7 @@ button:hover:disabled {
 }
 
 .EXTRA {
-  width: 65px;
+  
   margin: 0 .7em;
   border-radius: 15%;
 }

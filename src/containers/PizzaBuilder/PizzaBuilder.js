@@ -15,10 +15,10 @@ class PizzaBuilder extends Component {
     currentTab: 'meat',
     ingredients: {
       
-      [IngrTypes.PEPPERONI]: {
+      /* [IngrTypes.PEPPERONI]: {
         [IngrTypes.REGULAR]: IngrTypes.NONE,
         [IngrTypes.EXTRA]: IngrTypes.NONE
-      }
+      } */
     }
   };
 
@@ -80,15 +80,17 @@ class PizzaBuilder extends Component {
         <Pizza 
           ingredients={ingredients}/>
           
-        <BuildHeaders 
-          clicked={ this.headerClickedHandler}/>
+        
         {/* <BuildControls 
             currentControl={this.state.currentTab}  
             clicked={(name) => this.headerClickedHandler(name)}
             addTopping={(event, name, side, amount, toggle) => this.addToppingHandler(event, name, side, amount, toggle)}>
         </BuildControls> */}
         <ControlGroup 
-          addTopping={(name, side, amount) => this.addToppingHandler(name, side, amount) }/>
+          addTopping={(name, side, amount) => this.addToppingHandler(name, side, amount) }>
+          <BuildHeaders 
+          clicked={ this.headerClickedHandler}/>
+        </ControlGroup>
       </Auxhoc>
     );
   }

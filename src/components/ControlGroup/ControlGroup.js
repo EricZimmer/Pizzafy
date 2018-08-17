@@ -1,22 +1,42 @@
 import React, { Component } from 'react';
 import BuildControls from './BuildControls/BuildControls';
-import classes from './BuildControls/BuildControls.css';
+import classes from './ControlGroup.css';
 import * as IngrTypes from '../../INGREDIENTCONST';
 
 const TOPPINGS_MEAT = [IngrTypes.PEPPERONI, IngrTypes.SAUSAGE, IngrTypes.HAM];
+const TOPPINGS_VEGGIES = ['PEPPERS', 'TOMATOES', 'MUSHROOMS'];
+
+const ALL_TOPPINGS = {
+  MEAT: [
+    IngrTypes.PEPPERONI, IngrTypes.SAUSAGE, IngrTypes.HAM
+  ],
+  VEGGIES: [
+    'PEPPERS', 'TOMATOES', 'MUSHROOMS'
+  ]
+};
 
 class ControlGroup extends Component {
 
   componentWillMount() {
-    let initState = TOPPINGS_MEAT.map(topping =>{
-      return {
-        [topping]: {
-          toggled: false
+    this.setupState(ALL_TOPPINGS);
+    //this.setupState(TOPPINGS_VEGGIES);
+  }
+
+  setupState = (toppingName) => {
+    let initState = Object.keys(toppingName).map(topping =>{
+      return toppingName[topping].map(ingr => {
+        return {
+          [ingr]: {
+            toggled: false
+          }
         }
-      };
-    }).reduce((obj, item) => {
-      return {...obj, ...item};
-    },{});
+        }).reduce((obj, item) => {
+        return {...obj, ...item};
+      },{});
+      }).reduce((obj, item) => {
+        return {...obj, ...item};
+      },{});
+      
     console.log('initstate ', initState);
     this.setState({...initState});
   }
@@ -38,8 +58,8 @@ class ControlGroup extends Component {
     }
   }
 
-  render() {
-    let toppingsMeat = TOPPINGS_MEAT.map(topping => {
+  setToppingControls = (meatOrVeg) => {
+    return ALL_TOPPINGS[meatOrVeg].map(topping => {
       return (
         <BuildControls 
           key={topping}
@@ -50,10 +70,19 @@ class ControlGroup extends Component {
           toggled={this.state[topping].toggled}/>
       );
     });
+  } 
+
+  render() {
+    let toppings = this.setToppingControls('MEAT');
     return (
       <div 
         className={classes.BuildControlsContainer}>
-        {toppingsMeat}
+
+        {this.props.children}
+        <div>
+
+        </div>
+        {toppings}
       </div>
     );
   }

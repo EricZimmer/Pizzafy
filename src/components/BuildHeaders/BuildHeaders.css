@@ -5,14 +5,15 @@
   list-style: none;
   display: flex;
   flex-flow: row;
- 
+  
   
   /* align-items: left; */
-  /* width: 90%; */
-  /* height: 40px; */
-  justify-content: center;
-/*   color: #ccc;
-  background-color: blue; */
+  width: 95%;
+  height: 50px;
+  justify-content: left;
+  color: #ccc;
+  margin: 0 2.5% 0 2.5%;
+  
 }
 
 @media (min-width: 500px) {
