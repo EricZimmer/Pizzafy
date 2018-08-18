@@ -26,16 +26,21 @@ class BuildControls extends Component {
   }
   
   componentDidUpdate() {
-    //this.props.addTopping(this.props.topping, this.state);
+    
     
   }
   componentWillUpdate() {
+    
+  }
+
+  componentWillMount() {
     
   }
   
 
   toppingToggle = (e, side, amount) => {
     e.preventDefault();
+    e.stopPropagation();
     /* this.props.addTopping(this.props.topping, side, amount); */
 
     const stateAmount = this.state[amount];
@@ -93,21 +98,51 @@ class BuildControls extends Component {
       this.props.addTopping(this.props.topping, reg, extr);
     });
     console.log('updatedtoggle= ', updateToggle);
-    this.setState({
+    /* this.setState({
       pepperoni: [amount, side].join('__')
-    });
+    }); */
 
     
     //this.props.addTopping(e, name, side, amount, toggle);
   }
 
+  toggleOn = (e) => {
+    //e.stopPropagation();
+    /* this.setState({
+      [IngrTypes.REGULAR]: {
+        ...this.state[IngrTypes.REGULAR],
+        [IngrTypes.WHOLE] :true
+      }
+    }); */
+    if(!this.props.toggled) {
+
+      this.toppingToggle(e, IngrTypes.WHOLE, IngrTypes.REGULAR);
+      this.props.clicked(e);
+    }
+  }
+
+  toggleOff = (e) => {
+    this.setState({
+      [IngrTypes.REGULAR]: {
+        [IngrTypes.LEFT]: false,
+        [IngrTypes.WHOLE]: false,
+        [IngrTypes.RIGHT]: false
+      },
+      [IngrTypes.EXTRA]: {
+        [IngrTypes.LEFT]: false,
+        [IngrTypes.WHOLE]: false,
+        [IngrTypes.RIGHT]: false
+      }
+    });
+    this.props.clearTopping(e);
+  }
 
   render() {
     
     const regular = this.state.REGULAR;
     const extra = this.state.EXTRA;
     const topping = this.props.topping;
-    
+    const toggledOn = this.props.toggled;
     
     const controlsRegular = Object.keys(regular).map(reg => {
       return <BuildControl
@@ -136,10 +171,12 @@ class BuildControls extends Component {
 
     const controls = (    
       <div id={this.props.topping} className={classes.BuildControls}
-        onClick={(e) => this.props.clicked(e)}>
-        <div className={classes.Label}>
-          {this.props.topping}
-        </div>
+        onClick={(e) => this.toggleOn(e)}>
+        <div className={classes.Label}>{this.props.topping}</div>
+        { this.props.toggled ? 
+        <div className={classes.Checked} onClick={(e) => this.toggleOff(e)}>
+          X
+        </div> : null}
         {this.props.toggled ? 
           <Auxhoc>
             <div className={classes.BuildControl}>{controlsRegular}</div>

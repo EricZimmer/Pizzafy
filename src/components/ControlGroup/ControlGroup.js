@@ -41,7 +41,23 @@ class ControlGroup extends Component {
     this.setState({...initState});
   }
 
-  toppingGroupToggle = (e) => {
+  toppingGroupToggleOn = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = e.target.id || e.target.parentNode.id;
+    console.log('id= ', id);
+    if(id && this.state[id].toggled === false) {
+
+      this.setState({
+        ...this.state,
+        [id]: {
+          
+          toggled: !this.state[id].toggled
+        }
+      });
+    }
+  }
+  toppingGroupToggleOff = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const id = e.target.id || e.target.parentNode.id;
@@ -56,6 +72,7 @@ class ControlGroup extends Component {
         }
       });
     }
+    this.props.clearTopping(id);
   }
 
   setToppingControls = (meatOrVeg) => {
@@ -64,9 +81,11 @@ class ControlGroup extends Component {
         <BuildControls 
           key={topping}
           /* id={topping} */
-          clicked={(e) => this.toppingGroupToggle(e)}
+          clicked={(e) => this.toppingGroupToggleOn(e)}
+          toggleOff={(e) => this.toppingGroupToggleOff(e)}
           topping={topping}
           addTopping={this.props.addTopping}
+          clearTopping={(e) => this.toppingGroupToggleOff(e)}
           toggled={this.state[topping].toggled}/>
       );
     });

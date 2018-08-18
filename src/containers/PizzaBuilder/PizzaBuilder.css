@@ -1,0 +1,22 @@
+.PizzaBuilder {
+  width: 320px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: auto;
+}
+
+@media (min-width: 500px) and (min-height: 400px) {
+  .PizzaBuilder {
+    width: 480px;
+
+  }
+}
+
+
+@media (min-width: 1000px) and (min-height: 500px) {
+  .PizzaBuilder {
+    
+    width: 560px;
+
+  }
+}

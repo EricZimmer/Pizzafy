@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Auxhoc from '../../hoc/Auxhoc';
+import classes from './PizzaBuilder.css';
 import Pizza from '../../components/Pizza/Pizza';
 import BuildHeaders from '../../components/BuildHeaders/BuildHeaders';
 import BuildControls from '../../components/ControlGroup/BuildControls/BuildControls';
@@ -48,6 +49,23 @@ class PizzaBuilder extends Component {
     //console.log(this.state.ingredients[name[side]])
   }
 
+  clearToppingHander = (name) => {
+    const newState = {
+      ...this.state,
+      ingredients: {
+        ...this.state.ingredients,
+        [IngrTypes[name]]: {
+          ...this.state.ingredients[name],
+          /* ...newTopping, */
+          [IngrTypes.REGULAR]: IngrTypes.NONE,
+          [IngrTypes.EXTRA]: IngrTypes.NONE
+        }
+
+      }
+    }
+    this.setState({...newState});
+  }
+
   render() {
     /* let ingredient = (
         <PizzaIngredient 
@@ -76,22 +94,17 @@ class PizzaBuilder extends Component {
         /* console.log('ingredients = ', stIngr); */
     }
     return (
-      <Auxhoc>
+      <div className={classes.PizzaBuilder}>
         <Pizza 
           ingredients={ingredients}/>
           
-        
-        {/* <BuildControls 
-            currentControl={this.state.currentTab}  
-            clicked={(name) => this.headerClickedHandler(name)}
-            addTopping={(event, name, side, amount, toggle) => this.addToppingHandler(event, name, side, amount, toggle)}>
-        </BuildControls> */}
+        <BuildHeaders 
+        clicked={ this.headerClickedHandler}/>
         <ControlGroup 
-          addTopping={(name, side, amount) => this.addToppingHandler(name, side, amount) }>
-          <BuildHeaders 
-          clicked={ this.headerClickedHandler}/>
+          addTopping={(name, side, amount) => this.addToppingHandler(name, side, amount) }
+          clearTopping={name => this.clearToppingHander(name)}>
         </ControlGroup>
-      </Auxhoc>
+      </div>
     );
   }
 }

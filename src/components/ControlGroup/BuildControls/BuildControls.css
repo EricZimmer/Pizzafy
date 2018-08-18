@@ -19,6 +19,7 @@
   border: 3px solid #ccc;
   border-radius: 2%;
   width: 95%;
+  position:relative;
 }
 
 .ControlGroup {
@@ -49,15 +50,31 @@
  
 }
 
+.Checked {
+  width: 30px;
+  height: 30px;
+  border: 3px solid red;
+  color: #ddd;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10%;
+  position: absolute;
+  padding-bottom: 2px;
+  top: 23px;
+  right: 10px;
+  background-color: tomato;
+}
+
 .Label {
   padding: 10px 5px;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   display: block;
   color: #eee;
   margin: auto;
   user-select: none;
-  text-shadow: 1px 1px 2px #777;
+  text-shadow: 2px 2px 2px #777;
 }
 
 .Label:hover {

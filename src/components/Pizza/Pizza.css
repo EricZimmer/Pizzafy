@@ -1,10 +1,9 @@
 .Pizza {
-  width: 320px;
+  width: 100%;
   margin: auto;
   height: 320px;
   overflow: auto;
-  text-align: center;
-  font-weight: bold;
+
   /* transform: rotateX(50deg); */
   display: flex;
   background-color: #eee;
