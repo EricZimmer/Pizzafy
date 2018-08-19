@@ -43,8 +43,8 @@ class ControlGroup extends Component {
 
   toppingGroupToggleOn = (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    const id = e.target.id || e.target.parentNode.id;
+    //e.stopPropagation();
+    const id = e.id || e.target.id || e.target.parentNode.id || e.target.parentNode.parentNode.id;
     console.log('id= ', id);
     if(id && this.state[id].toggled === false) {
 
@@ -59,8 +59,9 @@ class ControlGroup extends Component {
   }
   toppingGroupToggleOff = (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    const id = e.target.id || e.target.parentNode.id;
+    //e.stopPropagation();
+    console.log('e= ', e.target, 'e.target.parent'/* , e.target.parentNode */);
+    const id = e.id || e.target.id || e.target.parentNode.id || e.target.parentNode.parentNode.id;
     console.log('id= ', id);
     if(id) {
 

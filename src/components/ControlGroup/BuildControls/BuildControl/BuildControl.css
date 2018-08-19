@@ -16,14 +16,14 @@ button {
   font: inherit;
   font-size: .75rem;
   height: 50px;
-  border: 4px solid #aa6817;
+  border: 4px solid #D39952;
   cursor: pointer;
   outline: none;
-  background-color: #D39952;
-  color: white;
+  background-color: #aa6817;
+  color: #eee;
   user-select: none;
   font-weight: bold;
-  text-shadow: 1px 1px 2px #777;
+  text-shadow: 0px 0px 4px rgb(37, 37, 37);
 } 
 
 
@@ -35,14 +35,20 @@ button:disabled {
   cursor: default;
 }
 
-button:hover:disabled {
-  background-color: #AC9980;
-  color: #ccc;
-  cursor: not-allowed;
+button:hover {
+  background-color: rgb(201, 146, 79);
+  color: #ddd;
+  
 }
 
 .ToggledOn {
-  background-color: red;
+  background-color: rgb(160, 45, 25);
+  border-color: #D39952
+}
+
+.ToggledOn:hover {
+  background-color: rgb(187, 54, 30);
+  border-color: #D39952
 }
 
 .LEFT {  

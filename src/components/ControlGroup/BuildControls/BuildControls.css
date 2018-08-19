@@ -1,25 +1,30 @@
-.BuildControlsContainer {
-  width: 320px;
+/* .BuildControlsContainer {
+  width: 100%;
   margin: auto;
   padding: 10px 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   background-color: rgb(141, 141, 141);
-}
+  border: 3px solid #ccc;
+} */
 
 
 .BuildControls {
   display: flex;
   flex-flow: column;
   align-content: center;
-  justify-content: center;
-  margin: 2px auto;
-  padding: 15px 15px;
-  border: 3px solid #ccc;
+  justify-items: center;
+  margin: 0px auto;
+  margin-bottom: 10px;
+  /* padding-bottom: 15px; */
+  border: 4px solid rgb(143, 133, 133);
+  background-color: rgb(143, 133, 133);
   border-radius: 2%;
+  /* border-top: 6px solid #aaa; */
   width: 95%;
   position:relative;
+  
 }
 
 .ControlGroup {
@@ -36,7 +41,9 @@
   align-items: center;
   box-shadow: 0 2px 1px #ccc;
   margin: auto;
+  margin-top:15px;
   padding: 5px 0px;
+  
 }
 
 .BuildControl {
@@ -45,36 +52,70 @@
   justify-content: center;
   align-content: center;
   align-self: center;
-  margin: .5em 0;
+  margin-top: 15px;
   width: 90%;
- 
+  
+}
+
+.BuildControl:last-child {
+  margin-bottom: 15px;
 }
 
 .Checked {
-  width: 30px;
-  height: 30px;
-  border: 3px solid red;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  /* justify-self: flex-end; */
+  float: left;
+  border: 3px solid rgb(179, 33, 33);
   color: #ddd;
   font-size: 1.4rem;
   font-weight: bold;
-  text-align: center;
+  /* text-align: center; */
   border-radius: 10%;
   position: absolute;
-  padding-bottom: 2px;
-  top: 23px;
-  right: 10px;
-  background-color: tomato;
+  padding-bottom: 0px;
+  /* top: 12px; */
+  right: 0px;
+  cursor: pointer;
+  margin-right: 8px;
+  background-color: rgb(116, 32, 17);
 }
+
+.Checked:hover {
+  background-color: rgb(187, 54, 30);
+}
+
+.LabelHeader {
+  width: 100%;
+  display: flex;
+  background-color: rgb(93, 88, 97);
+  position: relative;
+  justify-self: center;
+  margin: auto;
+  padding: 7px 0;
+  /* border-bottom: 4px solid #bbb; */
+}
+/* .BuildControls.LabelHeader */
 
 .Label {
   padding: 10px 5px;
   font-weight: bold;
-  font-size: 1.5rem;
-  display: block;
-  color: #eee;
+  font-size: 1.7rem;
+  /* display: block; */
+  justify-self: center;
+  color: rgb(184, 116, 8);
   margin: auto;
+  /* left: 35px; */
   user-select: none;
-  text-shadow: 2px 2px 2px #777;
+  text-shadow: 0px 0px 4px rgb(0, 0, 0);
+  /* -webkit-text-stroke-color: rgb(175, 143, 142);
+  -webkit-text-stroke-width: 1px;
+  paint-order:  stroke fill; */
+  /* color:rgb(195, 173, 143); */
 }
 
 .Label:hover {
@@ -83,6 +124,28 @@
 
 .Toggle {
   display: none;
+  
+}
+
+.MousePointer {
+  cursor: pointer;
+}
+.BuildControls:hover {
+  background-color: #777;
+}
+
+.BuildControls:hover.MousePointer {
+  background-color: #888;
+}
+
+.BuildControls.MousePointer > .Label {
+  color: #ccc;
+  background-color: #777;
+}
+
+.BuildControls:hover.MousePointer > .Label {
+  color: #eee;
+  background-color: #888;
 }
 
 

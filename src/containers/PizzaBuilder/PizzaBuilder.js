@@ -6,6 +6,7 @@ import Pizza from '../../components/Pizza/Pizza';
 import BuildHeaders from '../../components/BuildHeaders/BuildHeaders';
 import BuildControls from '../../components/ControlGroup/BuildControls/BuildControls';
 import ControlGroup from '../../components/ControlGroup/ControlGroup';
+import IngredientSummary from '../../components/Pizza/IngredientSummary/IngredientSummary';
 
 import * as IngrTypes from '../../INGREDIENTCONST';
 import PizzaIngredient from '../../components/Pizza/PizzaIngredient/PizzaIngredient';
@@ -14,39 +15,29 @@ class PizzaBuilder extends Component {
 
   state = {
     currentTab: 'meat',
-    ingredients: {
-      
-      /* [IngrTypes.PEPPERONI]: {
-        [IngrTypes.REGULAR]: IngrTypes.NONE,
-        [IngrTypes.EXTRA]: IngrTypes.NONE
-      } */
-    }
+    /* ingredients: {
+  
+    } */
   };
 
   headerClickedHandler = (name) => {
-    
-    /* console.log('clicked'); */
+    this.setState({currentTab: name})
   }
 
   addToppingHandler = (name, reg, extra) => {
-     
-    /* console.log('add top ', name, side, amount); */
     const newState = {
       ...this.state,
       ingredients: {
         ...this.state.ingredients,
         [IngrTypes[name]]: {
-          ...this.state.ingredients[name],
+          /* ...this.state.ingredients[name], */
           /* ...newTopping, */
           [IngrTypes.REGULAR]: reg,
           [IngrTypes.EXTRA]: extra
         }
-
       }
     }
-    console.log(newState);
     this.setState({...newState});
-    //console.log(this.state.ingredients[name[side]])
   }
 
   clearToppingHander = (name) => {
@@ -55,32 +46,26 @@ class PizzaBuilder extends Component {
       ingredients: {
         ...this.state.ingredients,
         [IngrTypes[name]]: {
-          ...this.state.ingredients[name],
-          /* ...newTopping, */
+          /* ...this.state.ingredients[name], */
           [IngrTypes.REGULAR]: IngrTypes.NONE,
           [IngrTypes.EXTRA]: IngrTypes.NONE
         }
-
       }
     }
     this.setState({...newState});
   }
 
   render() {
-    /* let ingredient = (
-        <PizzaIngredient 
-        topping={'PEPPERONI'}
-        side={'LEFT'}
-        amount={'REGULAR'}/>
-    ); */
-    let ingredients = null;
-    if (this.state.ingredients != null) {
-      let stIngr = {...this.state.ingredients};
+    const stIngredients = this.state.ingredients !== null ? this.state.ingredients 
+      : null;
+    let pizzaIngredients = null;
+    if (stIngredients != null) {
+      
 
-      ingredients = Object.keys(stIngr)
+      pizzaIngredients = Object.keys(stIngredients)
         .map(ingr => {
-          return Object.keys(stIngr[ingr]).map((amount) => {
-            let side = stIngr[ingr][amount];
+          return Object.keys(stIngredients[ingr]).map((amount) => {
+            let side = stIngredients[ingr][amount];
             return (
               <PizzaIngredient 
                   key={`${ingr} + '_' ${amount} + '_' ${side}`}
@@ -88,16 +73,15 @@ class PizzaBuilder extends Component {
                   side={side}
                   amount={amount}/>
               );
-            /* `${ingr} + '-' + ${side} + '-' + ${stIngr[ingr][side]}` */
           });
         });
-        /* console.log('ingredients = ', stIngr); */
     }
+    console.log('pbi = ', stIngredients)
     return (
       <div className={classes.PizzaBuilder}>
         <Pizza 
-          ingredients={ingredients}/>
-          
+          ingredients={pizzaIngredients}/>
+        {/* <IngredientSummary ingredients={stIngredients}/> */}
         <BuildHeaders 
         clicked={ this.headerClickedHandler}/>
         <ControlGroup 

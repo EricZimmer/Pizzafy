@@ -20,11 +20,14 @@
 .BuildControlsContainer {
   width: 320px;
   margin: auto;
-  padding: 10px 0;
+  padding: 20px 0;
+  /* padding-top: 20px; */
   display: grid;
   flex-flow: row wrap;
   /* justify-content: center; */
-  background-color: rgb(141, 141, 141);
+  background-color: rgb(47, 43, 49);
+  border: 5px solid #999;
+  border-radius: 1%;
 }
 
 @media (min-width: 500px) and (min-height: 400px) {

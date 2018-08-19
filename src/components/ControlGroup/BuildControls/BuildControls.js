@@ -41,6 +41,8 @@ class BuildControls extends Component {
   toppingToggle = (e, side, amount) => {
     e.preventDefault();
     e.stopPropagation();
+    let node = e.target.parentNode.parentNode;
+    console.log('ee ', e.target.parentNode.parentNode);
     /* this.props.addTopping(this.props.topping, side, amount); */
 
     const stateAmount = this.state[amount];
@@ -80,11 +82,11 @@ class BuildControls extends Component {
     }).reduce((obj, item) => {
       return {...obj, ...item};
     },{});
-    this.setState({
+    let reg = IngrTypes.NONE;
+    let extr = IngrTypes.NONE;
+    this.setState( {
       [amount]: updateToggle
     }, () => {
-      let reg = IngrTypes.NONE;
-      let extr = IngrTypes.NONE;
       for (let key in this.state.REGULAR) {
         if (this.state.REGULAR[key]) {
           reg = key;
@@ -96,24 +98,15 @@ class BuildControls extends Component {
         }
       }
       this.props.addTopping(this.props.topping, reg, extr);
+      if(reg === IngrTypes.NONE && extr === IngrTypes.NONE) {
+        console.log('rem', node);
+        this.props.toggleOff(node);
+      }
     });
-    console.log('updatedtoggle= ', updateToggle);
-    /* this.setState({
-      pepperoni: [amount, side].join('__')
-    }); */
-
-    
-    //this.props.addTopping(e, name, side, amount, toggle);
+    console.log('reg ', reg, ' extr ', extr);
   }
 
   toggleOn = (e) => {
-    //e.stopPropagation();
-    /* this.setState({
-      [IngrTypes.REGULAR]: {
-        ...this.state[IngrTypes.REGULAR],
-        [IngrTypes.WHOLE] :true
-      }
-    }); */
     if(!this.props.toggled) {
 
       this.toppingToggle(e, IngrTypes.WHOLE, IngrTypes.REGULAR);
@@ -142,7 +135,6 @@ class BuildControls extends Component {
     const regular = this.state.REGULAR;
     const extra = this.state.EXTRA;
     const topping = this.props.topping;
-    const toggledOn = this.props.toggled;
     
     const controlsRegular = Object.keys(regular).map(reg => {
       return <BuildControl
@@ -169,14 +161,19 @@ class BuildControls extends Component {
       />
     });
 
+    let classlist = classes.BuildControls;
+    classlist = this.props.toggled ? classlist : [classlist, classes.MousePointer].join(' ');
     const controls = (    
-      <div id={this.props.topping} className={classes.BuildControls}
+      <div id={this.props.topping} className={classlist}
         onClick={(e) => this.toggleOn(e)}>
-        <div className={classes.Label}>{this.props.topping}</div>
-        { this.props.toggled ? 
-        <div className={classes.Checked} onClick={(e) => this.toggleOff(e)}>
-          X
-        </div> : null}
+        <div className={classes.LabelHeader}onClick={(e) => this.toggleOn(e)}>
+          <div className={classes.Label}>{this.props.topping}</div>
+          { this.props.toggled ? 
+          <div className={classes.Checked} onClick={(e) => this.toggleOff(e)}>
+            X
+          </div> : null}
+        
+        </div>
         {this.props.toggled ? 
           <Auxhoc>
             <div className={classes.BuildControl}>{controlsRegular}</div>

@@ -3,6 +3,7 @@
   display: flex;
   flex-flow: column nowrap;
   margin: auto;
+  background-color: rgb(88, 71, 71);
 }
 
 @media (min-width: 500px) and (min-height: 400px) {
