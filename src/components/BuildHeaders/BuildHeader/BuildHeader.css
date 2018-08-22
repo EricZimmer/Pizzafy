@@ -2,16 +2,27 @@
 .BuildHeader {
   /* margin: auto; */
   
+  display: flex;
+  height: 104%;
+  color: rgb(47, 43, 49);
+  border: 4px solid rgb(47, 43, 49);
+  /* border-radius: 2%; */
   
-  height: 100%;
-  color: #ccc;
-  border: 3px solid #ccc;
-  border-radius: 5%;
-  padding: .72em;
-  background-color: #666;
+  padding: .4em .5em;
+  padding-bottom: 1em;
+  
+  background-color: #ccc;
   font-weight: bold;
   text-align: center;
-  margin-right: 7px;
+  
+  /* border-bottom: 4px solid #333; */
+  /* margin: auto; */
+  /* margin-right: 7px; */
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-bottom: -6.5px;
+  align-self: center;
+  z-index: 3;
 }
 
 .BuildHeader:hover {
@@ -23,4 +34,16 @@
 .BuildHeader:active {
   background-color: #777;
   /* border-color: tomato; */
+}
+
+.Label {
+  /* background-color: rgb(47, 43, 49); */
+  padding: 0 .8em ;
+  padding-bottom: .4em;
+  /* display: flex;
+  justify-content: center;
+  align-content: center; */
+  /* width: 90%; */
+  align-self: flex-start;
+  color: #333;
 }

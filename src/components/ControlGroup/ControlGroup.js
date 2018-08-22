@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import BuildControls from './BuildControls/BuildControls';
 import classes from './ControlGroup.css';
 import * as IngrTypes from '../../INGREDIENTCONST';
@@ -15,11 +15,15 @@ const ALL_TOPPINGS = {
   ]
 };
 
-class ControlGroup extends Component {
+class ControlGroup extends PureComponent {
 
   componentWillMount() {
     this.setupState(ALL_TOPPINGS);
     //this.setupState(TOPPINGS_VEGGIES);
+  }
+
+  componentWillUnmount() {
+    console.log('hi');
   }
 
   setupState = (toppingName) => {
@@ -58,7 +62,7 @@ class ControlGroup extends Component {
     }
   }
   toppingGroupToggleOff = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     //e.stopPropagation();
     console.log('e= ', e.target, 'e.target.parent'/* , e.target.parentNode */);
     const id = e.id || e.target.id || e.target.parentNode.id || e.target.parentNode.parentNode.id;

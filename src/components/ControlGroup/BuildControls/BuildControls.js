@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './BuildControls.css';
 import Auxhoc from '../../../hoc/Auxhoc';
 import * as IngrTypes from '../../../INGREDIENTCONST';
 
 import BuildControl from './BuildControl/BuildControl';
 
-class BuildControls extends Component {
+class BuildControls extends PureComponent {
   state = {
     
     [IngrTypes.REGULAR]: {

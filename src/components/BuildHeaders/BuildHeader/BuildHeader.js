@@ -8,7 +8,10 @@ const buildHeader = (props) => {
     <div 
       className={classes.BuildHeader}
       onClick={() => props.clicked(props.name)}>
-      {props.children}
+        {props.children}
+      {/* <div className={classes.Label}>
+      
+      </div> */}
     </div>
 
   );

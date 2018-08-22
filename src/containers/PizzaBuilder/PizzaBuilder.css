@@ -3,7 +3,19 @@
   display: flex;
   flex-flow: column nowrap;
   margin: auto;
-  background-color: rgb(88, 71, 71);
+  background-color: rgb(241, 232, 223);
+}
+
+.MainControlsContainer {
+  width: inherit;
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+  justify-content: center;
+  /* background-color: rgb(47, 43, 49); */
+  background-color: #ccc;
+  /* border: 5px solid #999;
+  border-radius: 1%; */
 }
 
 @media (min-width: 500px) and (min-height: 400px) {
