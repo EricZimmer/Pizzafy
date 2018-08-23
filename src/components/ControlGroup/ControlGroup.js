@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import BuildControls from './BuildControls/BuildControls';
 import classes from './ControlGroup.css';
 import * as IngrTypes from '../../INGREDIENTCONST';
@@ -15,7 +15,7 @@ const ALL_TOPPINGS = {
   ]
 };
 
-class ControlGroup extends PureComponent {
+class ControlGroup extends Component {
 
   componentWillMount() {
     this.setupState(ALL_TOPPINGS);

@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import classes from './BuildControls.css';
 import Auxhoc from '../../../hoc/Auxhoc';
 import * as IngrTypes from '../../../INGREDIENTCONST';
 
 import BuildControl from './BuildControl/BuildControl';
 
-class BuildControls extends PureComponent {
+class BuildControls extends Component {
   state = {
     
     [IngrTypes.REGULAR]: {
@@ -25,19 +25,6 @@ class BuildControls extends PureComponent {
     e.target.classList.toggle(classes.Toggle);
   }
   
-  componentDidUpdate() {
-    
-    
-  }
-  componentWillUpdate() {
-    
-  }
-
-  componentWillMount() {
-    
-  }
-  
-
   toppingToggle = (e, side, amount) => {
     e.preventDefault();
     e.stopPropagation();

@@ -1,19 +1,26 @@
-export const NONE = 'NONE';
-export const REGULAR = 'REGULAR';
-export const EXTRA = 'EXTRA';
+export const NONE = 'None';
+export const REGULAR = 'Regular';
+export const EXTRA = 'Extra';
 
-export const LEFT = 'LEFT';
-export const RIGHT = 'RIGHT';
-export const WHOLE = 'WHOLE';
+export const LEFT = 'Left';
+export const RIGHT = 'Right';
+export const WHOLE = 'Whole';
 
-export const PEPPERONI = 'PEPPERONI';
-export const SAUSAGE = 'SAUSAGE';
-export const HAM = 'HAM';
+export const PEPPERONI = 'Pepperoni';
+export const SAUSAGE = 'Sausage';
+export const HAM = 'Ham';
 
-export const TOPPINGS = 'TOPPINGS';
-export const BASE = 'BASE';
-export const SAUCE = 'SAUCE';
-export const CRUST = 'CRUST';
-export const CHEESE = 'CHEESE';
-export const MEAT = 'MEAT';
-export const VEGGIES = 'VEGGIES';
+export const OLIVES = 'Olives';
+export const TOMATOES = 'Tomatoes';
+export const PEPPERS = 'Peppers';
+
+export const TOPPINGS = 'Toppings';
+export const BASE = 'Base';
+export const SAUCE = 'Sauce';
+export const CRUST = 'Crust';
+export const CHEESE = 'Cheese';
+export const MEAT = 'Meat';
+export const VEGGIES = 'Veggies';
+
+export const TOPPINGS_MEAT = [PEPPERONI, SAUSAGE, HAM];
+export const TOPPINGS_VEGGIES = [PEPPERS, TOMATOES, OLIVES];

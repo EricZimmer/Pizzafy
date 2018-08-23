@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
 import Auxhoc from '../../hoc/Auxhoc';
 import classes from './PizzaBuilder.css';
@@ -11,7 +11,10 @@ import IngredientSummary from '../../components/Pizza/IngredientSummary/Ingredie
 import * as IngrTypes from '../../INGREDIENTCONST';
 import PizzaIngredient from '../../components/Pizza/PizzaIngredient/PizzaIngredient';
 
-class PizzaBuilder extends PureComponent {
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux';
+
+class PizzaBuilder extends Component {
 
   state = {
     currentTab: 'BASE',
@@ -19,6 +22,11 @@ class PizzaBuilder extends PureComponent {
   
     } */
   };
+
+  componentDidMount() {
+    console.log('mount');
+    this.props.initToppingHandler();
+  }
 
   headerClickedHandler = (name) => {
     this.setState({currentTab: name})
@@ -56,6 +64,7 @@ class PizzaBuilder extends PureComponent {
   }
 
   toppingGroup = ((<ControlGroup 
+    toppingType={'MEAT'}
     addTopping={(name, side, amount) => this.addToppingHandler(name, side, amount) }
     clearTopping={name => this.clearToppingHander(name)}>
   </ControlGroup>));
@@ -81,7 +90,7 @@ class PizzaBuilder extends PureComponent {
           });
         });
     }
-    console.log('pbi = ', stIngredients)
+    console.log('storeIng = ', this.props.toppings)
  
     let controlGroup = <div>base</div>;
     controlGroup = this.state.currentTab === 'BASE' ? controlGroup : this.toppingGroup ;
@@ -102,5 +111,18 @@ class PizzaBuilder extends PureComponent {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    toppings: state.Toppings
+  }
+};
 
-export default PizzaBuilder;
+const mapDispatchToProps = dispatch => {
+  return {
+    addToppingHandler: (tType, tName, reg, extra) => dispatch(actions.addTopping(tType, tName, reg, extra)),
+    removeToppingHandler: (tType, tName) => dispatch(actions.removeTopping(tType, tName)),
+    initToppingHandler: () => dispatch(actions.initToppings())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PizzaBuilder);
