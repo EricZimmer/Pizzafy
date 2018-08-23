@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import classes from './BuildControls.css';
 import Auxhoc from '../../../hoc/Auxhoc';
-import * as IngrTypes from '../../../INGREDIENTCONST';
+import * as ToppingTypes from '../../../INGREDIENTCONST';
 
 import BuildControl from './BuildControl/BuildControl';
 
 class BuildControls extends Component {
   state = {
     
-    [IngrTypes.REGULAR]: {
-      [IngrTypes.LEFT]: false,
-      [IngrTypes.WHOLE]: false,
-      [IngrTypes.RIGHT]: false
+    [ToppingTypes.Regular]: {
+      [ToppingTypes.Left]: false,
+      [ToppingTypes.Whole]: false,
+      [ToppingTypes.Right]: false
     },
-    [IngrTypes.EXTRA]: {
-      [IngrTypes.LEFT]: false,
-      [IngrTypes.WHOLE]: false,
-      [IngrTypes.RIGHT]: false
+    [ToppingTypes.Extra]: {
+      [ToppingTypes.Left]: false,
+      [ToppingTypes.Whole]: false,
+      [ToppingTypes.Right]: false
     }
   }
 
@@ -35,28 +35,29 @@ class BuildControls extends Component {
     const stateAmount = this.state[amount];
     let updateToggle = Object.keys(stateAmount).map(stateSide => {
       if(stateSide === side) {
-        if(amount === IngrTypes.REGULAR) {
+        if(amount === ToppingTypes.Regular) {
+          console.log('tts', ToppingTypes, ' side ', side);
           this.setState({ 
-            [IngrTypes.EXTRA]: {
-              ...this.state[IngrTypes.EXTRA],
-              [IngrTypes[side]]: false,
-              [IngrTypes.WHOLE]: false
+            [ToppingTypes.Extra]: {
+              ...this.state[ToppingTypes.Extra],
+              [ToppingTypes[side]]: false,
+              [ToppingTypes.Whole]: false
             }
           });
-        } else if(amount === IngrTypes.EXTRA) {
-            if(side === IngrTypes.WHOLE) {
+        } else if(amount === ToppingTypes.Extra) {
+            if(side === ToppingTypes.Whole) {
               this.setState({ 
-                [IngrTypes.REGULAR]: {
-                  [IngrTypes.LEFT]: false,
-                  [IngrTypes.WHOLE]: false,
-                  [IngrTypes.RIGHT]: false
+                [ToppingTypes.Regular]: {
+                  [ToppingTypes.Left]: false,
+                  [ToppingTypes.Whole]: false,
+                  [ToppingTypes.Right]: false
                 }
               });
             } else {
               this.setState({ 
-                [IngrTypes.REGULAR]: {
-                  ...this.state[IngrTypes.REGULAR],
-                  [IngrTypes[side]]: false
+                [ToppingTypes.Regular]: {
+                  ...this.state[ToppingTypes.Regular],
+                  [ToppingTypes[side]]: false
                 }
               });
             }
@@ -69,49 +70,47 @@ class BuildControls extends Component {
     }).reduce((obj, item) => {
       return {...obj, ...item};
     },{});
-    let reg = IngrTypes.NONE;
-    let extr = IngrTypes.NONE;
+    let reg = ToppingTypes.None;
+    let extr = ToppingTypes.None;
     this.setState( {
       [amount]: updateToggle
     }, () => {
-      for (let key in this.state.REGULAR) {
-        if (this.state.REGULAR[key]) {
+      for (let key in this.state[ToppingTypes.Regular]) {
+        if (this.state[ToppingTypes.Regular][key]) {
           reg = key;
         }
       }
-      for (let key in this.state.EXTRA) {
-        if (this.state.EXTRA[key]) {
+      for (let key in this.state[ToppingTypes.Extra]) {
+        if (this.state[ToppingTypes.Extra][key]) {
           extr = key;
         }
       }
       this.props.addTopping(this.props.topping, reg, extr);
-      if(reg === IngrTypes.NONE && extr === IngrTypes.NONE) {
-        console.log('rem', node);
+      if(reg === ToppingTypes.None && extr === ToppingTypes.None) {
         this.props.toggleOff(node);
       }
     });
-    console.log('reg ', reg, ' extr ', extr);
   }
 
   toggleOn = (e) => {
     if(!this.props.toggled) {
 
-      this.toppingToggle(e, IngrTypes.WHOLE, IngrTypes.REGULAR);
+      //this.toppingToggle(e, ToppingTypes.Whole, ToppingTypes.Regular);
       this.props.clicked(e);
     }
   }
 
   toggleOff = (e) => {
     this.setState({
-      [IngrTypes.REGULAR]: {
-        [IngrTypes.LEFT]: false,
-        [IngrTypes.WHOLE]: false,
-        [IngrTypes.RIGHT]: false
+      [ToppingTypes.Regular]: {
+        [ToppingTypes.Left]: false,
+        [ToppingTypes.Whole]: false,
+        [ToppingTypes.Right]: false
       },
-      [IngrTypes.EXTRA]: {
-        [IngrTypes.LEFT]: false,
-        [IngrTypes.WHOLE]: false,
-        [IngrTypes.RIGHT]: false
+      [ToppingTypes.Extra]: {
+        [ToppingTypes.Left]: false,
+        [ToppingTypes.Whole]: false,
+        [ToppingTypes.Right]: false
       }
     });
     this.props.clearTopping(e);
@@ -119,15 +118,17 @@ class BuildControls extends Component {
 
   render() {
     
-    const regular = this.state.REGULAR;
-    const extra = this.state.EXTRA;
+    const regular = this.state[ToppingTypes.Regular];
+    const extra = this.state[ToppingTypes.Extra];
     const topping = this.props.topping;
+
+    console.log('topping = ', topping, ' reg == ', regular, ' extra == ', extra);
     
     const controlsRegular = Object.keys(regular).map(reg => {
       return <BuildControl
-        key={`${topping} + ${reg} + ${IngrTypes.REGULAR}`}
+        key={`${topping} + ${reg} + ${ToppingTypes.Regular}`}
         name={topping}
-        amount={IngrTypes.REGULAR}
+        amount={ToppingTypes.Regular}
         side={reg}
         class={reg}
         toggled={regular[reg]}
@@ -136,13 +137,14 @@ class BuildControls extends Component {
       
     });
     const controlsExtra = Object.keys(extra).map(ext => {
+      console.log(ext, ' ext ');
       return <BuildControl
-        key={`${topping} + ${ext} + ${IngrTypes.EXTRA}`}
+        key={`${topping} + ${ext} + ${ToppingTypes.Extra}`}
         name={topping}
-        amount={IngrTypes.EXTRA}
+        amount={ToppingTypes.Extra}
         side={ext}
-        label={IngrTypes.EXTRA}
-        class={IngrTypes.EXTRA}
+        label={ToppingTypes.Extra}
+        class={ToppingTypes.Extra}
         toggled={extra[ext]}
         clicked={this.toppingToggle}
       />

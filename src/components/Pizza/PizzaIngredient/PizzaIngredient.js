@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './PizzaIngredient.css';
-import * as IngrTypes from '../../../INGREDIENTCONST';
+import * as ToppingTypes from '../../../INGREDIENTCONST';
 import Auxhoc from '../../../hoc/Auxhoc';
 
-import PEPPERONI_RIGHT from '../../../assets/pepright.svg';
-import PEPPERONI_LEFT from '../../../assets/pepleft.svg';
+import Pepperoni_Right from '../../../assets/pepright.svg';
+import Pepperoni_Left from '../../../assets/pepleft.svg';
 
-import SAUSAGE_RIGHT from '../../../assets/sausageright.svg';
-import SAUSAGE_LEFT from '../../../assets/sausageleft.svg';
+import Sausage_Right from '../../../assets/sausageright.svg';
+import Sausage_Left from '../../../assets/sausageleft.svg';
 
 const IMAGES = {
-  'PEPPERONI_LEFT': PEPPERONI_LEFT, 'PEPPERONI_RIGHT': PEPPERONI_RIGHT,
-  'SAUSAGE_LEFT': SAUSAGE_LEFT, 'SAUSAGE_RIGHT': SAUSAGE_RIGHT
+  'Pepperoni_Left': Pepperoni_Left, 'Pepperoni_Right': Pepperoni_Right,
+  'Sausage_Left': Sausage_Left, 'Sausage_Right': Sausage_Right
 };
 
 const getImageRegular = (img, divclasses) => {
@@ -29,8 +29,8 @@ class PizzaIngredient extends Component {
 
   createTopping = (topping, side, amount) => {
     const imgSrc = {
-      [IngrTypes.LEFT]: [topping, IngrTypes.LEFT].join('_'),
-      [IngrTypes.RIGHT]: [topping, IngrTypes.RIGHT].join('_')    
+      [ToppingTypes.Left]: [topping, ToppingTypes.Left].join('_'),
+      [ToppingTypes.Right]: [topping, ToppingTypes.Right].join('_')    
     };
     const divClasses = {
       regular: classes[topping],
@@ -39,30 +39,30 @@ class PizzaIngredient extends Component {
 
     let finishedTopping = {};
 
-    if(side === IngrTypes.WHOLE) {
+    if(side === ToppingTypes.Whole) {
  
-      if(amount === IngrTypes.REGULAR) {
+      if(amount === ToppingTypes.Regular) {
         finishedTopping = (
           <Auxhoc>
-            {getImageRegular(imgSrc.LEFT, divClasses.regular)}
-            {getImageRegular(imgSrc.RIGHT, divClasses.regular)}
+            {getImageRegular(imgSrc.Left, divClasses.regular)}
+            {getImageRegular(imgSrc.Right, divClasses.regular)}
           </Auxhoc>
         );
-      } else if (amount === IngrTypes.EXTRA) {
+      } else if (amount === ToppingTypes.Extra) {
         finishedTopping = (
           <Auxhoc>
-            {getImageRegular(imgSrc.LEFT, divClasses.regular)}
-            {getImageRegular(imgSrc.RIGHT, divClasses.regular)}
-            {getImageRegular(imgSrc.LEFT, divClasses.extra)}
-            {getImageRegular(imgSrc.RIGHT, divClasses.extra)}
+            {getImageRegular(imgSrc.Left, divClasses.regular)}
+            {getImageRegular(imgSrc.Right, divClasses.regular)}
+            {getImageRegular(imgSrc.Left, divClasses.extra)}
+            {getImageRegular(imgSrc.Right, divClasses.extra)}
           </Auxhoc>
         );
       }
     } else {
-        if(amount === IngrTypes.REGULAR) {
+        if(amount === ToppingTypes.Regular) {
           finishedTopping = getImageRegular(imgSrc[side], divClasses.regular);
         } 
-        else if (amount === IngrTypes.EXTRA) {
+        else if (amount === ToppingTypes.Extra) {
           finishedTopping = (
             <Auxhoc>
               {getImageRegular(imgSrc[side], divClasses.regular)}
@@ -83,13 +83,13 @@ class PizzaIngredient extends Component {
       //console.log(amount, side);
       
       switch (this.props.topping) {
-        case('crust'):
+        case('Crust'):
           ingredients = <div className={classes.Crust}>{this.props.children}</div>;
         break;
-        case('crust-thin'):
+        case('Crust-thin'):
           ingredients = <div className={classes.CrustThin}>{this.props.children}</div>;
         break;
-        case('crust-regular'):
+        case('Crust-regular'):
           ingredients = <div className={classes.CrustRegular}>{this.props.children}</div>;
         break;
         case('sauce'):
@@ -102,14 +102,14 @@ class PizzaIngredient extends Component {
           ingredients = <div className={classes.ToppingContainer}>{this.props.children}</div>;
         break;
         
-        case(IngrTypes.PEPPERONI):
-          if(side && side !== IngrTypes.NONE) {
-            ingredients = this.createTopping(IngrTypes.PEPPERONI, side, amount);
+        case(ToppingTypes.Pepperoni):
+          if(side && side !== ToppingTypes.None) {
+            ingredients = this.createTopping(ToppingTypes.Pepperoni, side, amount);
           }
         break;
-        case(IngrTypes.SAUSAGE):
-          if(side && side  !== IngrTypes.NONE) {
-            ingredients = this.createTopping(IngrTypes.SAUSAGE, side, amount);
+        case(ToppingTypes.Sausage):
+          if(side && side  !== ToppingTypes.None) {
+            ingredients = this.createTopping(ToppingTypes.Sausage, side, amount);
           }
         break;
       default: ingredients = null;    
@@ -129,16 +129,16 @@ export default PizzaIngredient;
 /* case('pepperoni-right'):
         ingredients = <img className={classes.Pepperoni} src={pepperoniR}/>;
         break;
-      case('pepperoni-left'):
+      case('pepperoni-Left'):
         ingredients = <img className={classes.Pepperoni} src={pepperoniL}/>;
         break;
-      case('sausage-left'):
-        ingredients = <img className={classes.Sausage} src={sausageL}/>;
+      case('Sausage-Left'):
+        ingredients = <img className={classes.Sausage} src={SausageL}/>;
         break;
-      case('sausage-right'):
-        ingredients = <img className={classes.Sausage} src={sausageR}/>;
+      case('Sausage-right'):
+        ingredients = <img className={classes.Sausage} src={SausageR}/>;
         break;
-      case('pepperoni-left-extra'):
+      case('pepperoni-Left-extra'):
         ingredients = (
           <div>
             <img className={[classes.Pepperoni, classes.rotate].join(' ')} src={pepperoniL} />
@@ -152,17 +152,17 @@ export default PizzaIngredient;
           </div>
         );
         break;
-      case('sausage-left-extra'):
+      case('Sausage-Left-extra'):
         ingredients = (
           <div>
-            <img className={[classes.Sausage, classes.rotate].join(' ')} src={sausageL} />
+            <img className={[classes.Sausage, classes.rotate].join(' ')} src={SausageL} />
           </div>
         );
         break;
-      case('sausage-right-extra'):
+      case('Sausage-right-extra'):
         ingredients = (
           <div>
-            <img className={[classes.Sausage, classes.rotate].join(' ')} src={sausageR} />
+            <img className={[classes.Sausage, classes.rotate].join(' ')} src={SausageR} />
           </div>
         );
         break;

@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import BuildControls from './BuildControls/BuildControls';
 import classes from './ControlGroup.css';
-import * as IngrTypes from '../../INGREDIENTCONST';
+import * as ToppingTypes from '../../INGREDIENTCONST';
 
-const TOPPINGS_MEAT = [IngrTypes.PEPPERONI, IngrTypes.SAUSAGE, IngrTypes.HAM];
-const TOPPINGS_VEGGIES = ['PEPPERS', 'TOMATOES', 'MUSHROOMS'];
+const Toppings_Meat = [ToppingTypes.Pepperoni, ToppingTypes.Sausage, ToppingTypes.Ham];
+const Toppings_Veggies = ['Peppers', 'Tomatoes', 'MUSHROOMS'];
 
-const ALL_TOPPINGS = {
-  MEAT: [
-    IngrTypes.PEPPERONI, IngrTypes.SAUSAGE, IngrTypes.HAM
+const ALL_Toppings = {
+  Meat: [
+    ToppingTypes.Pepperoni, ToppingTypes.Sausage, ToppingTypes.Ham
   ],
-  VEGGIES: [
-    'PEPPERS', 'TOMATOES', 'MUSHROOMS'
+  Veggies: [
+    'Peppers', 'Tomatoes', 'MUSHROOMS'
   ]
 };
 
 class ControlGroup extends Component {
 
   componentWillMount() {
-    this.setupState(ALL_TOPPINGS);
-    //this.setupState(TOPPINGS_VEGGIES);
+    this.setupState(ALL_Toppings);
+    //this.setupState(Toppings_Veggies);
   }
 
   componentWillUnmount() {
@@ -80,8 +80,8 @@ class ControlGroup extends Component {
     this.props.clearTopping(id);
   }
 
-  setToppingControls = (meatOrVeg) => {
-    return ALL_TOPPINGS[meatOrVeg].map(topping => {
+  setToppingControls = (MeatOrVeg) => {
+    return ALL_Toppings[MeatOrVeg].map(topping => {
       return (
         <BuildControls 
           key={topping}
@@ -97,7 +97,7 @@ class ControlGroup extends Component {
   } 
 
   render() {
-    let toppings = this.setToppingControls('MEAT');
+    let toppings = this.setToppingControls('Meat');
     return (
       <div 
         className={classes.BuildControlsContainer}>

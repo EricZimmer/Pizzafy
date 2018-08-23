@@ -20,7 +20,7 @@ const pizza = (props) => {
     <div className={classes.Pizza}>
       <div className={classes.Pan}>
         <div className={classes.Crust}>
-          <PizzaIngredient topping='crust-regular'>
+          <PizzaIngredient topping='Crust-regular'>
             <PizzaIngredient topping='topping-container'>
               <PizzaIngredient topping='cheese' />
               <PizzaIngredient topping='sauce' />

@@ -3,7 +3,7 @@ import * as ToppingTypes from '../../INGREDIENTCONST';
 import { updateObject } from '../utility';
 
 const initialState = {
-  [ToppingTypes.TOPPINGS]: null,
+  [ToppingTypes.Toppings]: null,
   totalPrice: 8,
   error: false
 };
@@ -11,28 +11,27 @@ const initialState = {
 const addToppingHandler = (state, action) => {
   const updatedTopping = {
     [action.toppingName]: {
-      [ToppingTypes.REGULAR]: action.regular,
-      [ToppingTypes.EXTRA]: action.extra
+      [ToppingTypes.Regular]: action.regular,
+      [ToppingTypes.Extra]: action.extra
     }
   };
-  return updateObject(state.TOPPINGS[action.toppingType], updatedTopping);
+  return updateObject(state.Toppings[action.toppingType], updatedTopping);
 
 };
 
 const removeToppingHandler = (state, action) => {
   const updatedTopping = {
     [action.toppingName]: {
-      [ToppingTypes.REGULAR]: ToppingTypes.NONE,
-      [ToppingTypes.EXTRA]: ToppingTypes.NONE
+      [ToppingTypes.Regular]: ToppingTypes.None,
+      [ToppingTypes.Extra]: ToppingTypes.None
     }
   };
-  return updateObject(state.TOPPINGS[action.toppingType], updatedTopping);
+  return updateObject(state.Toppings[action.toppingType], updatedTopping);
 };
 
 const setToppings = (state, action) => {
-  console.log('actionT = ', action.Toppings);
   return updateObject(state, {
-    [ToppingTypes.TOPPINGS]: {
+    [ToppingTypes.Toppings]: {
       ...state.Toppings,
       ...action.Toppings
     },
@@ -45,9 +44,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_TOPPING: return addToppingHandler(state, action);
     case actionTypes.REMOVE_TOPPING: return removeToppingHandler(state, action);
-    case actionTypes.SET_TOPPINGS: 
-      console.log('lol');
-      return setToppings(state, action);
+    case actionTypes.SET_Toppings: return setToppings(state, action);
     default: return state;
   }
 };

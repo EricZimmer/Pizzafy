@@ -24,8 +24,8 @@ const mapToppings = (toppingType) => {
   return toppingType.map(topping => {
     return {
       [topping]: {
-        [ToppingTypes.REGULAR]: ToppingTypes.NONE, 
-        [ToppingTypes.EXTRA]: ToppingTypes.NONE
+        [ToppingTypes.Regular]: ToppingTypes.None, 
+        [ToppingTypes.Extra]: ToppingTypes.None
       }};
   }).reduce((obj, item) => {
     return {...obj, ...item};
@@ -33,16 +33,16 @@ const mapToppings = (toppingType) => {
 }
 
 export const setToppings = () => {
-  const toppingsMeat = mapToppings(ToppingTypes.TOPPINGS_MEAT);
-  const toppingsVeggies = mapToppings(ToppingTypes.TOPPINGS_VEGGIES);
+  const toppingsMeat = mapToppings(ToppingTypes.Toppings_Meat);
+  const toppingsVeggies = mapToppings(ToppingTypes.Toppings_Veggies);
   console.log(...toppingsVeggies);
   return {
-    type: actionTypes.SET_TOPPINGS,
-    [ToppingTypes.TOPPINGS]: {
-      [ToppingTypes.MEAT]: {
+    type: actionTypes.SET_Toppings,
+    [ToppingTypes.Toppings]: {
+      [ToppingTypes.Meat]: {
         ...toppingsMeat
       },
-      [ToppingTypes.VEGGIES]: {
+      [ToppingTypes.Veggies]: {
         ...toppingsVeggies
       }
     }

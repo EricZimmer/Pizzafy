@@ -35,7 +35,7 @@
   height: 100%;
   z-index: 5;
   top:0%;
-  left:0%;
+  Left:0%;
   position: absolute;
   margin: auto;
 }
@@ -48,7 +48,7 @@
   position: absolute;
   border-radius: 50%;
   top: 0.5%;
-  left: 0.5%;
+  Left: 0.5%;
   z-index: 5;
   margin: auto;
 }
@@ -61,7 +61,7 @@
   z-index: 6;
   margin: auto;
   top: 2.5%;
-  left: 2.5%;
+  Left: 2.5%;
   position: absolute;
 }
 
@@ -71,22 +71,22 @@
   
 }
 
-.PEPPERONI{
+.Pepperoni{
   z-index: 7;
   position: absolute;
   top:0px;
-  left: 4%;
+  Left: 4%;
   top: 4%;
   height: 92%;
   width: 92%;
 
 }
 
-.SAUSAGE{
+.Sausage{
   z-index: 8;
   position: absolute;
   top:0px;
-  left: 4%;
+  Left: 4%;
   top: 4%;
   height: 92%;
   width: 92%;

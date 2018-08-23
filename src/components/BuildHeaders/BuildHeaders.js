@@ -6,14 +6,14 @@ const buildHeaders = (props) => (
   <div className={classes.BuildHeaders}>
     <BuildHeader 
         clicked={props.clicked}
-        name={'BASE'}>
-      CRUST, CHEESE & SAUCE
+        name={'Base'}>
+      Crust, Cheese & Sauce
     </BuildHeader>
     
     <BuildHeader
         clicked={props.clicked}
-        name={'TOPPINGS'}>
-      TOPPINGS
+        name={'Toppings'}>
+      Toppings
     </BuildHeader>
     
     

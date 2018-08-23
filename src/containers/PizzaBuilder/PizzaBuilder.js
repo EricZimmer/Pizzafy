@@ -8,7 +8,7 @@ import BuildControls from '../../components/ControlGroup/BuildControls/BuildCont
 import ControlGroup from '../../components/ControlGroup/ControlGroup';
 import IngredientSummary from '../../components/Pizza/IngredientSummary/IngredientSummary';
 
-import * as IngrTypes from '../../INGREDIENTCONST';
+import * as ToppingTypes from '../../INGREDIENTCONST';
 import PizzaIngredient from '../../components/Pizza/PizzaIngredient/PizzaIngredient';
 
 import * as actions from '../../store/actions/index';
@@ -17,14 +17,13 @@ import { connect } from 'react-redux';
 class PizzaBuilder extends Component {
 
   state = {
-    currentTab: 'BASE',
+    currentTab: 'Base',
     /* ingredients: {
   
     } */
   };
 
   componentDidMount() {
-    console.log('mount');
     this.props.initToppingHandler();
   }
 
@@ -37,11 +36,11 @@ class PizzaBuilder extends Component {
       ...this.state,
       ingredients: {
         ...this.state.ingredients,
-        [IngrTypes[name]]: {
+        [ToppingTypes[name]]: {
           /* ...this.state.ingredients[name], */
           /* ...newTopping, */
-          [IngrTypes.REGULAR]: reg,
-          [IngrTypes.EXTRA]: extra
+          [ToppingTypes.Regular]: reg,
+          [ToppingTypes.Extra]: extra
         }
       }
     }
@@ -53,10 +52,10 @@ class PizzaBuilder extends Component {
       ...this.state,
       ingredients: {
         ...this.state.ingredients,
-        [IngrTypes[name]]: {
+        [ToppingTypes[name]]: {
           /* ...this.state.ingredients[name], */
-          [IngrTypes.REGULAR]: IngrTypes.NONE,
-          [IngrTypes.EXTRA]: IngrTypes.NONE
+          [ToppingTypes.Regular]: ToppingTypes.None,
+          [ToppingTypes.Extra]: ToppingTypes.None
         }
       }
     }
@@ -64,40 +63,42 @@ class PizzaBuilder extends Component {
   }
 
   toppingGroup = ((<ControlGroup 
-    toppingType={'MEAT'}
+    toppingType={'Meat'}
     addTopping={(name, side, amount) => this.addToppingHandler(name, side, amount) }
     clearTopping={name => this.clearToppingHander(name)}>
   </ControlGroup>));
 
-  render() {
-    const stIngredients = this.state.ingredients !== null ? this.state.ingredients 
-      : null;
-    let pizzaIngredients = null;
-    if (stIngredients != null) {
-      
+  createToppings = (tType) => {
+    return Object.keys(tType).map(tName => {
+      return Object.keys(tType[tName]).map((amount) => {
+        let side = tType[tName][amount];
+        return (
+          <PizzaIngredient 
+              key={`${tName} + '_' ${amount} + '_' ${side}`}
+              topping={tName}
+              side={side}
+              amount={amount}/>
+          );
+      });
+    });
+  }
 
-      pizzaIngredients = Object.keys(stIngredients)
-        .map(ingr => {
-          return Object.keys(stIngredients[ingr]).map((amount) => {
-            let side = stIngredients[ingr][amount];
-            return (
-              <PizzaIngredient 
-                  key={`${ingr} + '_' ${amount} + '_' ${side}`}
-                  topping={ingr}
-                  side={side}
-                  amount={amount}/>
-              );
-          });
-        });
+  render() {
+    const stateToppings = this.props.toppings !== null ? this.props.toppings
+      : null;
+    let toppingsMeat = null;
+    let toppingsVeggies = null;
+    if (stateToppings != null) {
+      toppingsMeat = this.createToppings(stateToppings.Meat)
     }
     console.log('storeIng = ', this.props.toppings)
  
-    let controlGroup = <div>base</div>;
-    controlGroup = this.state.currentTab === 'BASE' ? controlGroup : this.toppingGroup ;
+    let controlGroup = <div>Base</div>;
+    controlGroup = this.state.currentTab === 'Base' ? controlGroup : this.toppingGroup ;
     return (
       <div className={classes.PizzaBuilder}>
         <Pizza 
-          ingredients={pizzaIngredients}/>
+          ingredients={toppingsMeat}/>
         {/* <IngredientSummary ingredients={stIngredients}/> */}
         <div className={classes.MainControlsContainer}>
           <BuildHeaders 
