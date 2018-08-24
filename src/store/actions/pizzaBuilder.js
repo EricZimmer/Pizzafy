@@ -37,7 +37,7 @@ export const setToppings = () => {
   const toppingsVeggies = mapToppings(ToppingTypes.Toppings_Veggies);
   console.log(...toppingsVeggies);
   return {
-    type: actionTypes.SET_Toppings,
+    type: actionTypes.SET_TOPPINGS,
     [ToppingTypes.Toppings]: {
       [ToppingTypes.Meat]: {
         ...toppingsMeat

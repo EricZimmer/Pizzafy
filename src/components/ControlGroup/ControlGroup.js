@@ -61,7 +61,7 @@ class ControlGroup extends Component {
       });
     }
   }
-  toppingGroupToggleOff = (e) => {
+  toppingGroupToggleOff = (e, tType, tName) => {
     //e.preventDefault();
     //e.stopPropagation();
     console.log('e= ', e.target, 'e.target.parent'/* , e.target.parentNode */);
@@ -77,7 +77,7 @@ class ControlGroup extends Component {
         }
       });
     }
-    this.props.clearTopping(id);
+    this.props.removeTopping(tType, tName);
   }
 
   setToppingControls = (MeatOrVeg) => {
@@ -85,12 +85,12 @@ class ControlGroup extends Component {
       return (
         <BuildControls 
           key={topping}
-          /* id={topping} */
           clicked={(e) => this.toppingGroupToggleOn(e)}
-          toggleOff={(e) => this.toppingGroupToggleOff(e)}
-          topping={topping}
+          /* toggleOff={(e, tType, tName) => this.toppingGroupToggleOff(e, tType, tName)} */
+          toppingName={topping}
+          toppingType={this.props.toppingType}
           addTopping={this.props.addTopping}
-          clearTopping={(e) => this.toppingGroupToggleOff(e)}
+          removeTopping={(e, tType, tName) => this.toppingGroupToggleOff(e, tType, tName)}
           toggled={this.state[topping].toggled}/>
       );
     });

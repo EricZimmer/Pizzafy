@@ -64,8 +64,8 @@ class PizzaBuilder extends Component {
 
   toppingGroup = ((<ControlGroup 
     toppingType={'Meat'}
-    addTopping={(name, side, amount) => this.addToppingHandler(name, side, amount) }
-    clearTopping={name => this.clearToppingHander(name)}>
+    addTopping={(type, name, reg, extra) => this.props.addToppingHandler(type, name, reg, extra) }
+    removeTopping={(type, name) => this.props.removeToppingHandler(type, name)}>
   </ControlGroup>));
 
   createToppings = (tType) => {
@@ -91,7 +91,7 @@ class PizzaBuilder extends Component {
     if (stateToppings != null) {
       toppingsMeat = this.createToppings(stateToppings.Meat)
     }
-    console.log('storeIng = ', this.props.toppings)
+    console.log(toppingsMeat);
  
     let controlGroup = <div>Base</div>;
     controlGroup = this.state.currentTab === 'Base' ? controlGroup : this.toppingGroup ;

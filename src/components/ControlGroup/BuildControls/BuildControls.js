@@ -29,14 +29,12 @@ class BuildControls extends Component {
     e.preventDefault();
     e.stopPropagation();
     let node = e.target.parentNode.parentNode;
-    console.log('ee ', e.target.parentNode.parentNode);
-    /* this.props.addTopping(this.props.topping, side, amount); */
+    /* this.props.addTopping(this.props.toppingName, side, amount); */
 
     const stateAmount = this.state[amount];
     let updateToggle = Object.keys(stateAmount).map(stateSide => {
       if(stateSide === side) {
         if(amount === ToppingTypes.Regular) {
-          console.log('tts', ToppingTypes, ' side ', side);
           this.setState({ 
             [ToppingTypes.Extra]: {
               ...this.state[ToppingTypes.Extra],
@@ -85,17 +83,18 @@ class BuildControls extends Component {
           extr = key;
         }
       }
-      this.props.addTopping(this.props.topping, reg, extr);
+      
       if(reg === ToppingTypes.None && extr === ToppingTypes.None) {
-        this.props.toggleOff(node);
-      }
+        console.log('node = ', node);
+        this.props.removeTopping(node, this.props.toppingType, this.props.toppingName);
+      } else this.props.addTopping(this.props.toppingType, this.props.toppingName, reg, extr);
     });
   }
 
   toggleOn = (e) => {
     if(!this.props.toggled) {
 
-      //this.toppingToggle(e, ToppingTypes.Whole, ToppingTypes.Regular);
+      this.toppingToggle(e, ToppingTypes.Whole, ToppingTypes.Regular);
       this.props.clicked(e);
     }
   }
@@ -113,16 +112,15 @@ class BuildControls extends Component {
         [ToppingTypes.Right]: false
       }
     });
-    this.props.clearTopping(e);
+
+    this.props.removeTopping(e, this.props.toppingType, this.props.toppingName);
   }
 
   render() {
     
     const regular = this.state[ToppingTypes.Regular];
     const extra = this.state[ToppingTypes.Extra];
-    const topping = this.props.topping;
-
-    console.log('topping = ', topping, ' reg == ', regular, ' extra == ', extra);
+    const topping = this.props.toppingName;
     
     const controlsRegular = Object.keys(regular).map(reg => {
       return <BuildControl
@@ -137,7 +135,6 @@ class BuildControls extends Component {
       
     });
     const controlsExtra = Object.keys(extra).map(ext => {
-      console.log(ext, ' ext ');
       return <BuildControl
         key={`${topping} + ${ext} + ${ToppingTypes.Extra}`}
         name={topping}
@@ -153,10 +150,10 @@ class BuildControls extends Component {
     let classlist = classes.BuildControls;
     classlist = this.props.toggled ? classlist : [classlist, classes.MousePointer].join(' ');
     const controls = (    
-      <div id={this.props.topping} className={classlist}
+      <div id={this.props.toppingName} className={classlist}
         onClick={(e) => this.toggleOn(e)}>
         <div className={classes.LabelHeader}onClick={(e) => this.toggleOn(e)}>
-          <div className={classes.Label}>{this.props.topping}</div>
+          <div className={classes.Label}>{this.props.toppingName}</div>
           { this.props.toggled ? 
           <div className={classes.Checked} onClick={(e) => this.toggleOff(e)}>
             X
