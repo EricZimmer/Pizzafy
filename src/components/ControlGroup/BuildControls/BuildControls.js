@@ -3,11 +3,14 @@ import classes from './BuildControls.css';
 import Auxhoc from '../../../hoc/Auxhoc';
 import * as ToppingTypes from '../../../INGREDIENTCONST';
 
+import { connect } from 'react-redux';
+
 import BuildControl from './BuildControl/BuildControl';
+
 
 class BuildControls extends Component {
   state = {
-    
+    toggledOn: false,
     [ToppingTypes.Regular]: {
       [ToppingTypes.Left]: false,
       [ToppingTypes.Whole]: false,
@@ -23,6 +26,29 @@ class BuildControls extends Component {
   toggle = (e) => {
     e.preventDefault();
     e.target.classList.toggle(classes.Toggle);
+  }
+
+  updateStateFromProps = (amount, stAmount) => {
+    return Object.keys(this.state[stAmount]).map(side => {
+      if (amount === side) {
+        this.setState({toggledOn: true});
+        return {[side]: true};
+      }
+      else return {[side]: false};
+    })
+    .reduce((obj, item) => {
+      return {...obj, ...item};
+    },{});
+  }
+
+  componentWillMount() {
+   
+    const regular = this.updateStateFromProps(this.props.toppings.Regular, ToppingTypes.Regular);
+    const extra = this.updateStateFromProps(this.props.toppings.Extra, ToppingTypes.Extra);
+    this.setState({
+      [ToppingTypes.Regular] : {...regular},
+      [ToppingTypes.Extra]: {...extra}
+    });
   }
   
   toppingToggle = (e, side, amount) => {
@@ -94,7 +120,7 @@ class BuildControls extends Component {
   toggleOn = (e) => {
     if(!this.props.toggled) {
 
-      this.toppingToggle(e, ToppingTypes.Whole, ToppingTypes.Regular);
+      //this.toppingToggle(e, ToppingTypes.Whole, ToppingTypes.Regular);
       this.props.clicked(e);
     }
   }
@@ -148,19 +174,19 @@ class BuildControls extends Component {
     });
 
     let classlist = classes.BuildControls;
-    classlist = this.props.toggled ? classlist : [classlist, classes.MousePointer].join(' ');
+    classlist = this.props.toggled || this.state.toggledOn ? classlist : [classlist, classes.MousePointer].join(' ');
     const controls = (    
       <div id={this.props.toppingName} className={classlist}
         onClick={(e) => this.toggleOn(e)}>
         <div className={classes.LabelHeader}onClick={(e) => this.toggleOn(e)}>
           <div className={classes.Label}>{this.props.toppingName}</div>
-          { this.props.toggled ? 
+          { this.props.toggled || this.state.toggledOn ? 
           <div className={classes.Checked} onClick={(e) => this.toggleOff(e)}>
             X
           </div> : null}
         
         </div>
-        {this.props.toggled ? 
+        {this.props.toggled || this.state.toggledOn ? 
           <Auxhoc>
             <div className={classes.BuildControl}>{controlsRegular}</div>
             <div className={classes.BuildControl}>{controlsExtra}</div>
@@ -172,6 +198,13 @@ class BuildControls extends Component {
   };
 
     
+};
+
+const mapStateToProps = (state, ownProps) => {
+
+  return {
+    toppings: state.Toppings[ownProps.toppingType][ownProps.toppingName]
+  }
 }
   
-export default BuildControls;
+export default connect(mapStateToProps)(BuildControls);
