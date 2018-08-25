@@ -62,7 +62,7 @@
   align-items: center;
   align-self: center;
   /* justify-self: flex-end; */
-  float: Left;
+  /* float: Left; */
   border: 3px solid rgb(179, 33, 33);
   color: #ddd;
   font-size: 1.4rem;
@@ -71,7 +71,7 @@
   border-radius: 10%;
   position: absolute;
   padding-bottom: 0px;
-  /* top: 12px; */
+  /* top: .65rem; */
   right: 0px;
   cursor: pointer;
   margin-right: 8px;

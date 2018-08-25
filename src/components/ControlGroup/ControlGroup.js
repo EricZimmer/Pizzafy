@@ -45,8 +45,8 @@ class ControlGroup extends Component {
     this.setState({...initState});
   }
 
-  toppingGroupToggleOn = (e) => {
-    e.preventDefault();
+  toppingGroupToggleOn = () => {
+    /* e.preventDefault();
     //e.stopPropagation();
     const id = e.id || e.target.id || e.target.parentNode.id || e.target.parentNode.parentNode.id;
     console.log('id= ', id);
@@ -59,13 +59,11 @@ class ControlGroup extends Component {
           toggled: !this.state[id].toggled
         }
       });
-    }
+    } */
   }
-  toppingGroupToggleOff = (e, tType, tName) => {
-    //e.preventDefault();
-    //e.stopPropagation();
-    console.log('e= ', e.target, 'e.target.parent'/* , e.target.parentNode */);
-    const id = e.id || e.target.id || e.target.parentNode.id || e.target.parentNode.parentNode.id;
+  toppingGroupToggleOff = (tType, tName) => {
+
+    /* const id = e.id || e.target.id || e.target.parentNode.id || e.target.parentNode.parentNode.id;
     console.log('id= ', id);
     if(id) {
 
@@ -76,7 +74,7 @@ class ControlGroup extends Component {
           toggled: !this.state[id].toggled
         }
       });
-    }
+    } */
     this.props.removeTopping(tType, tName);
   }
 
@@ -85,12 +83,12 @@ class ControlGroup extends Component {
       return (
         <BuildControls 
           key={topping}
-          clicked={(e) => this.toppingGroupToggleOn(e)}
+          clicked={() => this.toppingGroupToggleOn()}
           /* toggleOff={(e, tType, tName) => this.toppingGroupToggleOff(e, tType, tName)} */
           toppingName={topping}
           toppingType={this.props.toppingType}
           addTopping={this.props.addTopping}
-          removeTopping={(e, tType, tName) => this.toppingGroupToggleOff(e, tType, tName)}
+          removeTopping={(tType, tName) => this.toppingGroupToggleOff(tType, tName)}
           toggled={this.state[topping].toggled}/>
       );
     });
