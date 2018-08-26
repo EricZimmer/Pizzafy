@@ -26,13 +26,13 @@
 }
 
 .Crust {
-  width: 90%;
-  height: 90%;
+  width: 94%;
+  height: 94%;
   border-radius: 50%;
   margin: auto;
   background: #99542d;
   z-index: 1;
-  top: 4%;
+  top: 2%;
   position: relative;
   border: 3px solid #5a3119;
   
@@ -54,7 +54,7 @@
 }
 
 
-@media (min-width: 500px) and (min-height: 400px) {
+@media (min-width: 500px) {
   .Pizza {
     width: 480px;
     height: 480px;
@@ -62,10 +62,9 @@
 }
 
 
-@media (min-width: 1000px) and (min-height: 500px) {
+@media (min-width: 1000px)  {
   .Pizza {
     
-    width: 560px;
-    height: 560px;
+    
   }
 }

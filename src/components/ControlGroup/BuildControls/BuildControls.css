@@ -150,7 +150,7 @@
 }
 
 
-@media (min-width: 500px) and (min-height: 400px) {
+@media (min-width: 500px) {
   .BuildControlsContainer {
     width: 480px;
     
@@ -158,7 +158,7 @@
 }
 
 
-@media (min-width: 1000px) and (min-height: 700px) {
+@media (min-width: 1000px) {
   .BuildControlsContainer {
     
     width: 560px;

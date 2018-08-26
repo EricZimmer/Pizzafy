@@ -3,7 +3,7 @@
   width: 100%;
 }
 
-.MeatOrVeg {
+.MeatsOrVeg {
   font: inherit;
   padding: 15px;
   height: 50px;
@@ -44,7 +44,7 @@
 @media (min-width: 1000px) and (min-height: 500px) {
   .BuildControlsContainer {
     
-    min-width: 560px;
+    
     
   }
 }

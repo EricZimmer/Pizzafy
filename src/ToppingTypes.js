@@ -19,8 +19,8 @@ export const Base = 'Base';
 export const Sauce = 'Sauce';
 export const Crust = 'Crust';
 export const Cheese = 'Cheese';
-export const Meat = 'Meat';
+export const Meats = 'Meats';
 export const Veggies = 'Veggies';
 
-export const Toppings_Meat = [Pepperoni, Sausage, Ham];
+export const Toppings_Meats = [Pepperoni, Sausage, Ham];
 export const Toppings_Veggies = [Peppers, Tomatoes, Olives];

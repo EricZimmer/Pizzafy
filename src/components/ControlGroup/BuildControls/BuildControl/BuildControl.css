@@ -72,9 +72,11 @@ button:hover {
 }
 
 .Extra {
-  
   margin: 0 .7em;
   border-radius: 15%;
+}
+.Extra:nth-of-type(2) {
+  margin: 0 1.1em;
 }
 
 .BuildControl .Left:hover, .BuildControl .Left:active {  

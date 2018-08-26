@@ -1,17 +1,47 @@
 import * as actionTypes from '../actions/ActionTypes';
-import * as ToppingTypes from '../../INGREDIENTCONST';
+import * as ToppingTypes from '../../ToppingTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
-  [ToppingTypes.Toppings]: null,
+  [ToppingTypes.Toppings]: {
+    [ToppingTypes.Meats] : {},
+    [ToppingTypes.Veggies]: {}
+  },
+  Prices: {
+    Meats: 0.4,
+    Veggies: 0.3,
+    Modifiers: {
+      Left: 1,
+      Right: 1,
+      Whole: 2,
+      Regular: 1,
+      Extra: 2,
+      None: 0
+    }
+  },
   totalPrice: 8,
   error: false
 };
 
+const PRICES = {
+  
+}
+
 const addToppingHandler = (state, action) => {
+  let price = state.totalPrice;
+  const prices = state.Prices;
+  const modifiers = state.Prices.Modifiers
+  if (action.regular === ToppingTypes.Whole && action.extra !== ToppingTypes.None) {
+    price += (prices[action.toppingType] * modifiers[action.regular]);
+    price += (prices[action.toppingType] * modifiers[action.extra] * modifiers.Extra * 0.5);
+  } else {
+    price += (prices[action.toppingType] * modifiers[action.regular] * modifiers.Regular);
+    price += (prices[action.toppingType] * modifiers[action.extra] * modifiers.Extra);
+  }
+  
+    
   const updatedTopping = {
-    [ToppingTypes.Toppings]: {
-      ...state[ToppingTypes.Toppings],
+    
       [action.toppingType]: {
         ...state[ToppingTypes.Toppings][action.toppingType],
         [action.toppingName]: {
@@ -19,10 +49,10 @@ const addToppingHandler = (state, action) => {
           [ToppingTypes.Extra]: action.extra
         }
       }
-    }
+    
   };
- 
-  return updateObject(state, updatedTopping);
+  const updatedState = {totalPrice: price, Toppings: updatedTopping};
+  return updateObject(state, updatedState);
 
 };
 

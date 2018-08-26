@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './BuildControls.css';
 import Auxhoc from '../../../hoc/Auxhoc';
-import * as ToppingTypes from '../../../INGREDIENTCONST';
+import * as ToppingTypes from '../../../ToppingTypes';
 
 import { connect } from 'react-redux';
 
@@ -39,12 +39,15 @@ class BuildControls extends Component {
 
   componentWillMount() {
     // reinitiate component state to match already selected toppings stored in redux  
-    const regular = this.updateStateFromProps(this.props.toppings.Regular, ToppingTypes.Regular);
-    const extra = this.updateStateFromProps(this.props.toppings.Extra, ToppingTypes.Extra);
-    this.setState({
-      [ToppingTypes.Regular] : {...regular},
-      [ToppingTypes.Extra]: {...extra}
-    });
+    const amount = this.props.toppings[this.props.toppingType][this.props.toppingName];
+    if(amount) {
+      const regular = this.updateStateFromProps(amount[ToppingTypes.Regular], ToppingTypes.Regular);
+      const extra = this.updateStateFromProps(amount[ToppingTypes.Extra], ToppingTypes.Extra);
+      this.setState({
+        [ToppingTypes.Regular] : {...regular},
+        [ToppingTypes.Extra]: {...extra}
+      });
+    }
   }
   
   toppingToggle = (side, amount) => {
@@ -193,7 +196,7 @@ class BuildControls extends Component {
 const mapStateToProps = (state, ownProps) => {
 
   return {
-    toppings: state.Toppings[ownProps.toppingType][ownProps.toppingName]
+    toppings: state.Toppings
   }
 }
   

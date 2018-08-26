@@ -1,5 +1,5 @@
 import * as actionTypes from './ActionTypes';
-import * as ToppingTypes from '../../INGREDIENTCONST';
+import * as ToppingTypes from '../../ToppingTypes';
 
 
 export const addTopping = (toppingType, toppingName, regular, extra) => {
@@ -33,14 +33,14 @@ const mapToppings = (toppingType) => {
 }
 
 export const setToppings = () => {
-  const toppingsMeat = mapToppings(ToppingTypes.Toppings_Meat);
+  const toppingsMeats = mapToppings(ToppingTypes.Toppings_Meats);
   const toppingsVeggies = mapToppings(ToppingTypes.Toppings_Veggies);
   console.log(...toppingsVeggies);
   return {
     type: actionTypes.SET_TOPPINGS,
     [ToppingTypes.Toppings]: {
-      [ToppingTypes.Meat]: {
-        ...toppingsMeat
+      [ToppingTypes.Meats]: {
+        ...toppingsMeats
       },
       [ToppingTypes.Veggies]: {
         ...toppingsVeggies
@@ -52,5 +52,28 @@ export const setToppings = () => {
 export const initToppings = () => {
   return dispatch => {
     dispatch(setToppings());
+  }
+}
+
+export const compileToppings = (toppings) => {
+  const meats = toppings.Meats;
+  const veggies = toppings.Veggies;
+  let objMeats = {}
+  for ( let key in meats) {
+    if (meats[key].Regular !== ToppingTypes.None) {
+      
+      objMeats[key] = {[ToppingTypes.Regular]: meats[key].Regular};
+    }
+    if(meats[key].Extra !== ToppingTypes.None) {
+      objMeats[key] = {
+        ...objMeats[key],
+        [ToppingTypes.Extra]: meats[key].Extra
+      }
+    }
+  }
+  console.log('obj', objMeats);
+  return {
+    type: actionTypes.COMPILE_TOPPINGS,
+    meats: objMeats
   }
 }

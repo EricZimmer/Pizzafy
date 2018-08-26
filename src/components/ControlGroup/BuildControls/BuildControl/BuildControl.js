@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './BuildControl.css';
-import * as ToppingTypes from '../../../../INGREDIENTCONST';
+import * as ToppingTypes from '../../../../ToppingTypes';
 
 const buildControl = (props) => {
      
