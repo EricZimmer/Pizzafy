@@ -2,5 +2,7 @@ export {
   addTopping,
   removeTopping,
   initToppings,
-  compileToppings
+  compileToppings,
+  updatePrice,
+  updateTopping
 } from './pizzaBuilder';

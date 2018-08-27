@@ -50,12 +50,14 @@ class BuildControls extends Component {
     }
   }
   
-  toppingToggle = (side, amount) => {
+  toppingToggle = (side, amount, toggledOn) => {
     // loop through state and toggle specific controls false, depending on the current side and amount selected by user
+    console.log(toggledOn)
     let updateToggle = Object.keys(this.state[amount]).map(stateSide => {
       if(stateSide === side) {
         if(amount === ToppingTypes.Regular) { 
         // if amount is regular, toggle off extra for current side and whole
+          console.log('ss', this.state.Extra[stateSide]);
           this.setState({ 
             [ToppingTypes.Extra]: {
               ...this.state[ToppingTypes.Extra],
@@ -116,11 +118,17 @@ class BuildControls extends Component {
         this.setState({toggledOn: false});
       } 
       // else, a topping was selected, add it to the toppings state in redux with type, name, and applicable sides for regular and extra
-      else this.props.addTopping(this.props.toppingType, this.props.toppingName, regular, extra);
+      else {
+        if (toggledOn === false) {
+
+          this.props.addTopping(this.props.toppingType, this.props.toppingName, regular, extra);
+        }
+      }
     });
   }
 
   toggleOn = () => {
+    
     if(!this.state.toggledOn) {
       // open topping controls and by default, select the current topping as whole and regular
       this.setState({toggledOn: true});

@@ -31,6 +31,17 @@ const mapToppings = (toppingType) => {
     return {...obj, ...item};
   },{});
 }
+export const updatePrice = () => {
+  return {
+    type: actionTypes.UPDATE_PRICE
+  }
+}
+export const updateTopping = (toppingType, toppingName, regular, extra) => {
+  return dispatch => {
+    dispatch(addTopping(toppingType, toppingName, regular, extra))
+    return dispatch(updatePrice())
+  };
+}
 
 export const setToppings = () => {
   const toppingsMeats = mapToppings(ToppingTypes.Toppings_Meats);

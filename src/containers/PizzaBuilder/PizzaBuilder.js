@@ -17,14 +17,14 @@ import { connect } from 'react-redux';
 class PizzaBuilder extends Component {
 
   state = {
-    currentTab: 'Base',
+    currentTab: 'Toppings',
     /* Toppings: {
   
     } */
   };
 
   componentDidMount() {
-    //this.props.initToppingHandler();
+    this.props.initToppingHandler();
   }
 
   componentWillReceiveProps() {
@@ -115,7 +115,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToppingHandler: (tType, tName, reg, extra) => dispatch(actions.addTopping(tType, tName, reg, extra)),
+    addToppingHandler: (tType, tName, reg, extra) => dispatch(actions.updateTopping(tType, tName, reg, extra)),
     removeToppingHandler: (tType, tName) => dispatch(actions.removeTopping(tType, tName)),
     initToppingHandler: () => dispatch(actions.initToppings()),
     compileToppings: (toppings) => dispatch(actions.compileToppings(toppings))

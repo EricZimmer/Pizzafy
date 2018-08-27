@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import classes from './BuildControl.css';
 import * as ToppingTypes from '../../../../ToppingTypes';
 
-const buildControl = (props) => {
-     
-    const baseClass = props.amount === ToppingTypes.Regular ? classes[props.side] :
-        classes.Extra
-    let toggledClass = props.toggled ? [baseClass, classes.ToggledOn].join(' ') : baseClass;
+class BuildControl extends Component {
+    state = {toggledOn: this.props.toggled};
 
-    return (
-        <button
-            className={toggledClass}
+    clickHandler = () => {
+        //console.log('bctog ', this.props.toggled)
+        this.props.clicked(this.props.side, this.props.amount, this.props.toggled);
+        this.setState({toggledOn: !this.state.toggledOn});
+    }
+    
+    render () {
+        const baseClass = this.props.amount === ToppingTypes.Regular ? classes[this.props.side] :
+            classes.Extra
+        const toggledClass = this.props.toggled ? [baseClass, classes.ToggledOn].join(' ') : baseClass;
+        return (
+            <button
+                className={toggledClass}
 
-            onClick={() => props.clicked(props.side, props.amount)}>
-            {props.label}
-        </button>
-    );
+                onClick={this.clickHandler}>
+                {this.props.label}
+            </button>
+        );
+    }
 };
 
-export default buildControl;
+export default BuildControl;
