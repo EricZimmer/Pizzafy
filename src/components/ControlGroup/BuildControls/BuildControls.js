@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './BuildControls.css';
 import Auxhoc from '../../../hoc/Auxhoc';
-import * as ToppingTypes from '../../../ToppingTypes';
+import * as tTypes from '../../../ToppingTypes';
 
 import { connect } from 'react-redux';
 
@@ -11,15 +11,15 @@ import BuildControl from './BuildControl/BuildControl';
 class BuildControls extends Component {
   state = {
     toggledOn: false,
-    [ToppingTypes.Regular]: {
-      [ToppingTypes.Left]: false,
-      [ToppingTypes.Whole]: false,
-      [ToppingTypes.Right]: false
+    [tTypes.Regular]: {
+      [tTypes.Left]: false,
+      [tTypes.Whole]: false,
+      [tTypes.Right]: false
     },
-    [ToppingTypes.Extra]: {
-      [ToppingTypes.Left]: false,
-      [ToppingTypes.Whole]: false,
-      [ToppingTypes.Right]: false
+    [tTypes.Extra]: {
+      [tTypes.Left]: false,
+      [tTypes.Whole]: false,
+      [tTypes.Right]: false
     }
   }
 
@@ -41,134 +41,104 @@ class BuildControls extends Component {
     // reinitiate component state to match already selected toppings stored in redux  
     const amount = this.props.toppings[this.props.toppingType][this.props.toppingName];
     if(amount) {
-      const regular = this.updateStateFromProps(amount[ToppingTypes.Regular], ToppingTypes.Regular);
-      const extra = this.updateStateFromProps(amount[ToppingTypes.Extra], ToppingTypes.Extra);
+      const regular = this.updateStateFromProps(amount[tTypes.Regular], tTypes.Regular);
+      const extra = this.updateStateFromProps(amount[tTypes.Extra], tTypes.Extra);
       this.setState({
-        [ToppingTypes.Regular] : {...regular},
-        [ToppingTypes.Extra]: {...extra}
+        [tTypes.Regular] : {...regular},
+        [tTypes.Extra]: {...extra}
       });
     }
   }
 
 
   
-  toppingToggle = (amount, side, toggledOn) => {
-    
-    // toggle specific controls false, depending on the current side and amount selected by user
-    console.log(toggledOn)
-    let toppingToDisable = {}
-    if(amount === ToppingTypes.Regular) { 
-      // if amount is regular, toggle off extra for current side and whole
-        toppingToDisable = { 
-          amount: ToppingTypes.Extra,
+  toppingToggle = (amount, side) => {
+    const { toppingType, toppingName } = this.props;
+    let toggleRules = {};
+    // toggle specific controls false for the opposite amount of the one the user just selected (regular vs extra)
+    if(amount === tTypes.Regular) { // if amount is regular, toggle off extra for current side and whole
+        toggleRules = { 
+          amount: tTypes.Extra,
           sides: {
-            /* ...this.state[ToppingTypes.Extra], */
-            [ToppingTypes[side]]: false,
-            [ToppingTypes.Whole]: false
+            [tTypes[side]]: false,
+            [tTypes.Whole]: false
           }
         };
-    } else if(amount === ToppingTypes.Extra) {
-        if(side === ToppingTypes.Whole) {
-        // if amount is extra and side is whole, toggle off all regular
-          toppingToDisable = { 
-              amount: ToppingTypes.Regular,
+    } else if(amount === tTypes.Extra) {
+        if(side === tTypes.Whole) { // if amount is extra and side is whole, toggle off all regular
+          toggleRules = { 
+              amount: tTypes.Regular,
               sides: {
-                [ToppingTypes.Left]: false,
-                [ToppingTypes.Whole]: false,
-                [ToppingTypes.Right]: false
+                [tTypes.Left]: false,
+                [tTypes.Whole]: false,
+                [tTypes.Right]: false
               }
           };
-        } else {
-          //if amount is extra and side is left/right, toggle off regular for current side
-            toppingToDisable = { 
-              amount: ToppingTypes.Regular,
+        } else { //if amount is extra and side is left/right, toggle off regular for current side
+            toggleRules = { 
+              amount: tTypes.Regular,
               sides: {
-                /* ...this.state[ToppingTypes.Regular], */
-                [ToppingTypes[side]]: false
+                [tTypes[side]]: false
               }
             };
         }
-    }     
-    let updateToggle = Object.keys(this.state[amount]).map(stateSide => {
+    } 
+
+    let regOrExtraToggles = Object.keys(this.state[amount]).map(stateSide => {
       if(stateSide === side) {
-        // return updateToggle = side: !state.amount.side (toggle on or off)
+        // toggle on or off the user-selected side for the given amount (either regular or extra)
         return {[stateSide]: !this.state[amount][stateSide]};
-      } else return {[stateSide]: false };
+      } else return {[stateSide]: false }; // toggle off the other 2 sides of the selected amount
     }).reduce((obj, item) => {
         return {...obj, ...item};
     },{});
 
-    console.log('ttd = ', toppingToDisable, ' tT = ', updateToggle)
-    for (let key in toppingToDisable.sides) {
-      if(this.state[toppingToDisable.amount][key] === true && toppingToDisable.sides[key] === false) {
-        console.log('turning off ', 'side', toppingToDisable.amount, key)
-        this.props.removeTopping(this.props.toppingType, this.props.toppingName, toppingToDisable.amount, key);
+    // the following two loops check the current amount & side toggle of the state, if true (toggled on), && based off of the above checks, if same amount & side should be toggled off, then remove the topping from redux
+    for (let key in toggleRules.sides) {
+      if(this.state[toggleRules.amount][key] === true && toggleRules.sides[key] === false ) {
+        this.props.removeTopping(toppingType, toppingName, toggleRules.amount, key);
+      }
+    }
+    for (let key in regOrExtraToggles) {
+      if (this.state[amount][key] === true && regOrExtraToggles[key] === false ) {
+        this.props.removeTopping(toppingType, toppingName, amount, key);
       }
     }
 
-    for (let key in updateToggle) {
-      if (this.state[amount][key] === true && updateToggle[key] === false ) {
-        console.log('turning off = ', amount, ' side =', key)
-        this.props.removeTopping(this.props.toppingType, this.props.toppingName, amount, key);
-      }
+    if (this.state[amount][side] === false) { 
+      // add the selected topping's amount and side to redux
+      this.props.addTopping(toppingType, toppingName, amount, side);
     }
 
-    if (toggledOn === true) { 
-      this.props.removeTopping(this.props.toppingType, this.props.toppingName, amount, side);
-    } else {
-      this.props.addTopping(this.props.toppingType, this.props.toppingName, amount, side);
-    }
+    let regular = false, extra = false;
 
-    let regular = ToppingTypes.None;
-    let extra = ToppingTypes.None;
- 
-    // update state for the last-clicked toggle  
-    /* this.setState( {
-      [amount]: updateToggle
-    }, () => {
-      // callback searches to find a toggle set to true for regular and extra
-      for (let key in this.state[ToppingTypes.Regular]) {
-        if (this.state[ToppingTypes.Regular][key]) {
-          regular = key;
-        }
-      }
-      for (let key in this.state[ToppingTypes.Extra]) {
-        if (this.state[ToppingTypes.Extra][key]) {
-          extra = key;
-        }
-      }
-      // if no topping selected, remove the current topping and toggle off its main controls
-      if(regular === ToppingTypes.None && extra === ToppingTypes.None) {
-        //this.props.removeTopping(this.props.toppingType, this.props.toppingName);
-        this.setState({toggledOn: false});
-      } 
-      // else, a topping was selected, add it to the toppings state in redux with type, name, and applicable sides for regular and extra
-      else {
-        if (toggledOn === false) {
-
-          //this.props.addTopping(this.props.toppingType, this.props.toppingName, regular, extra);
-        }
-      }
-    }); */
+    // set state toggles to reflect above both checks (toggleRules & regOrExtraToggles)
     this.setState({
       ...this.state,
-      [toppingToDisable.amount]: {
-        ...this.state[toppingToDisable.amount],
-        ...toppingToDisable.sides
+      [toggleRules.amount]: {
+        ...this.state[toggleRules.amount],
+        ...toggleRules.sides
       },
       [amount]: {
         ...this.state[amount],
-        ...updateToggle
+        ...regOrExtraToggles
       }
+    }, () => {
+      // callback searches to find a toggle set to true for regular and extra
+      for (let key in this.state[tTypes.Regular]) {
+        if (this.state[tTypes.Regular][key]) regular = true;
+        if (this.state[tTypes.Extra][key]) extra = true;
+      }
+      // if no topping selected, toggle off its main controls
+      if( !regular && !extra ) this.setState({toggledOn: false});
     });
-    
   }
 
   toggleOn = () => {
     
     if(!this.state.toggledOn) {
       // open topping controls and by default, select the current topping as whole and regular
-      this.toppingToggle(ToppingTypes.Regular, ToppingTypes.Whole, false);
+      this.toppingToggle(tTypes.Regular, tTypes.Whole);
       this.setState({toggledOn: true});
     }
   }
@@ -176,18 +146,18 @@ class BuildControls extends Component {
   toggleOff = () => {
     this.setState({
       toggledOn: false,
-      [ToppingTypes.Regular]: {
-        [ToppingTypes.Left]: false,
-        [ToppingTypes.Whole]: false,
-        [ToppingTypes.Right]: false
+      [tTypes.Regular]: {
+        [tTypes.Left]: false,
+        [tTypes.Whole]: false,
+        [tTypes.Right]: false
       },
-      [ToppingTypes.Extra]: {
-        [ToppingTypes.Left]: false,
-        [ToppingTypes.Whole]: false,
-        [ToppingTypes.Right]: false
+      [tTypes.Extra]: {
+        [tTypes.Left]: false,
+        [tTypes.Whole]: false,
+        [tTypes.Right]: false
       }
     });
-    this.props.removeTopping(this.props.toppingType, this.props.toppingName);
+    this.props.clearTopping(this.props.toppingType, this.props.toppingName);
   }
 
   createControls = (toppingAmount) => {
@@ -199,7 +169,7 @@ class BuildControls extends Component {
         name={topping}
         amount={toppingAmount}
         side={regOrExtra}
-        label={toppingAmount === ToppingTypes.Extra ? 'Extra' : null}
+        label={toppingAmount === tTypes.Extra ? 'Extra' : null}
         toggled={stAmount[regOrExtra]}
         clicked={this.toppingToggle} /> 
     });
@@ -207,8 +177,8 @@ class BuildControls extends Component {
 
   render() {
     
-    const controlsRegular = this.createControls(ToppingTypes.Regular);
-    const controlsExtra = this.createControls(ToppingTypes.Extra);
+    const controlsRegular = this.createControls(tTypes.Regular);
+    const controlsExtra = this.createControls(tTypes.Extra);
 
     let closeButton = null;
     let toppingControls = null;

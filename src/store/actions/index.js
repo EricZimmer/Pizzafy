@@ -1,6 +1,7 @@
 export {
   addTopping,
   removeTopping,
+  clearTopping,
   initToppings,
   compileToppings,
   updatePrice,

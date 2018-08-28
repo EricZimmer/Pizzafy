@@ -1,11 +1,11 @@
 import * as actionTypes from '../actions/ActionTypes';
-import * as ToppingTypes from '../../ToppingTypes';
+import * as tTypes from '../../ToppingTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
-  [ToppingTypes.Toppings]: {
-    [ToppingTypes.Meats] : {},
-    [ToppingTypes.Veggies]: {}
+  [tTypes.Toppings]: {
+    [tTypes.Meats] : {},
+    [tTypes.Veggies]: {}
   },
   Prices: {
     Meats: 0.4,
@@ -64,20 +64,20 @@ const updateToppingHandler = (state, action) => {
     case actionTypes.ADD_TOPPING:
       updatedTopping = {
         [action.toppingType]: {
-        ...state[ToppingTypes.Toppings][action.toppingType],
+        ...state[tTypes.Toppings][action.toppingType],
         [action.toppingName]: {
-          [ToppingTypes.Regular]: action.regular,
-          [ToppingTypes.Extra]: action.extra
+          [tTypes.Regular]: action.regular,
+          [tTypes.Extra]: action.extra
         }
       }};
       break;
     case actionTypes.REMOVE_TOPPING:
       updatedTopping = {
         [action.toppingType]: {
-        ...state[ToppingTypes.Toppings][action.toppingType],
+        ...state[tTypes.Toppings][action.toppingType],
         [action.toppingName]: {
-          [ToppingTypes.Regular]: action.None,
-          [ToppingTypes.Extra]: action.None
+          [tTypes.Regular]: action.None,
+          [tTypes.Extra]: action.None
         }
       }};
       break;
@@ -125,7 +125,7 @@ const removeToppingHandler = (state, action) => {
       ...state.Toppings[action.toppingType],
       [action.toppingName]: {
         ...state.Toppings[action.toppingType][action.toppingName],
-        [action.amount]: ToppingTypes.None
+        [action.amount]: tTypes.None
       }
     }
   
@@ -134,9 +134,16 @@ const removeToppingHandler = (state, action) => {
 return updateObject(state, {Toppings: updatedTopping});
 };
 
+const clearToppingHandler = (state, action) => {
+  const topping = state.Toppings[action.toppingType][action.toppingName];
+  console.log('reg', topping.Regular, 'ext', topping.Extra)
+  if (topping.Regular !== tTypes.None) removeToppingHandler(state, {...action, amount: tTypes.Regular});
+  if (topping.Extra !== tTypes.None) removeToppingHandler(state, {...action, amount: tTypes.Extra});
+}
+
 const setToppings = (state, action) => {
   return updateObject(state, {
-    [ToppingTypes.Toppings]: {
+    [tTypes.Toppings]: {
       ...state.Toppings,
       ...action.Toppings
     },
@@ -149,6 +156,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_TOPPING: return addToppingHandler(state, action);
     case actionTypes.REMOVE_TOPPING: return removeToppingHandler(state, action);
+    case actionTypes.CLEAR_TOPPING: return clearToppingHandler(state, action);
     case actionTypes.SET_TOPPINGS: return setToppings(state, action);
     case actionTypes.UPDATE_PRICE: return newPrice(state);
     default: return state;

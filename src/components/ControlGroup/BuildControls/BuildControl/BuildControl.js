@@ -7,8 +7,7 @@ class BuildControl extends Component {
     state = {toggledOn: this.props.toggled};
 
     clickHandler = () => {
-        //console.log('bctog ', this.props.toggled)
-        this.props.clicked(this.props.amount, this.props.side, this.props.toggled);
+        this.props.clicked(this.props.amount, this.props.side);
         this.setState({toggledOn: !this.state.toggledOn});
     }
     

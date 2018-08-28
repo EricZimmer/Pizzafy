@@ -22,6 +22,14 @@ export const removeTopping = (toppingType, toppingName, amount, side) => {
   };
 };
 
+export const clearTopping = (toppingType, toppingName) => {
+  return {
+    type: actionTypes.CLEAR_TOPPING,
+    toppingType: toppingType,
+    toppingName: toppingName
+  }
+}
+
 const mapToppings = (toppingType) => {
   return toppingType.map(topping => {
     return {

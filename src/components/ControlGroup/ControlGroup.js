@@ -25,7 +25,8 @@ const controlGroup = (props) => {
           toppingName={topping}
           toppingType={props.toppingType}
           addTopping={props.addTopping}
-          removeTopping={props.removeTopping} />
+          removeTopping={props.removeTopping}
+          clearTopping={props.clearTopping} />
       );
     });
   } 
