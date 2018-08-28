@@ -10,7 +10,7 @@ const ToppingSummary = (props) => {
   
   const getToppings = (toppingType) => {
     return Object.keys(toppingType).map(tName => {
-      console.log(toppingType[tName]['Extra'] ? toppingType[tName]['Extra'] : 'nope')
+      //console.log(toppingType[tName]['Extra'] ? toppingType[tName]['Extra'] : 'nope')
       let reg = toppingType[tName][ToppingTypes.Regular] ? toppingType[tName][ToppingTypes.Regular] : null;
       let ext = toppingType[tName][ToppingTypes.Extra] ? toppingType[tName][ToppingTypes.Extra] : null;
       let amp = reg && ext ? '&' : null;
