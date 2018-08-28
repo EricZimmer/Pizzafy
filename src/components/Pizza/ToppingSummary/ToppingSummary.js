@@ -5,7 +5,7 @@ import Auxhoc from '../../../hoc/Auxhoc';
 
 
 const ToppingSummary = (props) => {
-  console.log('ig = ',Object.keys(props.toppings.Meats).length)
+  //console.log('ig = ',Object.keys(props.toppings.Meats).length)
   let toppings = props.toppings;
   
   const getToppings = (toppingType) => {

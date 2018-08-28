@@ -24,7 +24,7 @@ class PizzaBuilder extends Component {
   };
 
   componentDidMount() {
-    this.props.initToppingHandler();
+    //this.props.initToppingHandler();
   }
 
   componentWillReceiveProps() {
@@ -58,8 +58,8 @@ class PizzaBuilder extends Component {
 
   toppingGroup = ((<ControlGroup 
     toppingType={'Meats'}
-    addTopping={(type, name, reg, extra) => this.props.addToppingHandler(type, name, reg, extra) }
-    removeTopping={(type, name) => this.props.removeToppingHandler(type, name)}>
+    addTopping={(type, name, amount, side) => this.props.addToppingHandler(type, name, amount, side) }
+    removeTopping={(type, name, amount, side) => this.props.removeToppingHandler(type, name, amount, side)}>
   </ControlGroup>));
 
   createToppings = (tType) => {
@@ -115,8 +115,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToppingHandler: (tType, tName, reg, extra) => dispatch(actions.updateTopping(tType, tName, reg, extra)),
-    removeToppingHandler: (tType, tName) => dispatch(actions.removeTopping(tType, tName)),
+    addToppingHandler: (tType, tName, amount, side) => dispatch(actions.addTopping(tType, tName, amount, side)),
+    removeToppingHandler: (tType, tName, amount, side) => dispatch(actions.removeTopping(tType, tName, amount, side)),
     initToppingHandler: () => dispatch(actions.initToppings()),
     compileToppings: (toppings) => dispatch(actions.compileToppings(toppings))
   }

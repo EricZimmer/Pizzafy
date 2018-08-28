@@ -48,12 +48,12 @@ const updatePrice = (state, action) => {
     console.log('here')
     price -= (prices[action.toppingType]  * modifiers.Extra);
   } */
-  console.log('price', price);
+  //console.log('price', price);
   return price;
 }
 
 const newPrice = (state) => {
-  console.log('run')
+  //console.log('run')
 }
 
 const updateToppingHandler = (state, action) => {
@@ -89,7 +89,7 @@ const updateToppingHandler = (state, action) => {
 }
 
 const addToppingHandler = (state, action) => {
-  let price = state.totalPrice;
+  /* let price = state.totalPrice;
   const prices = state.Prices;
   const modifiers = state.Prices.Modifiers;
   if (action.regular === ToppingTypes.Whole && action.extra !== ToppingTypes.None) {
@@ -98,40 +98,40 @@ const addToppingHandler = (state, action) => {
   } else {
     price += (prices[action.toppingType] * modifiers[action.regular] * modifiers.Regular);
     price += (prices[action.toppingType] * modifiers[action.extra] * modifiers.Extra);
-  }
+  } */
   
     
   const updatedTopping = {
     
       [action.toppingType]: {
-        ...state[ToppingTypes.Toppings][action.toppingType],
+        ...state.Toppings[action.toppingType],
         [action.toppingName]: {
-          [ToppingTypes.Regular]: action.regular,
-          [ToppingTypes.Extra]: action.extra
+          ...state.Toppings[action.toppingType][action.toppingName],
+          [action.amount]: action.side
         }
       }
     
   };
-  const updatedState = {totalPrice: price, Toppings: updatedTopping};
-  return updateObject(state, updatedState);
+  /* const updatedState = {totalPrice: price, Toppings: updatedTopping}; */
+  return updateObject(state, {Toppings: updatedTopping});
 
 };
 
 const removeToppingHandler = (state, action) => {
+  console.log(' amount ', action.amount)
   const updatedTopping = {
-    [ToppingTypes.Toppings]: {
-      ...state[ToppingTypes.Toppings],
-      [action.toppingType]: {
-        ...state[ToppingTypes.Toppings][action.toppingType],
-        [action.toppingName]: {
-          [ToppingTypes.Regular]: ToppingTypes.None,
-          [ToppingTypes.Extra]: ToppingTypes.None
-        }
+    
+    [action.toppingType]: {
+      ...state.Toppings[action.toppingType],
+      [action.toppingName]: {
+        ...state.Toppings[action.toppingType][action.toppingName],
+        [action.amount]: ToppingTypes.None
       }
     }
-  };
- 
-  return updateObject(state, updatedTopping);
+  
+};
+/* const updatedState = {totalPrice: price, Toppings: updatedTopping}; */
+return updateObject(state, {Toppings: updatedTopping});
 };
 
 const setToppings = (state, action) => {
@@ -147,8 +147,8 @@ const setToppings = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_TOPPING: return updateToppingHandler(state, action);
-    case actionTypes.REMOVE_TOPPING: return updateToppingHandler(state, action);
+    case actionTypes.ADD_TOPPING: return addToppingHandler(state, action);
+    case actionTypes.REMOVE_TOPPING: return removeToppingHandler(state, action);
     case actionTypes.SET_TOPPINGS: return setToppings(state, action);
     case actionTypes.UPDATE_PRICE: return newPrice(state);
     default: return state;

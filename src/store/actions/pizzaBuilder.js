@@ -2,21 +2,23 @@ import * as actionTypes from './ActionTypes';
 import * as ToppingTypes from '../../ToppingTypes';
 
 
-export const addTopping = (toppingType, toppingName, regular, extra) => {
+export const addTopping = (toppingType, toppingName, amount, side) => {
   return {
     type: actionTypes.ADD_TOPPING,
     toppingType: toppingType,
     toppingName: toppingName,
-    regular: regular,
-    extra: extra
+    amount: amount,
+    side: side
   };
 };
 
-export const removeTopping = (toppingType, toppingName) => {
+export const removeTopping = (toppingType, toppingName, amount, side) => {
   return {
     type: actionTypes.REMOVE_TOPPING,
     toppingType: toppingType,
-    toppingName: toppingName
+    toppingName: toppingName,
+    amount: amount,
+    side: side
   };
 };
 
@@ -46,7 +48,7 @@ export const updateTopping = (toppingType, toppingName, regular, extra) => {
 export const setToppings = () => {
   const toppingsMeats = mapToppings(ToppingTypes.Toppings_Meats);
   const toppingsVeggies = mapToppings(ToppingTypes.Toppings_Veggies);
-  console.log(...toppingsVeggies);
+  //console.log(...toppingsVeggies);
   return {
     type: actionTypes.SET_TOPPINGS,
     [ToppingTypes.Toppings]: {
@@ -82,7 +84,7 @@ export const compileToppings = (toppings) => {
       }
     }
   }
-  console.log('obj', objMeats);
+  //console.log('obj', objMeats);
   return {
     type: actionTypes.COMPILE_TOPPINGS,
     meats: objMeats
