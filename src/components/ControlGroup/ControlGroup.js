@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BuildControls from './BuildControls/BuildControls';
+import ToppingControls from './ToppingControls/ToppingControls';
 import classes from './ControlGroup.css';
 import * as ToppingTypes from '../../ToppingTypes';
 
@@ -20,13 +20,10 @@ const controlGroup = (props) => {
   const setToppingControls = (MeatsOrVeg) => {
     return ALL_Toppings[MeatsOrVeg].map(topping => {
       return (
-        <BuildControls 
+        <ToppingControls 
           key={topping}
           toppingName={topping}
-          toppingType={props.toppingType}
-          addTopping={props.addTopping}
-          removeTopping={props.removeTopping}
-          clearTopping={props.clearTopping} />
+          toppingType={props.toppingType}/>
       );
     });
   } 
@@ -34,7 +31,7 @@ const controlGroup = (props) => {
   
   let toppings = setToppingControls('Meats');
   return (
-    <div className={classes.BuildControlsContainer}>
+    <div className={classes.ToppingControlsContainer}>
       {toppings}
     </div>
   );

@@ -4,7 +4,8 @@ import Auxhoc from '../../hoc/Auxhoc';
 import classes from './PizzaBuilder.css';
 import Pizza from '../../components/Pizza/Pizza';
 import BuildHeaders from '../../components/BuildHeaders/BuildHeaders';
-import BuildControls from '../../components/ControlGroup/BuildControls/BuildControls';
+import ToppingControls from '../../components/ControlGroup/ToppingControls/ToppingControls';
+import PizzaBaseControls from '../../components/ControlGroup/PizzaBaseControls/PizzaBaseControls';
 import ControlGroup from '../../components/ControlGroup/ControlGroup';
 import ToppingSummary from '../../components/Pizza/ToppingSummary/ToppingSummary';
 
@@ -18,18 +19,13 @@ class PizzaBuilder extends Component {
 
   state = {
     currentTab: 'Toppings',
-    /* Toppings: {
-  
-    } */
+    
   };
 
   componentDidMount() {
     this.props.initToppingHandler();
   }
 
-  componentWillReceiveProps() {
-    
-  }
 
   headerClickedHandler = (name) => {
     this.setState({currentTab: name})
@@ -37,7 +33,6 @@ class PizzaBuilder extends Component {
 
   
   finalToppings = () => {
-    
     
     const meats = this.props.toppings.Meats;
     const veggies = this.props.toppings.Veggies;
@@ -56,12 +51,8 @@ class PizzaBuilder extends Component {
     return {[ToppingTypes.Meats]: {...objMeats}};
   }
 
-  toppingGroup = ((<ControlGroup 
-    toppingType={'Meats'}
-    addTopping={this.props.addToppingHandler}
-    removeTopping={this.props.removeToppingHandler}
-    clearTopping={this.props.clearToppingHandler}>
-  </ControlGroup>));
+  toppingGroup = (<ControlGroup 
+    toppingType={'Meats'}/>);
 
   createToppings = (tType) => {
     return Object.keys(tType).map(tName => {
@@ -89,13 +80,13 @@ class PizzaBuilder extends Component {
     
     const toppingList = this.finalToppings();
  
-    let controlGroup = <div>Base</div>;
+    let controlGroup = <PizzaBaseControls />;
     controlGroup = this.state.currentTab === 'Base' ? controlGroup : this.toppingGroup ;
     return (
       <div className={classes.PizzaBuilder}>
         <Pizza 
           Toppings={toppingsMeats}/>
-        <ToppingSummary toppings={toppingList}/>
+        <ToppingSummary toppings={toppingList} price={this.props.price}/>
         <div className={classes.MainControlsContainer}>
           <BuildHeaders 
           clicked={ this.headerClickedHandler}/>
@@ -110,15 +101,16 @@ class PizzaBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    toppings: state.Toppings
+    toppings: state.Toppings,
+    price: state.totalPrice
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToppingHandler: (tType, tName, amount, side) => dispatch(actions.addTopping(tType, tName, amount, side)),
+    /* addToppingHandler: (tType, tName, amount, side) => dispatch(actions.addTopping(tType, tName, amount, side)),
     removeToppingHandler: (tType, tName, amount, side) => dispatch(actions.removeTopping(tType, tName, amount, side)),
-    clearToppingHandler: (tType, tName) => dispatch(actions.clearTopping(tType, tName)),
+    clearToppingHandler: (tType, tName) => dispatch(actions.clearTopping(tType, tName)), */
     initToppingHandler: () => dispatch(actions.initToppings()),
     compileToppings: (toppings) => dispatch(actions.compileToppings(toppings))
   }

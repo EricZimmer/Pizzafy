@@ -1,4 +1,4 @@
-.BuildControl {
+.ToppingControl {
   display: grid;
   flex-flow: row nowrap;
   justify-content: center;
@@ -79,17 +79,17 @@ button:hover {
   margin: 0 1.1em;
 }
 
-.BuildControl .Left:hover, .BuildControl .Left:active {  
+.ToppingControl .Left:hover, .ToppingControl .Left:active {  
   background-color: #DAA972;
   color: white;
 }
 
-.BuildControl .Right:hover,.BuildControl .Right:active {
+.ToppingControl .Right:hover,.ToppingControl .Right:active {
   background-color: #99703F;
   color: white;
 }
 
-.BuildControl .Whole:hover,.BuildControl .Whole:active {
+.ToppingControl .Whole:hover,.ToppingControl .Whole:active {
   background-color: #99703F;
   color: white;
 }

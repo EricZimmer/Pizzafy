@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import classes from './BuildControl.css';
+import classes from './ToppingControl.css';
 import * as ToppingTypes from '../../../../ToppingTypes';
 
-class BuildControl extends Component {
+class ToppingControl extends Component {
     state = {toggledOn: this.props.toggled};
 
     clickHandler = () => {
@@ -26,4 +26,4 @@ class BuildControl extends Component {
     }
 };
 
-export default BuildControl;
+export default ToppingControl;

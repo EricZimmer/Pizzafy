@@ -1,5 +1,5 @@
 
-.BuildControls {
+.ToppingControls {
   display: flex;
   flex-flow: column;
   align-content: center;
@@ -39,7 +39,7 @@
   
 }
 
-.BuildControl {
+.ToppingControl {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -50,7 +50,7 @@
   
 }
 
-.BuildControl:last-child {
+.ToppingControl:last-child {
   margin-bottom: 15px;
 }
 
@@ -101,7 +101,7 @@
   /* border-bottom-Left-radius: 5%;
   border-bottom-right-radius: 5%; */
 }
-/* .BuildControls.LabelHeader */
+/* .ToppingControls.LabelHeader */
 
 .Label {
   padding: 10px 5px;
@@ -132,26 +132,26 @@
 .MousePointer {
   cursor: pointer;
 }
-/* .BuildControls:hover {
+/* .ToppingControls:hover {
   background-color: #777;
 } */
 
-.BuildControls:hover.MousePointer .LabelHeader{
+.ToppingControls:hover.MousePointer .LabelHeader{
   background-color: #444;
 }
 
-.BuildControls.MousePointer > .Label {
+.ToppingControls.MousePointer > .Label {
   color: #ccc;
   background-color: #777;
 }
 
-.BuildControls:hover.MousePointer  .Label {
+.ToppingControls:hover.MousePointer  .Label {
  
 }
 
 
 @media (min-width: 500px) {
-  .BuildControlsContainer {
+  .ToppingControlsContainer {
     width: 480px;
     
   }
@@ -159,7 +159,7 @@
 
 
 @media (min-width: 1000px) {
-  .BuildControlsContainer {
+  .ToppingControlsContainer {
     
     width: 560px;
     

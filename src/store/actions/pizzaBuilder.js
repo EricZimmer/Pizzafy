@@ -1,5 +1,5 @@
 import * as actionTypes from './ActionTypes';
-import * as ToppingTypes from '../../ToppingTypes';
+import * as tTypes from '../../ToppingTypes';
 
 
 export const addTopping = (toppingType, toppingName, amount, side) => {
@@ -12,13 +12,12 @@ export const addTopping = (toppingType, toppingName, amount, side) => {
   };
 };
 
-export const removeTopping = (toppingType, toppingName, amount, side) => {
+export const removeTopping = (toppingType, toppingName, amount) => {
   return {
     type: actionTypes.REMOVE_TOPPING,
     toppingType: toppingType,
     toppingName: toppingName,
-    amount: amount,
-    side: side
+    amount: amount
   };
 };
 
@@ -34,8 +33,8 @@ const mapToppings = (toppingType) => {
   return toppingType.map(topping => {
     return {
       [topping]: {
-        [ToppingTypes.Regular]: ToppingTypes.None, 
-        [ToppingTypes.Extra]: ToppingTypes.None
+        [tTypes.Regular]: tTypes.None, 
+        [tTypes.Extra]: tTypes.None
       }};
   }).reduce((obj, item) => {
     return {...obj, ...item};
@@ -54,16 +53,29 @@ export const updateTopping = (toppingType, toppingName, regular, extra) => {
 }
 
 export const setToppings = () => {
-  const toppingsMeats = mapToppings(ToppingTypes.Toppings_Meats);
-  const toppingsVeggies = mapToppings(ToppingTypes.Toppings_Veggies);
+  const toppingsMeats = mapToppings(tTypes.Toppings_Meats);
+  const toppingsVeggies = mapToppings(tTypes.Toppings_Veggies);
   //console.log(...toppingsVeggies);
   return {
     type: actionTypes.SET_TOPPINGS,
-    [ToppingTypes.Toppings]: {
-      [ToppingTypes.Meats]: {
+    [tTypes.Base]: {
+      [tTypes.Crust]: {
+        type: tTypes.HandTossed,
+        size: tTypes.Large
+      },
+      [tTypes.Sauce]: {
+        type: tTypes.Sauce_Classic,
+        amount: tTypes.Regular
+      },
+      [tTypes.Cheese]: {
+        amount: tTypes.Regular
+      }
+    },
+    [tTypes.Toppings]: {
+      [tTypes.Meats]: {
         ...toppingsMeats
       },
-      [ToppingTypes.Veggies]: {
+      [tTypes.Veggies]: {
         ...toppingsVeggies
       }
     }
@@ -81,14 +93,14 @@ export const compileToppings = (toppings) => {
   const veggies = toppings.Veggies;
   let objMeats = {}
   for ( let key in meats) {
-    if (meats[key].Regular !== ToppingTypes.None) {
+    if (meats[key].Regular !== tTypes.None) {
       
-      objMeats[key] = {[ToppingTypes.Regular]: meats[key].Regular};
+      objMeats[key] = {[tTypes.Regular]: meats[key].Regular};
     }
-    if(meats[key].Extra !== ToppingTypes.None) {
+    if(meats[key].Extra !== tTypes.None) {
       objMeats[key] = {
         ...objMeats[key],
-        [ToppingTypes.Extra]: meats[key].Extra
+        [tTypes.Extra]: meats[key].Extra
       }
     }
   }

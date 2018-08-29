@@ -3,8 +3,21 @@ import * as tTypes from '../../ToppingTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
+  [tTypes.Base]: {
+    [tTypes.Crust]: {
+      type: {},
+      size: {}
+    },
+    [tTypes.Sauce]: {
+      type: {},
+      amount:{}
+    },
+    [tTypes.Cheese]: {
+      amount: {}
+    }
+  },
   [tTypes.Toppings]: {
-    [tTypes.Meats] : {},
+    [tTypes.Meats]: {},
     [tTypes.Veggies]: {}
   },
   Prices: {
@@ -24,40 +37,16 @@ const initialState = {
 };
 
 const updatePrice = (state, action) => {
-  let price = state.totalPrice;
-  /* const prices = state.Prices;
+  const { toppingType, toppingName, amount } = action;
+  /* Depending on the action sent in arguments, side either is the side to add (left/whole/right),
+   or the side to remove from state.Toppings (because side is undefined on action.type = remove) */
+  const side = action.side || state.Toppings[toppingType][toppingName][amount];
   const modifiers = state.Prices.Modifiers; 
-  const steTopReg = modifiers[state.Toppings[action.toppingType][action.toppingName].Regular];
-  const steTopExt = modifiers[state.Toppings[action.toppingType][action.toppingName].Extra];
-  const actTopReg = modifiers[action.regular];
-  const actTopExt = modifiers[action.extra];
-  console.log('sttop ', steTopReg, steTopExt, 'act top ', actTopReg, actTopExt);
-  if(actTopReg > steTopReg) {
-    if(actTopReg === 2 && steTopReg === 1) price -= prices[action.toppingType] * modifiers.Regular;
-    price += (prices[action.toppingType] * modifiers[action.regular] * modifiers.Regular);
-    
-  } else if (actTopExt > steTopExt) {
-    if(actTopExt === 2 && steTopExt === 1) price -= prices[action.toppingType] * modifiers.Extra;
-    price += (prices[action.toppingType] * modifiers[action.extra] * modifiers.Extra);
-  }
-  
-  if (actTopReg < steTopReg){
-    price -= (prices[action.toppingType] * modifiers.Regular);
-    
-  } else if (actTopExt < steTopExt) {
-    console.log('here')
-    price -= (prices[action.toppingType]  * modifiers.Extra);
-  } */
-  //console.log('price', price);
-  return price;
+  return state.Prices[toppingType] * modifiers[amount] * modifiers[side];
 }
 
-const newPrice = (state) => {
-  //console.log('run')
-}
 
 const updateToppingHandler = (state, action) => {
-  //const updatedPrice = updatePrice(state, action);
   const { toppingType, toppingName, amount } = action;
   let updatedTopping = {
     [toppingType]: {
@@ -68,68 +57,46 @@ const updateToppingHandler = (state, action) => {
       }
     }
   };
-
+  let updatedPrice = updatePrice(state, action);
+  
   switch(action.type) {
     case actionTypes.ADD_TOPPING:
       updatedTopping[toppingType][toppingName][amount] = action.side;
+      updatedPrice = state.totalPrice + updatedPrice;
       break;
     case actionTypes.REMOVE_TOPPING:
       updatedTopping[toppingType][toppingName][amount] = tTypes.None;
+      updatedPrice = state.totalPrice - updatedPrice;
       break;
     default: return state;
   }
-
-  //const updatedState = {totalPrice: updatedPrice, Toppings: updatedTopping};
-  return updateObject(state, {Toppings: updatedTopping});
+  return updateObject(state, {totalPrice: updatedPrice, Toppings: updatedTopping});
 }
 
-const addToppingHandler = (state, action) => {
-  /* let price = state.totalPrice;
-  const prices = state.Prices;
-  const modifiers = state.Prices.Modifiers;
-  if (action.regular === ToppingTypes.Whole && action.extra !== ToppingTypes.None) {
-    price += (prices[action.toppingType] * modifiers[action.regular]);
-    price += (prices[action.toppingType] * modifiers[action.extra] * modifiers.Extra * 0.5);
-  } else {
-    price += (prices[action.toppingType] * modifiers[action.regular] * modifiers.Regular);
-    price += (prices[action.toppingType] * modifiers[action.extra] * modifiers.Extra);
-  } */
-  
-    
-  const updatedTopping = {
-    
-      [action.toppingType]: {
-        ...state.Toppings[action.toppingType],
-        [action.toppingName]: {
-          ...state.Toppings[action.toppingType][action.toppingName],
-          [action.amount]: action.side
-        }
-      }
-    
-  };
-  /* const updatedState = {totalPrice: price, Toppings: updatedTopping}; */
-  return updateObject(state, {Toppings: updatedTopping});
-
-};
 
 
 const clearToppingHandler = (state, action) => {
   const topping = state.Toppings[action.toppingType][action.toppingName];
-  console.log('reg', topping.Regular, 'ext', topping.Extra)
   let regState = {}, extraState = {};
-  if (topping.Regular !== tTypes.None) {
+  // Check the current state to find existing toppings in Regular and Extra
+  if (topping.Regular !== tTypes.None) { // If a topping is found in Regular, remove it
     regState = updateToppingHandler(state, {...action, amount: tTypes.Regular, type: actionTypes.REMOVE_TOPPING});
   }
+  // Create a temporary modified state object based on the above check, or return original state if no Regular found
   const updatedToppingsReg = updateObject(state, regState);
-  if (topping.Extra !== tTypes.None) {
-    extraState = updateToppingHandler(updatedToppingsReg, {...action, amount: tTypes.Extra, type: actionTypes.REMOVE_TOPPING});
+  if (topping.Extra !== tTypes.None) { // If a topping is found in Extra, remove it
+    extraState = updateToppingHandler(updatedToppingsReg, 
+      {...action, amount: tTypes.Extra, type: actionTypes.REMOVE_TOPPING});
   }
-
   return updateObject(state, {...updatedToppingsReg, ...extraState});
 }
 
 const setToppings = (state, action) => {
   return updateObject(state, {
+    [tTypes.Base]: {
+      ...state.Base,
+      ...action.Base
+    },
     [tTypes.Toppings]: {
       ...state.Toppings,
       ...action.Toppings
@@ -145,7 +112,6 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REMOVE_TOPPING: return updateToppingHandler(state, action);
     case actionTypes.CLEAR_TOPPING: return clearToppingHandler(state, action);
     case actionTypes.SET_TOPPINGS: return setToppings(state, action);
-    case actionTypes.UPDATE_PRICE: return newPrice(state);
     default: return state;
   }
 };

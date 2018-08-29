@@ -1,18 +1,19 @@
 import React from 'react';
 import classes from './ToppingSummary.css';
-import * as ToppingTypes from '../../../ToppingTypes';
+import * as tTypes from '../../../ToppingTypes';
 import Auxhoc from '../../../hoc/Auxhoc';
 
 
 const ToppingSummary = (props) => {
   //console.log('ig = ',Object.keys(props.toppings.Meats).length)
   let toppings = props.toppings;
+  let price = props.price;
   
   const getToppings = (toppingType) => {
     return Object.keys(toppingType).map(tName => {
       //console.log(toppingType[tName]['Extra'] ? toppingType[tName]['Extra'] : 'nope')
-      let reg = toppingType[tName][ToppingTypes.Regular] ? toppingType[tName][ToppingTypes.Regular] : null;
-      let ext = toppingType[tName][ToppingTypes.Extra] ? toppingType[tName][ToppingTypes.Extra] : null;
+      let reg = toppingType[tName][tTypes.Regular] ? toppingType[tName][tTypes.Regular] : null;
+      let ext = toppingType[tName][tTypes.Extra] ? toppingType[tName][tTypes.Extra] : null;
       let amp = reg && ext ? '&' : null;
         return (
           <p className={classes.Topping} key={tName}>
@@ -34,6 +35,7 @@ const ToppingSummary = (props) => {
       
         
         {meatSum}
+        <p>Total: ${price.toFixed(2)}</p>
       
     </div>
   );

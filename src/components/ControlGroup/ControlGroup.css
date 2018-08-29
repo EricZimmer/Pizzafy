@@ -17,7 +17,7 @@
   text-shadow: 1px 1px 2px #777;
 }
 
-.BuildControlsContainer {
+.ToppingControlsContainer {
   width: inherit;
   margin: auto;
   padding-top: 20px;
@@ -34,7 +34,7 @@
 }
 
 @media (min-width: 500px) and (min-height: 400px) {
-  .BuildControlsContainer {
+  .ToppingControlsContainer {
     width: 480px;
     
   }
@@ -42,7 +42,7 @@
 
 
 @media (min-width: 1000px) and (min-height: 500px) {
-  .BuildControlsContainer {
+  .ToppingControlsContainer {
     
     
     
