@@ -1,0 +1,73 @@
+.ToppingControls {
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  justify-items: center;
+  margin: 0px auto;
+  margin-bottom: 0px;
+  border: 4px solid #333;
+  border-top: None;
+  /* padding-bottom: 15px; */
+  /* border-bottom: 4px solid #222;*/
+  border-Left:None;
+  border-right: None;
+  background-color: #ccc;
+  /* border-radius: 2%; */
+  /* border-top: 6px solid #aaa; */
+  width: 100%;
+  position:relative;
+  
+}
+
+.ToppingControl {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  margin-top: 15px;
+  width: 90%;
+  
+}
+
+button {
+  /* display: flex;
+  align-content: center;
+  justify-content: center; */
+  font: inherit;
+  font-size: .75rem;
+  height: 50px;
+  border: 4px solid #D39952;
+  cursor: pointer;
+  outline: None;
+  background-color: #aa6817;
+  color: #eee;
+  user-select: None;
+  font-weight: bold;
+  text-shadow: 0px 0px 4px rgb(37, 37, 37);
+} 
+
+
+
+button:disabled {
+  /* background-color: #AC9980;
+  border: 1px solid #7E7365; */
+  color: #ccc;
+  cursor: default;
+}
+
+button:hover {
+  background-color: rgb(201, 146, 79);
+  color: #ddd;
+  
+}
+
+.ToggledOn {
+  background-color: rgb(160, 45, 25);
+  border-color: #D39952
+}
+
+.ToggledOn:hover {
+  background-color: rgb(187, 54, 30);
+  border-color: #D39952
+}

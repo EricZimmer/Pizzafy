@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 class PizzaBuilder extends Component {
 
   state = {
-    currentTab: 'Toppings',
+    currentTab: 'Base',
     
   };
 

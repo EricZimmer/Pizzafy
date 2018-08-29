@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as tTypes from '../../../ToppingTypes';
 import { connect } from 'react-redux';
+import classes from '../PizzaBaseControls/PizzaBaseControls.css';
+import PizzaBaseControl from './PizzaBaseControl/PizzaBaseControl';
 
 
 class PizzaBaseControls extends Component {
@@ -23,23 +25,38 @@ class PizzaBaseControls extends Component {
     const { Crust, Sauce, Cheese} = this.props.base;
     this.setState({
       [tTypes.Crust]: {
+        name: tTypes.Crust,
         type: Crust.type,
         size: Crust.size
       },
       [tTypes.Sauce]: {
+        name: tTypes.Sauce,
         type: Sauce.type,
         amount: Sauce.amount
       },
       [tTypes.Cheese]: {
+        name: tTypes.Cheese,
         amount: Cheese.amount
       }
     })
   }
 
+  updatePizzaBase = (element) => {
+
+  }
+
   render() {
-    console.log(this.state.Cheese.amount);
-    return (
-      <div></div>
+    const base = this.state;
+    return ( 
+      <div className={classes.BaseControlsContainer}>
+
+        <PizzaBaseControl 
+          element={base.Crust}/>
+        <PizzaBaseControl 
+          element={base.Sauce}/>
+        <PizzaBaseControl 
+          element={base.Cheese}/>
+      </div>
     )
   }
 };

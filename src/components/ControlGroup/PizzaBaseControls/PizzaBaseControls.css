@@ -1,0 +1,31 @@
+.BaseControlsContainer {
+  width: inherit;
+  margin: auto;
+  padding-top: 20px;
+  /* padding-top: 20px; */
+  display: flex;
+  flex-flow: row wrap;
+  /* justify-content: center; */
+  /* background-color: rgb(47, 43, 49);*/
+  border-Left: 5px solid rgb(47, 43, 49);
+  border-right: 5px solid rgb(47, 43, 49);
+  
+  /* border-top: 2px solid #999; */
+  /* border-radius: 1%; */
+}
+
+@media (min-width: 500px) and (min-height: 400px) {
+  .BaseControlsContainer {
+    width: 480px;
+    
+  }
+}
+
+
+@media (min-width: 1000px) and (min-height: 500px) {
+  .BaseControlsContainer {
+    
+    
+    
+  }
+}
