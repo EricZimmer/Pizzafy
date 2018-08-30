@@ -17,7 +17,7 @@
   /* border-top: 6px solid #aaa; */
   width: 100%;
   position:relative;
-  
+  user-select: None;
 }
 
 .ControlGroup {
@@ -106,13 +106,14 @@
 .Label {
   padding: 10px 5px;
   font-weight: bold;
-  font-size: 1.3rem;
+  letter-spacing: .2rem;
+  /* font-size: 1.3rem; */
   /* display: block; */
   justify-self: center;
   color: rgb(184, 116, 8);
   margin: auto;
   /* Left: 35px; */
-  user-select: None;
+  /* user-select: None; */
   text-shadow: 0px 0px 4px rgb(0, 0, 0);
   /* -webkit-text-stroke-color: rgb(175, 143, 142);
   -webkit-text-stroke-width: 1px;
@@ -120,8 +121,8 @@
   /* color:rgb(195, 173, 143); */
 }
 
-.Label:hover {
-
+.MainControlsContainer .Label{
+  font-size: 5em;
 }
 
 .Toggle {
@@ -165,6 +166,6 @@
     
   }
   .Label{ 
-    font-size: 1.7rem;
+    /* font-size: 1.7rem; */
   }
 }

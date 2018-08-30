@@ -211,7 +211,7 @@ class ToppingControls extends Component {
     return (    
       <div className={classNames}>
         <div className={classes.LabelHeader}onClick={this.toggleOn}>
-          <div className={classes.Label}>{this.props.toppingName}</div>
+          <div className={classes.Label}>{this.props.toppingName.toUpperCase()}</div>
           {closeButton}    
         </div>
         {toppingControls}

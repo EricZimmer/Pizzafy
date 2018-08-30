@@ -18,9 +18,15 @@
   border-radius: 1%; */
 }
 
+
+
+
 @media (min-width: 500px) and (min-height: 400px) {
   .PizzaBuilder {
     width: 480px;
+
+  }
+  .MainControlsContainer {
 
   }
 }
@@ -31,5 +37,11 @@
     
     
 
+  }
+  .MainControlsContainer {
+    
+  }
+  .MainControlsContainer .Label{
+    font-size: 5em;
   }
 }

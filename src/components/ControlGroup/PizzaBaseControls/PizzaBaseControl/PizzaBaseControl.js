@@ -11,16 +11,16 @@ const pizzaBaseControl = (props) => {
       return <option value={name}>{name}</option>;
     });
     const buttons = tTypes.Crust_Sizes.map(size => {
-      return <button>{size}</button>
+      return <button className={classes.Button}>{size}</button>
     });
     
     return <Auxhoc>
-      <div className={classes.ToppingControl}>
+      <div className={classes.BaseControl}>
         <select>
           {options}
         </select>
       </div>
-      <div className={classes.ToppingControl}>
+      <div className={classes.BaseControl}>
         {buttons}
       </div>
 
@@ -31,25 +31,25 @@ const pizzaBaseControl = (props) => {
       return <option value={name}>{name}</option>;
     });
     const buttons = tTypes.Base_Amounts.map(size => {
-      return <button>{size}</button>
+      return <button className={classes.Button}>{size}</button>
     });
     return <Auxhoc>
-      <div className={classes.ToppingControl}>
+      <div className={classes.BaseControl}>
         <select>
           {options}
         </select>
       </div>
-      <div className={classes.ToppingControl}>
+      <div className={classes.BaseControl}>
         {buttons}
       </div>
     </Auxhoc>
   }
   const createCheese = (cheese) => {
     const buttons = tTypes.Base_Amounts.map(size => {
-      return <button>{size}</button>
+      return <button className={classes.Button}>{size}</button>
     });
     return <Auxhoc>
-      <div className={classes.ToppingControl}>
+      <div className={classes.BaseControl}>
         {buttons}
       </div>
     </Auxhoc>
@@ -66,7 +66,7 @@ const pizzaBaseControl = (props) => {
   let base = createControl();
   console.log(base);
   return (
-    <div className={classes.ToppingControls}>
+    <div className={classes.BaseControls}>
       <div className={tcClasses.LabelHeader}onClick={this.toggleOn}>
         <div className={tcClasses.Label}>{props.element.name}</div>      
       </div>

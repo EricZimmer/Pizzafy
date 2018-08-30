@@ -7,7 +7,7 @@ const buildHeaders = (props) => (
     <BuildHeader 
         clicked={props.clicked}
         name={'Base'}>
-      Crust, Cheese & Sauce
+      Crust - Cheese - Sauce
     </BuildHeader>
     
     <BuildHeader

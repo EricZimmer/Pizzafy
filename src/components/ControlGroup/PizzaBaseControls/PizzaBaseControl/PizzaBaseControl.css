@@ -1,4 +1,4 @@
-.ToppingControls {
+.BaseControls {
   display: flex;
   flex-flow: column;
   align-content: center;
@@ -7,7 +7,7 @@
   margin-bottom: 0px;
   border: 4px solid #333;
   border-top: None;
-  /* padding-bottom: 15px; */
+  padding-bottom: 20px;
   /* border-bottom: 4px solid #222;*/
   border-Left:None;
   border-right: None;
@@ -19,7 +19,7 @@
   
 }
 
-.ToppingControl {
+.BaseControl {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -30,14 +30,17 @@
   
 }
 
-button {
+.Button {
   /* display: flex;
   align-content: center;
-  justify-content: center; */
+  justify-content: center;  */
   font: inherit;
   font-size: .75rem;
-  height: 50px;
+  margin: 0 1.5%;
+  height: 3.5em;
+  padding: 0 12px;
   border: 4px solid #D39952;
+  border-radius: 9%;
   cursor: pointer;
   outline: None;
   background-color: #aa6817;
@@ -49,14 +52,14 @@ button {
 
 
 
-button:disabled {
+.Button:disabled {
   /* background-color: #AC9980;
   border: 1px solid #7E7365; */
   color: #ccc;
   cursor: default;
 }
 
-button:hover {
+.Button:hover {
   background-color: rgb(201, 146, 79);
   color: #ddd;
   

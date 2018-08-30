@@ -25,7 +25,10 @@
 @media (min-width: 1000px) and (min-height: 500px) {
   .BaseControlsContainer {
     
-    
-    
+      width: 560px;
+      
+    }
+  .Label{ 
+    font-size: 1.7rem;
   }
 }

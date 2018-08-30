@@ -34,7 +34,7 @@ export const Sauce = 'Sauce';
 export const Sauce_Classic = 'Classic Marinara';
 export const Sauce_Buffalo = 'Spicy Buffalo';
 export const Sauce_Garlic = 'Creamy Garlic Parmesan';
-export const Sauce_Barbeque = 'Tangy Barbeque"';
+export const Sauce_Barbeque = 'Tangy Barbeque';
 export const Sauce_Types = [Sauce_Classic, Sauce_Garlic, Sauce_Buffalo, Sauce_Barbeque];
 
 

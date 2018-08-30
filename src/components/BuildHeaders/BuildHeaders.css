@@ -6,7 +6,7 @@
   display: flex;
   flex-flow: row;
   
-  font-size: 1rem;
+  
   align-content: flex-start;
   width: 100%;
   /* height: 50px; */
@@ -15,7 +15,7 @@
   color: #ccc;
   /* margin: 0 2.5% 0 2.5%; */
   border-bottom: 4px solid rgb(47, 43, 49);
- 
+  user-select: None;
   background-color: rgb(241, 232, 223);
   margin-bottom: 0;
   z-index: 3;
