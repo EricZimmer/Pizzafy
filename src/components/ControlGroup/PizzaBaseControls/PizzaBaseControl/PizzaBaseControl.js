@@ -1,17 +1,19 @@
 import React from 'react';
 import * as tTypes from '../../../../ToppingTypes';
 import classes from '../PizzaBaseControl/PizzaBaseControl.css';
-import tcClasses from '../../ToppingControls/ToppingControls.css';
+import cgClasses from '../../../ControlGroup/ControlGroup.css';
 import Auxhoc from '../../../../hoc/Auxhoc';
 
 const pizzaBaseControl = (props) => {
 
   const createCrust = (crust) => {
     const options = tTypes.Crust_Types.map(name => {
-      return <option value={name}>{name}</option>;
+      return <option key={name} value={name}>{name}</option>;
     });
     const buttons = tTypes.Crust_Sizes.map(size => {
-      return <button className={classes.Button}>{size}</button>
+      console.log('bclass', crust.size === size)
+      const buttonClass = size === crust.size ? [classes.Button, classes.ToggledOn].join(' '): classes.Button;
+      return <button key={size} className={buttonClass}>{size}</button>
     });
     
     return <Auxhoc>
@@ -26,12 +28,13 @@ const pizzaBaseControl = (props) => {
 
     </Auxhoc>
   }
-  const createSauce = (sauce) => {
+  const createSauce = (sauce) => { 
     const options = tTypes.Sauce_Types.map(name => {
-      return <option value={name}>{name}</option>;
+      return <option key={name} value={name}>{name}</option>;
     });
-    const buttons = tTypes.Base_Amounts.map(size => {
-      return <button className={classes.Button}>{size}</button>
+    const buttons = tTypes.Base_Amounts.map(amount => {
+      const buttonClass = amount === sauce.amount ? [classes.Button, classes.ToggledOn].join(' '): classes.Button;
+      return <button key={amount} className={buttonClass}>{amount}</button>
     });
     return <Auxhoc>
       <div className={classes.BaseControl}>
@@ -46,7 +49,7 @@ const pizzaBaseControl = (props) => {
   }
   const createCheese = (cheese) => {
     const buttons = tTypes.Base_Amounts.map(size => {
-      return <button className={classes.Button}>{size}</button>
+      return <button key={size} className={classes.Button}>{size}</button>
     });
     return <Auxhoc>
       <div className={classes.BaseControl}>
@@ -67,8 +70,8 @@ const pizzaBaseControl = (props) => {
   console.log(base);
   return (
     <div className={classes.BaseControls}>
-      <div className={tcClasses.LabelHeader}onClick={this.toggleOn}>
-        <div className={tcClasses.Label}>{props.element.name}</div>      
+      <div className={cgClasses.LabelHeader}onClick={this.toggleOn}>
+        <div className={cgClasses.Label}>{props.element.name}</div>      
       </div>
       {base}
       

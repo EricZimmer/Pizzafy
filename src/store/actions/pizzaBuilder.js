@@ -60,14 +60,17 @@ export const setToppings = () => {
     type: actionTypes.SET_TOPPINGS,
     [tTypes.Base]: {
       [tTypes.Crust]: {
-        type: tTypes.HandTossed,
+        name: tTypes.Crust,
+        type: tTypes.ThinCrust,
         size: tTypes.Large
       },
       [tTypes.Sauce]: {
+        name: tTypes.Sauce,
         type: tTypes.Sauce_Classic,
         amount: tTypes.Regular
       },
       [tTypes.Cheese]: {
+        name: tTypes.Cheese,
         amount: tTypes.Regular
       }
     },

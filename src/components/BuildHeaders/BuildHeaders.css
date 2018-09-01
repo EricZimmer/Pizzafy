@@ -1,30 +1,84 @@
-.BuildHeaders {
+.BuildHeadersContainer {
   
   padding: 0px;
-  
-  list-style: None;
+  /* display: grid;
+  grid-template-areas: "back next" "heading heading";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 2fr; */
   display: flex;
-  flex-flow: row;
-  
-  
-  align-content: flex-start;
+  flex-flow: column nowrap;
+  align-items: center;
   width: 100%;
-  /* height: 50px; */
-  justify-content: flex-start;
-  justify-self: flex-start;
-  color: #ccc;
-  /* margin: 0 2.5% 0 2.5%; */
-  border-bottom: 4px solid rgb(47, 43, 49);
+  font-weight: bold;
+  
   user-select: None;
-  background-color: rgb(241, 232, 223);
-  margin-bottom: 0;
-  z-index: 3;
+  background-color: rgb(230, 221, 212);
+  border: 4px solid rgb(47, 43, 49);
+  border-bottom: none;
+  /* z-index: 3; */
+  position: relative;
+}
+.BuildHeaders {
+  display: flex;
+  width: 100%;
+  background-color: rgb(47, 43, 49);
+  /* justify-content: space-between; */
+  white-space: pre;
+}
+.Heading {
+  /* width: 100%; */
+  padding: 5px;
+  display: flex;
+  font-size: 18px;
+  /* padding-bottom: 10px; */
+  
+  font-weight: bolder;
+  white-space: nowrap;
+  margin: auto;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 3px solid rgb(47, 43, 49);
+  /* border-top: 2px solid #ccc; */
+  color: #aa6817;
+  /* text-shadow: 0px 0px 4px rgb(184, 116, 8); */
+  justify-self: center;
+  align-self: center;
 }
 
-@media (min-width: 500px) {
+select {
+  padding: 4px 6px;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  margin: 10px auto;
+  width: 80%;
+  max-width: 250px;
+  cursor: pointer;
+}
+
+@media (min-width: 414px) {
   .BuildHeaders {
-    justify-content: flex-start;
-    font-size: 1.3rem
-    /* flex-flow: row nowrap; */
+    
+    font-size: 17px;
+    
+  }
+  .Heading {
+    font-size: 21px;
+  }
+}
+@media (min-width: 768px) {
+  .BuildHeaders {
+    /* justify-content: left; */
+    font-size: 17px;
+    
+  }
+  .Heading {
+    font-size: 24px;
+  }
+}
+@media (min-width: 1079px) {
+  .BuildHeaders {
+    
+    
   }
 }

@@ -3,49 +3,57 @@
   /* margin: auto; */
   
   display: flex;
-  height: 104%;
-  color: rgb(47, 43, 49);
-  border: 4px solid rgb(47, 43, 49);
+  /* width: 100%; */
+  /* height: 104%; */
+  color: #aa6817;
+  
   /* border-radius: 2%; */
   
-  padding: .4rem .6rem;
-  padding-bottom: 1rem;
+  padding: .5rem 0;
   
-  background-color: #ccc;
-  font-size: 12px;
+  
+  font-size: inherit;
   font-weight: bold;
-  text-align: center;
-  letter-spacing: .1rem;
-  /* border-bottom: 4px solid #333; */
-  /* margin: auto; */
-  margin-right: 7px;
-  border-top-Left-radius: 5px;
-  border-top-right-radius: 5px;
-  margin-bottom: -6.5px;
-  align-self: center;
-  z-index: 3;
+  /* text-align: center; */
+  letter-spacing: 0rem;
+ 
+  /* position: relative; */
+  
+  
+  text-transform: uppercase;
+  /* z-index: 3; */
+ 
+}
+
+.Back {
+  justify-self: flex-start;
+  padding-left: 10px;
+}
+
+.Next {
+  justify-self: flex-end;
+  margin-left: auto;
+  padding-right: 10px;
 }
 
 .BuildHeader:hover {
-  color: white;
-  background-color: #888;
+  color: #666;
+  /* background-color: #888; */
   cursor: pointer;
 }
 
 .BuildHeader:active {
-  background-color: #777;
+  /* background-color: #777; */
   /* border-color: tomato; */
+ 
 }
 
-.Label {
-  /* background-color: rgb(47, 43, 49); */
+/* .Label {
+  
   padding: 0 .6em ;
   padding-bottom: .4em;
   
-  /* display: flex;
-  justify-content: center;
-  align-content: center; */
-  /* width: 90%; */
+  
   align-self: flex-start;
   color: #333;
-}
+} */

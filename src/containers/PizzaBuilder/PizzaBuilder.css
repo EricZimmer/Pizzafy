@@ -6,7 +6,7 @@
   background-color: rgb(241, 232, 223);
 }
 
-.MainControlsContainer {
+.PizzaBuilderContainer {
   width: inherit;
   display: flex;
   flex-flow: row wrap;
@@ -26,7 +26,7 @@
     width: 480px;
 
   }
-  .MainControlsContainer {
+  .PizzaBuilderContainer {
 
   }
 }
@@ -38,10 +38,10 @@
     
 
   }
-  .MainControlsContainer {
+  .PizzaBuilderContainer {
     
   }
-  .MainControlsContainer .Label{
+  .PizzaBuilderContainer .Label{
     font-size: 5em;
   }
 }

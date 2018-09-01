@@ -94,8 +94,8 @@ const clearToppingHandler = (state, action) => {
 const setToppings = (state, action) => {
   return updateObject(state, {
     [tTypes.Base]: {
-      ...state.Base,
-      ...action.Base
+      ...state[tTypes.Base],
+      ...action[tTypes.Base]
     },
     [tTypes.Toppings]: {
       ...state.Toppings,

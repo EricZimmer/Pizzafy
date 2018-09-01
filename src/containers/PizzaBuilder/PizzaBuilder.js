@@ -9,7 +9,7 @@ import PizzaBaseControls from '../../components/ControlGroup/PizzaBaseControls/P
 import ControlGroup from '../../components/ControlGroup/ControlGroup';
 import ToppingSummary from '../../components/Pizza/ToppingSummary/ToppingSummary';
 
-import * as ToppingTypes from '../../ToppingTypes';
+import * as tTypes from '../../ToppingTypes';
 import PizzaTopping from '../../components/Pizza/PizzaTopping/PizzaTopping';
 
 import * as actions from '../../store/actions/index';
@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 class PizzaBuilder extends Component {
 
   state = {
-    currentTab: 'Base',
+    currentTab: tTypes.Base,
     
   };
 
@@ -29,6 +29,7 @@ class PizzaBuilder extends Component {
 
   headerClickedHandler = (name) => {
     this.setState({currentTab: name})
+    console.log('name', name)
   }
 
   
@@ -38,17 +39,17 @@ class PizzaBuilder extends Component {
     const veggies = this.props.toppings.Veggies;
     let objMeats = {}
     for ( let key in meats) {
-      if (meats[key].Regular !== ToppingTypes.None) { 
-        objMeats[key] = {[ToppingTypes.Regular]: meats[key].Regular};
+      if (meats[key].Regular !== tTypes.None) { 
+        objMeats[key] = {[tTypes.Regular]: meats[key].Regular};
       }
-      if(meats[key].Extra !== ToppingTypes.None) {
+      if(meats[key].Extra !== tTypes.None) {
         objMeats[key] = {
           ...objMeats[key],
-          [ToppingTypes.Extra]: meats[key].Extra
+          [tTypes.Extra]: meats[key].Extra
         }
       }
     }
-    return {[ToppingTypes.Meats]: {...objMeats}};
+    return {[tTypes.Meats]: {...objMeats}};
   }
 
   toppingGroup = (<ControlGroup 
@@ -81,15 +82,16 @@ class PizzaBuilder extends Component {
     const toppingList = this.finalToppings();
  
     let controlGroup = <PizzaBaseControls />;
-    controlGroup = this.state.currentTab === 'Base' ? controlGroup : this.toppingGroup ;
+    controlGroup = this.state.currentTab === tTypes.Base ? controlGroup : this.toppingGroup ;
     return (
       <div className={classes.PizzaBuilder}>
         <Pizza 
           Toppings={toppingsMeats}/>
         <ToppingSummary toppings={toppingList} price={this.props.price}/>
-        <div className={classes.MainControlsContainer}>
+        <div className={classes.PizzaBuilderContainer}>
           <BuildHeaders 
-          clicked={ this.headerClickedHandler}/>
+            currentHeader={this.state.currentTab}
+            clicked={ this.headerClickedHandler}/>
           
          {controlGroup}
         

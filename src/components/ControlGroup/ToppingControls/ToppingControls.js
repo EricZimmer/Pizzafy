@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classes from './ToppingControls.css';
+import cgClasses from '../../ControlGroup/ControlGroup.css';
 import Auxhoc from '../../../hoc/Auxhoc';
 import * as tTypes from '../../../ToppingTypes';
 import * as actions from '../../../store/actions';
@@ -210,8 +211,8 @@ class ToppingControls extends Component {
 
     return (    
       <div className={classNames}>
-        <div className={classes.LabelHeader}onClick={this.toggleOn}>
-          <div className={classes.Label}>{this.props.toppingName.toUpperCase()}</div>
+        <div className={cgClasses.LabelHeader}onClick={this.toggleOn}>
+          <div className={cgClasses.Label}>{this.props.toppingName.toUpperCase()}</div>
           {closeButton}    
         </div>
         {toppingControls}

@@ -18,7 +18,7 @@ export const Tomatoes = 'Tomatoes';
 export const Peppers = 'Peppers';
 
 
-export const Base = 'Base';
+export const Base = 'Crust - Cheese - Sauce';
 export const Base_Amounts = [None, Light, Regular, Extra];
 export const Crust = 'Crust';
 export const Medium = 'Medium';
@@ -48,3 +48,5 @@ export const Veggies = 'Veggies';
 
 export const Toppings_Meats = [Pepperoni, Sausage, Ham];
 export const Toppings_Veggies = [Peppers, Tomatoes, Olives];
+
+export const Review = 'Review & Add To Order';

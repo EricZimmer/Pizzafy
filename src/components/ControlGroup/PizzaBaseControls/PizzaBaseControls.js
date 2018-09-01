@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as tTypes from '../../../ToppingTypes';
 import { connect } from 'react-redux';
 import classes from '../PizzaBaseControls/PizzaBaseControls.css';
+import cgClasses from '../../ControlGroup/ControlGroup.css';
 import PizzaBaseControl from './PizzaBaseControl/PizzaBaseControl';
 
 
@@ -40,22 +41,23 @@ class PizzaBaseControls extends Component {
       }
     })
   }
-
+  
   updatePizzaBase = (element) => {
-
+    
   }
-
+  
   render() {
-    const base = this.state;
+    const pBase = this.props.base;
+
     return ( 
-      <div className={classes.BaseControlsContainer}>
+      <div className={cgClasses.MainControlsContainer}>
 
         <PizzaBaseControl 
-          element={base.Crust}/>
+          element={pBase.Crust}/>
         <PizzaBaseControl 
-          element={base.Sauce}/>
+          element={pBase.Sauce}/>
         <PizzaBaseControl 
-          element={base.Cheese}/>
+          element={pBase.Cheese}/>
       </div>
     )
   }
@@ -63,7 +65,7 @@ class PizzaBaseControls extends Component {
 
 const mapStateToProps = state => {
   return {
-    base: state.Base
+    base: state[tTypes.Base]
   }
 }
 
