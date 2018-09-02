@@ -1,66 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import * as tTypes from '../../../ToppingTypes';
 import { connect } from 'react-redux';
-import classes from '../PizzaBaseControls/PizzaBaseControls.css';
 import cgClasses from '../../ControlGroup/ControlGroup.css';
 import PizzaBaseControl from './PizzaBaseControl/PizzaBaseControl';
+import * as actions from '../../../store/actions';
 
 
-class PizzaBaseControls extends Component {
+const pizzaBaseControls = (props) => {
 
-  state = {
-    /* [tTypes.Crust]: {
-      type: tTypes.HandTossed,
-      size: tTypes.Large
-    },
-    [tTypes.Sauce]: {
-      type: tTypes.Sauce_Classic,
-      amount: tTypes.None
-    },
-    [tTypes.Cheese]: {
-      amount: tTypes.None
-    } */
-  }
+  return ( 
+    <div className={cgClasses.MainControlsContainer}>
 
-  componentWillMount() {
-    const { Crust, Sauce, Cheese} = this.props.base;
-    this.setState({
-      [tTypes.Crust]: {
-        name: tTypes.Crust,
-        type: Crust.type,
-        size: Crust.size
-      },
-      [tTypes.Sauce]: {
-        name: tTypes.Sauce,
-        type: Sauce.type,
-        amount: Sauce.amount
-      },
-      [tTypes.Cheese]: {
-        name: tTypes.Cheese,
-        amount: Cheese.amount
-      }
-    })
-  }
+      <PizzaBaseControl 
+        element={props.base.Crust} changed={(element, changedObj) => props.updatePizzaBase(element, changedObj)}/>
+      <PizzaBaseControl 
+        element={props.base.Sauce} changed={(element, changedObj) => props.updatePizzaBase(element, changedObj)}/>
+      <PizzaBaseControl 
+        element={props.base.Cheese} changed={(element, changedObj) => props.updatePizzaBase(element, changedObj)}/>
+    </div>
+  );
   
-  updatePizzaBase = (element) => {
-    
-  }
-  
-  render() {
-    const pBase = this.props.base;
-
-    return ( 
-      <div className={cgClasses.MainControlsContainer}>
-
-        <PizzaBaseControl 
-          element={pBase.Crust}/>
-        <PizzaBaseControl 
-          element={pBase.Sauce}/>
-        <PizzaBaseControl 
-          element={pBase.Cheese}/>
-      </div>
-    )
-  }
 };
 
 const mapStateToProps = state => {
@@ -69,4 +28,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(PizzaBaseControls);
+const mapDispatchToProps = dispatch => {
+  return {
+    updatePizzaBase: (baseElement, changedObj) => dispatch(actions.updatePizzaBase(baseElement, changedObj))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(pizzaBaseControls);

@@ -55,8 +55,8 @@
 }
 
 .Checked {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +70,7 @@
   padding-bottom: 0px;
   right: 0px;
   cursor: pointer;
-  margin-right: 8px;
+  margin-right: 10px;
   background-color: rgb(116, 32, 17);
 }
 

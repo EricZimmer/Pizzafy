@@ -3,6 +3,7 @@ import * as tTypes from '../../../../ToppingTypes';
 import classes from '../PizzaBaseControl/PizzaBaseControl.css';
 import cgClasses from '../../../ControlGroup/ControlGroup.css';
 import Auxhoc from '../../../../hoc/Auxhoc';
+import { connect } from 'react-redux';
 
 const pizzaBaseControl = (props) => {
 
@@ -11,14 +12,14 @@ const pizzaBaseControl = (props) => {
       return <option key={name} value={name}>{name}</option>;
     });
     const buttons = tTypes.Crust_Sizes.map(size => {
-      console.log('bclass', crust.size === size)
+
       const buttonClass = size === crust.size ? [classes.Button, classes.ToggledOn].join(' '): classes.Button;
-      return <button key={size} className={buttonClass}>{size}</button>
+      return <button key={size} className={buttonClass} onClick={() => props.changed(crust, {key: 'size', value: size})}>{size}</button>
     });
     
     return <Auxhoc>
       <div className={classes.BaseControl}>
-        <select>
+        <select value={crust.type} onChange={(e) => props.changed(crust, {key: 'type', value: e.target.value})}>
           {options}
         </select>
       </div>
@@ -34,11 +35,14 @@ const pizzaBaseControl = (props) => {
     });
     const buttons = tTypes.Base_Amounts.map(amount => {
       const buttonClass = amount === sauce.amount ? [classes.Button, classes.ToggledOn].join(' '): classes.Button;
-      return <button key={amount} className={buttonClass}>{amount}</button>
+      return <button key={amount} 
+        className={buttonClass} 
+        onClick={() => props.changed(sauce, {key: 'amount', value: amount})}>
+        {amount}</button>
     });
     return <Auxhoc>
       <div className={classes.BaseControl}>
-        <select>
+        <select value={sauce.type} onChange={(e) => props.changed(sauce, {key: 'type', value: e.target.value})}>
           {options}
         </select>
       </div>
@@ -48,8 +52,12 @@ const pizzaBaseControl = (props) => {
     </Auxhoc>
   }
   const createCheese = (cheese) => {
-    const buttons = tTypes.Base_Amounts.map(size => {
-      return <button key={size} className={classes.Button}>{size}</button>
+    const buttons = tTypes.Base_Amounts.map(amount => {
+      const buttonClass = amount === cheese.amount ? [classes.Button, classes.ToggledOn].join(' '): classes.Button;
+      return <button key={amount} 
+        className={buttonClass} 
+        onClick={() => props.changed(cheese, {key: 'amount', value: amount})}>
+        {amount}</button>
     });
     return <Auxhoc>
       <div className={classes.BaseControl}>
@@ -66,14 +74,14 @@ const pizzaBaseControl = (props) => {
       default: return 'null';
     }
   }
-  let base = createControl();
-  console.log(base);
+  
+ 
   return (
     <div className={classes.BaseControls}>
       <div className={cgClasses.LabelHeader}onClick={this.toggleOn}>
         <div className={cgClasses.Label}>{props.element.name}</div>      
       </div>
-      {base}
+      {createControl()}
       
     </div>
   );

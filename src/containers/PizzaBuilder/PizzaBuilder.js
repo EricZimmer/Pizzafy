@@ -18,18 +18,17 @@ import { connect } from 'react-redux';
 class PizzaBuilder extends Component {
 
   state = {
-    currentTab: tTypes.Base,
-    
+    currentControls: tTypes.Base,
+    currentTopping: tTypes.Meats
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.initToppingHandler();
   }
 
 
   headerClickedHandler = (name) => {
-    this.setState({currentTab: name})
-    console.log('name', name)
+    this.setState({currentControls: name})
   }
 
   
@@ -37,7 +36,7 @@ class PizzaBuilder extends Component {
     
     const meats = this.props.toppings.Meats;
     const veggies = this.props.toppings.Veggies;
-    let objMeats = {}
+    let objMeats = {};
     for ( let key in meats) {
       if (meats[key].Regular !== tTypes.None) { 
         objMeats[key] = {[tTypes.Regular]: meats[key].Regular};
@@ -51,9 +50,6 @@ class PizzaBuilder extends Component {
     }
     return {[tTypes.Meats]: {...objMeats}};
   }
-
-  toppingGroup = (<ControlGroup 
-    toppingType={'Meats'}/>);
 
   createToppings = (tType) => {
     return Object.keys(tType).map(tName => {
@@ -70,6 +66,15 @@ class PizzaBuilder extends Component {
     });
   }
 
+  getCurrentControls = () => {
+    switch(this.state.currentControls) {
+      case tTypes.Base: return <PizzaBaseControls />;
+      case tTypes.Toppings: return <ControlGroup toppingType={this.state.currentTopping}/>;
+      case tTypes.Review: return <ToppingSummary toppings={this.finalToppings()} price={this.props.price}/>;
+      default: return <PizzaBaseControls />;
+    }
+  }
+
   render() {
     const stateToppings = this.props.toppings !== null ? this.props.toppings
       : null;
@@ -79,21 +84,19 @@ class PizzaBuilder extends Component {
       toppingsMeats = this.createToppings(stateToppings.Meats)
     }
     
-    const toppingList = this.finalToppings();
- 
-    let controlGroup = <PizzaBaseControls />;
-    controlGroup = this.state.currentTab === tTypes.Base ? controlGroup : this.toppingGroup ;
+    const controlGroup = this.getCurrentControls();
+
     return (
       <div className={classes.PizzaBuilder}>
         <Pizza 
           Toppings={toppingsMeats}/>
-        <ToppingSummary toppings={toppingList} price={this.props.price}/>
+        
         <div className={classes.PizzaBuilderContainer}>
           <BuildHeaders 
-            currentHeader={this.state.currentTab}
+            currentHeader={this.state.currentControls}
             clicked={ this.headerClickedHandler}/>
           
-         {controlGroup}
+         {this.getCurrentControls()}
         
         </div>
       </div>

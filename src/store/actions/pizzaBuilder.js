@@ -1,6 +1,13 @@
 import * as actionTypes from './ActionTypes';
 import * as tTypes from '../../ToppingTypes';
 
+export const updatePizzaBase = (baseElement, changedObj) => {
+  return {
+    type: actionTypes.UPDATE_PIZZA_BASE,
+    baseElement: {...baseElement},
+    changedObj: changedObj
+  }
+}
 
 export const addTopping = (toppingType, toppingName, amount, side) => {
   return {
@@ -40,17 +47,7 @@ const mapToppings = (toppingType) => {
     return {...obj, ...item};
   },{});
 }
-export const updatePrice = () => {
-  return {
-    type: actionTypes.UPDATE_PRICE
-  }
-}
-export const updateTopping = (toppingType, toppingName, regular, extra) => {
-  return dispatch => {
-    dispatch(addTopping(toppingType, toppingName, regular, extra))
-    return dispatch(updatePrice())
-  };
-}
+
 
 export const setToppings = () => {
   const toppingsMeats = mapToppings(tTypes.Toppings_Meats);
@@ -91,7 +88,7 @@ export const initToppings = () => {
   }
 }
 
-export const compileToppings = (toppings) => {
+/* export const compileToppings = (toppings) => {
   const meats = toppings.Meats;
   const veggies = toppings.Veggies;
   let objMeats = {}
@@ -112,4 +109,4 @@ export const compileToppings = (toppings) => {
     type: actionTypes.COMPILE_TOPPINGS,
     meats: objMeats
   }
-}
+} */

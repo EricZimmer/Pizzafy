@@ -5,14 +5,17 @@ import { updateObject } from '../utility';
 const initialState = {
   [tTypes.Base]: {
     [tTypes.Crust]: {
+      name: tTypes.Crust,
       type: {},
       size: {}
     },
     [tTypes.Sauce]: {
+      name: tTypes.Sauce,
       type: {},
       amount:{}
     },
     [tTypes.Cheese]: {
+      name: tTypes.Cheese,
       amount: {}
     }
   },
@@ -45,6 +48,22 @@ const updatePrice = (state, action) => {
   return state.Prices[toppingType] * modifiers[amount] * modifiers[side];
 }
 
+const updatePizzaBase = (state, action) => {
+  let updatedBase = {
+    [tTypes.Base]: {
+      ...state[tTypes.Base],
+      [action.baseElement.name]: {
+        ...action.baseElement,
+        [action.changedObj.key]: action.changedObj.value
+      }
+    }
+  };
+  /* switch(action.baseElement) {
+    case tTypes.Crust: 
+  } */
+  console.log(updatedBase)
+  return updateObject(state, updatedBase);
+}
 
 const updateToppingHandler = (state, action) => {
   const { toppingType, toppingName, amount } = action;
@@ -108,6 +127,7 @@ const setToppings = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.UPDATE_PIZZA_BASE: return updatePizzaBase(state, action);
     case actionTypes.ADD_TOPPING: return updateToppingHandler(state, action);
     case actionTypes.REMOVE_TOPPING: return updateToppingHandler(state, action);
     case actionTypes.CLEAR_TOPPING: return clearToppingHandler(state, action);
