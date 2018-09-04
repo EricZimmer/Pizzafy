@@ -2,18 +2,21 @@ import React, { Component } from 'react';
 
 import Auxhoc from '../../hoc/Auxhoc';
 import classes from './PizzaBuilder.css';
+import cgClasses from '../../components/ControlGroup/ControlGroup.css';
 import Pizza from '../../components/Pizza/Pizza';
 import BuildHeaders from '../../components/BuildHeaders/BuildHeaders';
 import ToppingControls from '../../components/ControlGroup/ToppingControls/ToppingControls';
 import PizzaBaseControls from '../../components/ControlGroup/PizzaBaseControls/PizzaBaseControls';
 import ControlGroup from '../../components/ControlGroup/ControlGroup';
 import ToppingSummary from '../../components/Pizza/ToppingSummary/ToppingSummary';
+import withErrorHandler from '../../hoc/withErrorHandler';
 
 import * as tTypes from '../../ToppingTypes';
 import PizzaTopping from '../../components/Pizza/PizzaTopping/PizzaTopping';
 
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
+import axios from '../../axios-config';
 
 class PizzaBuilder extends Component {
 
@@ -23,7 +26,7 @@ class PizzaBuilder extends Component {
   };
 
   componentWillMount() {
-    this.props.initToppingHandler();
+    //this.props.initToppingHandler();
   }
 
 
@@ -76,6 +79,7 @@ class PizzaBuilder extends Component {
   }
 
   render() {
+    
     const stateToppings = this.props.toppings !== null ? this.props.toppings
       : null;
     let toppingsMeats = null;
@@ -84,7 +88,7 @@ class PizzaBuilder extends Component {
       toppingsMeats = this.createToppings(stateToppings.Meats)
     }
     
-    const controlGroup = this.getCurrentControls();
+    //const controlGroup = this.getCurrentControls();
 
     return (
       <div className={classes.PizzaBuilder}>
@@ -95,9 +99,9 @@ class PizzaBuilder extends Component {
           <BuildHeaders 
             currentHeader={this.state.currentControls}
             clicked={ this.headerClickedHandler}/>
-          
-         {this.getCurrentControls()}
-        
+          <div className={cgClasses.MainControlsContainer}>
+            {this.getCurrentControls()}
+          </div>
         </div>
       </div>
     );

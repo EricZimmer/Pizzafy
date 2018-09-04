@@ -20,6 +20,19 @@
   
 }
 
+
+select {
+  padding: 4px 6px;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  margin: 10px auto;
+  width: 80%;
+  max-width: 250px;
+  cursor: pointer;
+}
+
+
 .BaseControl {
   display: flex;
   flex-flow: row nowrap;

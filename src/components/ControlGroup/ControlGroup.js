@@ -31,9 +31,9 @@ const controlGroup = (props) => {
   
   let toppings = setToppingControls('Meats');
   return (
-    <div className={classes.MainControlsContainer}>
-      {toppings}
-    </div>
+    
+      toppings
+   
   );
   
 }

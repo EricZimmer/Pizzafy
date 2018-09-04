@@ -3,13 +3,14 @@ import * as tTypes from '../../../ToppingTypes';
 import { connect } from 'react-redux';
 import cgClasses from '../../ControlGroup/ControlGroup.css';
 import PizzaBaseControl from './PizzaBaseControl/PizzaBaseControl';
+import Auxhoc from '../../../hoc/Auxhoc';
 import * as actions from '../../../store/actions';
 
 
 const pizzaBaseControls = (props) => {
 
   return ( 
-    <div className={cgClasses.MainControlsContainer}>
+    <Auxhoc>
 
       <PizzaBaseControl 
         element={props.base.Crust} changed={(element, changedObj) => props.updatePizzaBase(element, changedObj)}/>
@@ -17,7 +18,7 @@ const pizzaBaseControls = (props) => {
         element={props.base.Sauce} changed={(element, changedObj) => props.updatePizzaBase(element, changedObj)}/>
       <PizzaBaseControl 
         element={props.base.Cheese} changed={(element, changedObj) => props.updatePizzaBase(element, changedObj)}/>
-    </div>
+    </Auxhoc>
   );
   
 };

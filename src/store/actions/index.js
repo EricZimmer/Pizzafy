@@ -5,5 +5,6 @@ export {
   clearTopping,
   initToppings,
   compileToppings,
-  updateTopping
+  updateTopping,
+  initApp
 } from './pizzaBuilder';

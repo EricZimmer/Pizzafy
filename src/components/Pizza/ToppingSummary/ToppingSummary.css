@@ -2,8 +2,10 @@
   width: 100%;
   padding: 20px;
   margin: 10px auto;
+  font-size: inherit;
   background-color: #ccc;
-  border: 4px solid #333;
+  color: rgb(47, 43, 49);
+  /* border: 4px solid #333; */
   display: flex;
   flex-flow: column nowrap;
 }

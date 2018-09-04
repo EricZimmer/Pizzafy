@@ -19,7 +19,7 @@ const pizzaBaseControl = (props) => {
     
     return <Auxhoc>
       <div className={classes.BaseControl}>
-        <select value={crust.type} onChange={(e) => props.changed(crust, {key: 'type', value: e.target.value})}>
+        <select value={tTypes.Crust_Types[crust.type]} onChange={(e) => props.changed(crust, {key: 'type', value: e.target.value})}>
           {options}
         </select>
       </div>
@@ -42,7 +42,7 @@ const pizzaBaseControl = (props) => {
     });
     return <Auxhoc>
       <div className={classes.BaseControl}>
-        <select value={sauce.type} onChange={(e) => props.changed(sauce, {key: 'type', value: e.target.value})}>
+        <select value={tTypes.Sauce_Types[sauce.type]} onChange={(e) => props.changed(sauce, {key: 'type', value: e.target.value})}>
           {options}
         </select>
       </div>

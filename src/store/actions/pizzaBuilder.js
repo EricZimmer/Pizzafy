@@ -1,5 +1,29 @@
 import * as actionTypes from './ActionTypes';
 import * as tTypes from '../../ToppingTypes';
+import axios from '../../axios-config';
+
+const initAppFromDb = (dbData) => {
+  return {
+    type: actionTypes.INIT_APP,
+    data: {...dbData}
+  }
+}
+
+export const initApp = (database) => {
+  return async dispatch => {
+    try {
+      let dbData = {'Pizza_Templates': {}, 'Prices': {}};
+      let pizzaData = await database.collection('Pizza_Templates').get();
+      let pricedata = await database.collection('Prices').get();
+
+      pizzaData.forEach(doc => dbData.Pizza_Templates = {...dbData.Pizza_Templates, [doc.id]: doc.data()});
+      pricedata.forEach(doc => dbData.Prices = {...dbData.Prices, [doc.id]: doc.data()});
+      return dispatch(initAppFromDb(dbData));
+    } catch(error) {
+      console.log('initApp error: ', error)
+    }
+  }
+}
 
 export const updatePizzaBase = (baseElement, changedObj) => {
   return {
@@ -58,7 +82,7 @@ export const setToppings = () => {
     [tTypes.Base]: {
       [tTypes.Crust]: {
         name: tTypes.Crust,
-        type: tTypes.ThinCrust,
+        type: tTypes.Crust_Thin,
         size: tTypes.Large
       },
       [tTypes.Sauce]: {
@@ -85,6 +109,13 @@ export const setToppings = () => {
 export const initToppings = () => {
   return dispatch => {
     dispatch(setToppings());
+    /* axios.get('/Basic/Base.json')
+      .then(response => {
+        console.log('res', response)
+      })
+      .catch(error => {
+        console.log('initToppings error', error)
+      }); */
   }
 }
 

@@ -25,10 +25,10 @@ export const Medium = 'Medium';
 export const Large = 'Large';
 export const XLarge = 'X-Large';
 export const Crust_Sizes = [Medium, Large, XLarge];
-export const HandTossed = 'Original Hand-Tossed';
-export const ThinCrust = 'Thin And Crispy';
-export const Stuffed = 'Cheese-Stuffed Crust';
-export const Crust_Types = [HandTossed, ThinCrust, Stuffed];
+export const Crust_HandTossed = 'Original Hand-Tossed';
+export const Crust_Thin = 'Thin And Crispy';
+export const Crust_Stuffed = 'Cheese-Crust_Stuffed Crust';
+export const Crust_Types = [Crust_HandTossed, Crust_Thin, Crust_Stuffed];
 
 export const Sauce = 'Sauce';
 export const Sauce_Classic = 'Classic Marinara';

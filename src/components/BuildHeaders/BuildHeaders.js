@@ -27,7 +27,7 @@ class BuildHeaders extends Component {
     return(
       <div className={classes.BuildHeadersContainer}>
         <div className={classes.BuildHeaders}>{back}{next}</div>
-        <div className={classes.Heading}>{this.state.currentHeader}</div>
+        <div className={classes.Heading}>{this.state.currentHeader.toUpperCase()}</div>
       </div>
     );
   }
