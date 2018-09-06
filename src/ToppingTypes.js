@@ -23,18 +23,18 @@ export const Base_Amounts = [None, Light, Regular, Extra];
 export const Crust = 'Crust';
 export const Medium = 'Medium';
 export const Large = 'Large';
-export const XLarge = 'X-Large';
+export const XLarge = 'XLarge';
 export const Crust_Sizes = [Medium, Large, XLarge];
-export const Crust_HandTossed = 'Original Hand-Tossed';
-export const Crust_Thin = 'Thin And Crispy';
-export const Crust_Stuffed = 'Cheese-Crust_Stuffed Crust';
+export const Crust_HandTossed = 'Crust_HandTossed';
+export const Crust_Thin = 'Crust_Thin';
+export const Crust_Stuffed = 'Crust_Stuffed';
 export const Crust_Types = [Crust_HandTossed, Crust_Thin, Crust_Stuffed];
 
 export const Sauce = 'Sauce';
-export const Sauce_Classic = 'Classic Marinara';
-export const Sauce_Buffalo = 'Spicy Buffalo';
-export const Sauce_Garlic = 'Creamy Garlic Parmesan';
-export const Sauce_Barbeque = 'Tangy Barbeque';
+export const Sauce_Classic = 'Sauce_Classic';
+export const Sauce_Buffalo = 'Sauce_Buffalo';
+export const Sauce_Garlic = 'Sauce_Garlic';
+export const Sauce_Barbeque = 'Sauce_Barbeque';
 export const Sauce_Types = [Sauce_Classic, Sauce_Garlic, Sauce_Buffalo, Sauce_Barbeque];
 
 

@@ -96,6 +96,7 @@ class PizzaBuilder extends Component {
           Toppings={toppingsMeats}/>
         
         <div className={classes.PizzaBuilderContainer}>
+          <div className={classes.Price}>Total: ${this.props.price.toFixed(2)}</div>
           <BuildHeaders 
             currentHeader={this.state.currentControls}
             clicked={ this.headerClickedHandler}/>

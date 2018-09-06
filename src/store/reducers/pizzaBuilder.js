@@ -52,52 +52,75 @@ const initialState = {
 };
 
 const updatePrice = (state, action) => {
+  const Prices = state.Prices;
+  const Modifiers = state.Prices.Modifiers; 
   if(action.type === actionTypes.ADD_TOPPING || action.type === actionTypes.REMOVE_TOPPING) {
     const { toppingType, toppingName, amount } = action;
     /* Depending on the action sent in arguments, side either is the side to add (left/whole/right),
     or the side to remove from state.Toppings (because side is undefined on action.type = remove) */
     const side = action.side || state.Toppings[toppingType][toppingName][amount];
-    const modifiers = state.Prices.Modifiers; 
-    console.log('action', action)
-    return state.Prices[toppingType] * modifiers[amount] * modifiers[side] * modifiers[state[tTypes.Base].Crust.size];
+    return state.Prices[toppingType] * Modifiers[amount] * Modifiers[side] * Modifiers[state[tTypes.Base].Crust.size];
   } 
   else if (action.type === actionTypes.UPDATE_PIZZA_BASE) {
-    let updatedPrice = 0;
-    const stMeats = state.Toppings.Meats;
-    for (let meat in stMeats) {
-      if(stMeats[meat].Regular !== tTypes.None) {
-        console.log('meats ', meat, 'reg', stMeats[meat].Regular)
-        updatedPrice += updatePrice(state, {
-          type: actionTypes.ADD_TOPPING, toppingType: tTypes.Meats, 
-          toppingName: meat, amount: tTypes.Regular, side: stMeats[meat].Regular
-          });
-        console.log('reg udp', updatedPrice)
-        }
-      if(stMeats[meat].Extra !== tTypes.None) {
-        updatedPrice += updatePrice(state, {
-          type: actionTypes.ADD_TOPPING, toppingType: tTypes.Meats, 
-          toppingName: meat, amount: tTypes.Extra, side: stMeats[meat].Extra
-        });
-        console.log('ext udp', updatedPrice)
-      }
+    //remove current base element price and add the new element's price
+    let priceChange = 0;
+    if (action.baseElement.name === tTypes.Cheese && action.changedObj.key === 'amount') {
+      priceChange -= Prices[state[tTypes.Base].Cheese.name] * Modifiers[state[tTypes.Base].Cheese.amount];
+      priceChange += Prices[action.baseElement.name] * Modifiers[action.changedObj.value]
     }
-    return updatedPrice;
+    else if (action.baseElement.name === tTypes.Sauce && action.changedObj.key === 'amount') {
+      priceChange -= Prices[state[tTypes.Base].Sauce.name] * Modifiers[state[tTypes.Base].Sauce.amount];
+      priceChange += Prices[action.baseElement.name] * Modifiers[action.changedObj.value]
+    }
+    else if (action.baseElement.name === tTypes.Crust && action.changedObj.key === 'type') {
+      priceChange -= Prices[state[tTypes.Base].Crust.type];
+      priceChange += Prices[action.changedObj.value];
+    }
+    console.log(priceChange)
+    return priceChange;
   }
 }
 
+
+const renderTotalPrice = (state) => {
+  let updatedPrice = 0;
+  const Prices = state.Prices;
+  const Modifiers = Prices.Modifiers;
+  const stBase = state[tTypes.Base];
+  const stMeats = state.Toppings.Meats;
+
+  updatedPrice += Prices[stBase.Crust.type] + Prices[stBase.Crust.size] + Modifiers[stBase.Sauce.amount] + Modifiers[stBase.Cheese.amount];
+  
+  for (let meat in stMeats) {
+    if(stMeats[meat].Regular && stMeats[meat].Regular !== tTypes.None) {
+      updatedPrice += Prices.Meats * Modifiers.Regular * Modifiers[stMeats[meat].Regular] * Modifiers[stBase.Crust.size];      
+    }
+    if(stMeats[meat].Extra && stMeats[meat].Extra !== tTypes.None) {
+      updatedPrice += Prices.Meats * Modifiers.Extra * Modifiers[stMeats[meat].Extra] * Modifiers[stBase.Crust.size]; 
+    }
+  }
+  return updatedPrice;
+}
+
 const updatePizzaBase = (state, action) => {
-  let updatedBase = {
+  const base = action.baseElement;
+  const updatedElement = action.changedObj;
+  let updatedPrice = 0;
+  let updateBase = {
     
       ...state[tTypes.Base],
-      [action.baseElement.name]: {
-        ...action.baseElement,
-        [action.changedObj.key]: action.changedObj.value
+      [base.name]: {
+        ...base,
+        [updatedElement.key]: updatedElement.value
       }
     
   };
-  let updatedPrice = updatePrice(state, action);
-  console.log(updatedBase)
-  return updateObject(state, {totalPrice: updatedPrice, [tTypes.Base]: updatedBase});
+  const updatedState = updateObject(state, {[tTypes.Base]: updateBase});
+  console.log(updatedState)
+  if (updatedElement.key === 'size') updatedPrice = renderTotalPrice(updatedState);
+  else updatedPrice = state.totalPrice + updatePrice(state, action);
+  
+  return updateObject(updatedState, {totalPrice: updatedPrice});
 }
 
 const updateToppingHandler = (state, action) => {
@@ -115,15 +138,18 @@ const updateToppingHandler = (state, action) => {
   
   switch(action.type) {
     case actionTypes.ADD_TOPPING:
-      updatedTopping[toppingType][toppingName][amount] = action.side;
-      updatedPrice = state.totalPrice + updatedPrice;
-      break;
+    updatedTopping[toppingType][toppingName][amount] = action.side;
+    updatedPrice = state.totalPrice + updatedPrice;
+    break;
     case actionTypes.REMOVE_TOPPING:
-      updatedTopping[toppingType][toppingName][amount] = tTypes.None;
-      updatedPrice = state.totalPrice - updatedPrice;
-      break;
+    updatedTopping[toppingType][toppingName][amount] = tTypes.None;
+    updatedPrice = state.totalPrice - updatedPrice;
+    break;
     default: return state;
   }
+  /* const updatedState = updateObject(state, updatedTopping) */
+  /* const updatedPrice = renderTotalPrice(updatedState) */
+  console.log('updSt', updatedPrice)
   return updateObject(state, {totalPrice: updatedPrice, Toppings: updatedTopping});
 }
 
@@ -133,37 +159,18 @@ const clearToppingHandler = (state, action) => {
   const topping = state.Toppings[action.toppingType][action.toppingName];
   let regState = {}, extraState = {};
   // Check the current state to find existing toppings in Regular and Extra
-  if (topping.Regular !== tTypes.None) { // If a topping is found in Regular, remove it
+  if (topping.Regular !== undefined && topping.Regular !== tTypes.None) { // If a topping is found in Regular, remove it
     regState = updateToppingHandler(state, {...action, amount: tTypes.Regular, type: actionTypes.REMOVE_TOPPING});
   }
   // Create a temporary modified state object based on the above check, or return original state if no Regular found
   const updatedToppingsReg = updateObject(state, regState);
-  if (topping.Extra !== tTypes.None) { // If a topping is found in Extra, remove it
+  if (topping.Extra !== undefined && topping.Extra !== tTypes.None) { // If a topping is found in Extra, remove it
     extraState = updateToppingHandler(updatedToppingsReg, 
       {...action, amount: tTypes.Extra, type: actionTypes.REMOVE_TOPPING});
   }
   return updateObject(state, {...updatedToppingsReg, ...extraState});
 }
 
-const setToppings = (state, action) => {
-  let totalPrice = 0;
-  const prices = state.Prices;
-  const base = action[tTypes.Base];
-  totalPrice += prices[base.Crust.size] + prices[base.Crust.type] +
-    prices.Modifiers[base.Sauce.amount] + prices.Modifiers[base.Cheese.amount];
-  return updateObject(state, {
-    [tTypes.Base]: {
-      ...state[tTypes.Base],
-      ...action[tTypes.Base]
-    },
-    [tTypes.Toppings]: {
-      ...state.Toppings,
-      ...action.Toppings
-    },
-    totalPrice: totalPrice,
-    error: false
-  });
-};
 
 const initStateFromDB = (state, action) => {
   console.log(action.data)
@@ -171,7 +178,8 @@ const initStateFromDB = (state, action) => {
   const {Prices, Modifiers} = action.data.Prices;
   const initPrices = updateObject(state, {Prices: {...Prices, Modifiers: Modifiers}});
   console.log('tt' , tTypes.Crust_Types[`${Pizza.Crust.type}`])
-  const initAction = {
+  const initState = {
+    
     [tTypes.Base]: {
       [tTypes.Crust]: {...Pizza.Crust},
       [tTypes.Sauce]: {...Pizza.Sauce},
@@ -182,8 +190,9 @@ const initStateFromDB = (state, action) => {
       [tTypes.Veggies]: {...Pizza.Veggies}
     }
   }
-  const updatedState = setToppings(initPrices, initAction);
-  return updateObject(state, updatedState)
+  const updatedState = updateObject(initPrices, initState);
+  const updatedPrice = renderTotalPrice(updatedState);
+  return updateObject(updatedState, {totalPrice: updatedPrice})
 }
 
 const reducer = (state = initialState, action) => {
@@ -193,7 +202,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_TOPPING: return updateToppingHandler(state, action);
     case actionTypes.REMOVE_TOPPING: return updateToppingHandler(state, action);
     case actionTypes.CLEAR_TOPPING: return clearToppingHandler(state, action);
-    case actionTypes.SET_TOPPINGS: return setToppings(state, action);
+    //case actionTypes.SET_TOPPINGS: return setToppings(state, action);
     default: return state;
   }
 };

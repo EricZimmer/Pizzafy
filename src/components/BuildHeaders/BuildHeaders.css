@@ -21,6 +21,8 @@
 .BuildHeaders {
   display: flex;
   width: 100%;
+  color: rgb(230, 221, 212);
+  text-align: center;
   background-color: rgb(47, 43, 49);
   /* justify-content: space-between; */
   white-space: pre;

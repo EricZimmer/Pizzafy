@@ -19,7 +19,7 @@ const pizzaBaseControl = (props) => {
     
     return <Auxhoc>
       <div className={classes.BaseControl}>
-        <select value={tTypes.Crust_Types[crust.type]} onChange={(e) => props.changed(crust, {key: 'type', value: e.target.value})}>
+        <select value={crust.type} onChange={(e) => props.changed(crust, {key: 'type', value: e.target.value})}>
           {options}
         </select>
       </div>

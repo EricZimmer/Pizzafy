@@ -16,9 +16,13 @@
   background-color: #ccc;
   /* border: 5px solid #999;
   border-radius: 1%; */
+  font-size: 15px;
 }
 
-
+.Price {
+  margin: auto;
+  font-weight: bold;
+}
 
 
 @media (min-width: 500px) and (min-height: 400px) {
@@ -39,7 +43,7 @@
 
   }
   .PizzaBuilderContainer {
-    
+    font-size: 20px;
   }
   .PizzaBuilderContainer .Label{
     font-size: 5em;
