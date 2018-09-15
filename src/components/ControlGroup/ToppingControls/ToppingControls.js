@@ -83,8 +83,8 @@ class ToppingControls extends Component {
 
   componentWillMount() {
     // reinitiate component state to match already selected toppings stored in redux  
-    const amount = this.props.toppings[this.props.toppingType][this.props.toppingName];
-    if(amount) {
+    const amount = this.props.toppings[this.props.toppingType][this.props.toppingName] || null;
+    if(amount!== null) {
       const regular = this.updateStateFromProps(amount[tTypes.Regular], tTypes.Regular);
       const extra = this.updateStateFromProps(amount[tTypes.Extra], tTypes.Extra);
       this.setState({

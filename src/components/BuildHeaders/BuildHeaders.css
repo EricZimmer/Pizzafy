@@ -57,10 +57,22 @@
     font-size: 19px;
   }
 }
+
+@media (min-width: 600px) {
+  .BuildHeaders {
+    
+    font-size: 18px;
+    
+  }
+  .Heading {
+    font-size: 22px;
+  }
+}
+
 @media (min-width: 768px) {
   .BuildHeaders {
     /* justify-content: left; */
-    font-size: 17px;
+    font-size: 19px;
     
   }
   .Heading {

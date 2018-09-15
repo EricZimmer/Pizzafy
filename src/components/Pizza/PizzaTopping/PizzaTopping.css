@@ -71,6 +71,16 @@
   
 }
 
+.Topping {
+  z-index: 7;
+  position: absolute;
+  top:0px;
+  Left: 4%;
+  top: 4%;
+  height: 92%;
+  width: 92%;
+}
+
 .Pepperoni{
   z-index: 7;
   position: absolute;

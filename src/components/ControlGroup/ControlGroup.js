@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import ToppingControls from './ToppingControls/ToppingControls';
 import classes from './ControlGroup.css';
-import * as ToppingTypes from '../../ToppingTypes';
+import * as tTypes from '../../ToppingTypes';
 
-const Toppings_Meats = [ToppingTypes.Pepperoni, ToppingTypes.Sausage, ToppingTypes.Ham];
-const Toppings_Veggies = ['Peppers', 'Tomatoes', 'MUSHROOMS'];
+
 
 const ALL_Toppings = {
-  Meats: [
-    ToppingTypes.Pepperoni, ToppingTypes.Sausage, ToppingTypes.Ham
-  ],
-  Veggies: [
-    'Peppers', 'Tomatoes', 'MUSHROOMS'
-  ]
+  Meats: [...tTypes.Toppings_Meats],
+  Veggies: [...tTypes.Toppings_Veggies]
 };
 
 const controlGroup = (props) => {
@@ -27,14 +22,8 @@ const controlGroup = (props) => {
       );
     });
   } 
-
-  
-  let toppings = setToppingControls('Meats');
-  return (
-    
-      toppings
-   
-  );
+  console.log('tTt', props.toppingType)
+  return setToppingControls(props.toppingType);
   
 }
 

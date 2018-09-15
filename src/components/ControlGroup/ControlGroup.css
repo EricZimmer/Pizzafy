@@ -20,7 +20,7 @@
 .MainControlsContainer {
   width: inherit;
   margin: auto;
-  padding-top: 20px;
+  
   /* padding-top: 20px; */
   display: flex;
   flex-flow: row wrap;
@@ -33,6 +33,24 @@
   font-size: 22px;
   /* border-top: 2px solid #999; */
   /* border-radius: 1%; */
+}
+
+.MeatOrVeg {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: rgb(47, 43, 49);
+  margin: 15px 0;
+  padding: 0px 10px;
+}
+
+.MOVToggle {
+  color: #aa6817;
+  text-decoration: underline;
+}
+
+.MOVNoToggle {
+
 }
 
 .LabelHeader {

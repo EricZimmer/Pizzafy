@@ -6,13 +6,21 @@ import Auxhoc from '../../../hoc/Auxhoc';
 
 import Pepperoni_Right from '../../../assets/pepright.svg';
 import Pepperoni_Left from '../../../assets/pepleft.svg';
-
 import Sausage_Right from '../../../assets/sausageright.svg';
 import Sausage_Left from '../../../assets/sausageleft.svg';
+import Ham_Right from '../../../assets/hamright.svg';
+import Ham_Left from '../../../assets/hamleft.svg';
+import Peppers_Right from '../../../assets/peppersright.svg';
+import Peppers_Left from '../../../assets/peppersleft.svg';
+import Olives_Right from '../../../assets/olivesright.svg';
+import Olives_Left from '../../../assets/olivesleft.svg';
 
 const IMAGES = {
   'Pepperoni_Left': Pepperoni_Left, 'Pepperoni_Right': Pepperoni_Right,
-  'Sausage_Left': Sausage_Left, 'Sausage_Right': Sausage_Right
+  'Sausage_Left': Sausage_Left, 'Sausage_Right': Sausage_Right,
+  'Ham_Left': Ham_Left, 'Ham_Right': Ham_Right,
+  'Peppers_Left': Peppers_Left, 'Peppers_Right': Peppers_Right,
+  'Olives_Left': Olives_Left, 'Olives_Right': Olives_Right
 };
 
 const getImageRegular = (img, divclasses) => {
@@ -33,8 +41,8 @@ class PizzaTopping extends Component {
       [ToppingTypes.Right]: [topping, ToppingTypes.Right].join('_')    
     };
     const divClasses = {
-      regular: classes[topping],
-      extra: [classes[topping], classes.rotate].join(' ')
+      regular: classes.Topping,
+      extra: [classes.Topping, classes.rotate].join(' ')
     };
 
     let finishedTopping = {};
@@ -101,18 +109,10 @@ class PizzaTopping extends Component {
         case('topping-container'):
           Toppings = <div className={classes.ToppingContainer}>{this.props.children}</div>;
         break;
-        
-        case(ToppingTypes.Pepperoni):
+        default:
           if(side && side !== ToppingTypes.None) {
-            Toppings = this.createTopping(ToppingTypes.Pepperoni, side, amount);
-          }
-        break;
-        case(ToppingTypes.Sausage):
-          if(side && side  !== ToppingTypes.None) {
-            Toppings = this.createTopping(ToppingTypes.Sausage, side, amount);
-          }
-        break;
-      default: Toppings = null;    
+            Toppings = this.createTopping(this.props.topping, side, amount);
+          }    
     }
     
     return Toppings;

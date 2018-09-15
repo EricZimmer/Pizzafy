@@ -78,22 +78,35 @@ class PizzaBuilder extends Component {
     }
   }
 
+  toppingSwitch = (toppingType) => {
+    this.setState({currentTopping: toppingType});
+  }
+
   render() {
     
     const stateToppings = this.props.toppings !== null ? this.props.toppings
       : null;
     let toppingsMeats = null;
     let toppingsVeggies = null;
-    if (stateToppings != null) {
+    if (stateToppings.Meats != null) {
       toppingsMeats = this.createToppings(stateToppings.Meats)
     }
+    if (stateToppings.Veggies != null) {
+      toppingsVeggies = this.createToppings(stateToppings.Veggies)
+    }
     
+    const currentToppings = this.state.currentTopping;
+    const meatOrVeg = this.state.currentControls !== tTypes.Toppings ? null 
+      : <div className={cgClasses.MeatOrVeg}>
+          <div className={currentToppings === tTypes.Meats ? cgClasses.MOVToggle : null} onClick={() => this.toppingSwitch(tTypes.Meats)}>Meats</div>
+          <div className={currentToppings === tTypes.Veggies ? cgClasses.MOVToggle : null} onClick={() => this.toppingSwitch(tTypes.Veggies)}>Veggies</div>
+        </div>
     //const controlGroup = this.getCurrentControls();
 
     return (
       <div className={classes.PizzaBuilder}>
         <Pizza 
-          Toppings={toppingsMeats}/>
+          Toppings={[...toppingsMeats, ...toppingsVeggies]}/>
         
         <div className={classes.PizzaBuilderContainer}>
           <div className={classes.Price}>Total: ${this.props.price.toFixed(2)}</div>
@@ -101,6 +114,7 @@ class PizzaBuilder extends Component {
             currentHeader={this.state.currentControls}
             clicked={ this.headerClickedHandler}/>
           <div className={cgClasses.MainControlsContainer}>
+            {meatOrVeg}
             {this.getCurrentControls()}
           </div>
         </div>

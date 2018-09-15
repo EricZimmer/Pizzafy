@@ -7,15 +7,20 @@ export const Left = 'Left';
 export const Right = 'Right';
 export const Whole = 'Whole';
 
+export const Toppings = 'Toppings';
 
-
+export const Meats = 'Meats';
 export const Pepperoni = 'Pepperoni';
 export const Sausage = 'Sausage';
 export const Ham = 'Ham';
+export const Toppings_Meats = [Pepperoni, Sausage, Ham];
 
+export const Veggies = 'Veggies';
 export const Olives = 'Olives';
 export const Tomatoes = 'Tomatoes';
 export const Peppers = 'Peppers';
+export const Mushrooms = 'Mushrooms';
+export const Toppings_Veggies = [Peppers, Mushrooms, Tomatoes, Olives];
 
 
 export const Base = 'Crust - Cheese - Sauce';
@@ -39,14 +44,5 @@ export const Sauce_Types = [Sauce_Classic, Sauce_Garlic, Sauce_Buffalo, Sauce_Ba
 
 
 export const Cheese = 'Cheese';
-
-
-export const Toppings = 'Toppings';
-export const Meats = 'Meats';
-export const Veggies = 'Veggies';
-
-
-export const Toppings_Meats = [Pepperoni, Sausage, Ham];
-export const Toppings_Veggies = [Peppers, Tomatoes, Olives];
 
 export const Review = 'Review & Add To Order';

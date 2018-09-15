@@ -125,7 +125,7 @@ const updatePizzaBase = (state, action) => {
 
 const updateToppingHandler = (state, action) => {
   const { toppingType, toppingName, amount } = action;
-  let updatedTopping = {
+  let topping = {
     [toppingType]: {
       ...state.Toppings[toppingType],
       [toppingName]: {
@@ -135,21 +135,21 @@ const updateToppingHandler = (state, action) => {
     }
   };
   let updatedPrice = updatePrice(state, action);
-  
   switch(action.type) {
     case actionTypes.ADD_TOPPING:
-    updatedTopping[toppingType][toppingName][amount] = action.side;
+    topping[toppingType][toppingName][amount] = action.side;
     updatedPrice = state.totalPrice + updatedPrice;
     break;
     case actionTypes.REMOVE_TOPPING:
-    updatedTopping[toppingType][toppingName][amount] = tTypes.None;
+    topping[toppingType][toppingName][amount] = tTypes.None;
     updatedPrice = state.totalPrice - updatedPrice;
     break;
     default: return state;
   }
-  /* const updatedState = updateObject(state, updatedTopping) */
+  console.log('toppn', topping)
+  const updatedTopping = updateObject(state.Toppings, topping)
   /* const updatedPrice = renderTotalPrice(updatedState) */
-  console.log('updSt', updatedPrice)
+  console.log('updSt', updatedTopping)
   return updateObject(state, {totalPrice: updatedPrice, Toppings: updatedTopping});
 }
 
